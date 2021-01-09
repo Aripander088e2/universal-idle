@@ -14,3 +14,8 @@ function getGeneratorMulti(gen){
   base = base.mul(getSizeBoost())
   return base
 }
+
+function getGeneratorCost(gen){
+  let base = generatorCost[gen].mul(generatorCostScaling[gen].pow(game.generatorBought[gen]))
+  return base
+}
