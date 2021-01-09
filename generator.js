@@ -32,5 +32,9 @@ function buyGenerator(gen){
 }
 
 function buyMaxGenerator(gen){
-  let logten = game.atoms.log10()
+  let maxBulk = 
+  if (game.atoms.gte(getGeneratorCost[gen])){
+      game.upgradeBought[layer][id] = game.upgradeBought[layer][id].add(maxBulk)
+      game.prestige[0] = game.prestige[0].sub(calcBulkCost(getUpgradeCost(layer, id), upgradeCostScaling[layer][id], maxBulk))
+  }
 }
