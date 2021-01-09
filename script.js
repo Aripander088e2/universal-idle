@@ -30,6 +30,6 @@ function loop(ms){
   for (let i=1; i<8.5; i++){
     document.getElementById("gen" + i + "Bought").innerHTML = formate(game.generatorBought[i], 0)
     document.getElementById("gen" + i + "Amount").innerHTML = formate(game.generator[i], 0)
-    document.getElementById("gen" + i + "Multi").innerHTML = formate(getGeneratorMulti(i), 0)
+    document.getElementById("gen" + i + "Multi").innerHTML = formate(getGeneratorMulti(i), 2)
   }
 }
