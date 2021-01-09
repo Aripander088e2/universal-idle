@@ -30,3 +30,7 @@ function buyGenerator(gen){
     game.generatorBought[gen] = game.generatorBought[gen].add(1)
   }
 }
+
+function buyMaxGenerator(gen){
+  let logten = game.atoms.log10()
+}
