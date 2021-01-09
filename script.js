@@ -7,9 +7,6 @@ let game = {
   
 }
 
-const generatorCost = [null, new Decimal(10), new Decimal(1e4), new Decimal(1e9), new Decimal(1e16), new Decimal(1e25), new Decimal(1e36), new Decimal(1e49), new Decimal(1e64)]
-const generatorCostScaling = [null, new Decimal(10), new Decimal(100), new Decimal(1e3), new Decimal(1e4), new Decimal(1e5), new Decimal(1e6), new Decimal(1e7), new Decimal(1e8)]
-
 let deltaTime;
 const calculate = window.setInterval(() => {
   deltaTime = Date.now() - game.tLast;

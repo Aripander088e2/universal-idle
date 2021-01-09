@@ -15,6 +15,9 @@ function getGeneratorMulti(gen){
   return base
 }
 
+const generatorCost = [null, new Decimal(10), new Decimal(1e3), new Decimal(1e6), new Decimal(1e10), new Decimal(1e15), new Decimal(1e21), new Decimal(1e28), new Decimal(1e36)]
+const generatorCostScaling = [null, new Decimal(10), new Decimal(100), new Decimal(1e3), new Decimal(1e4), new Decimal(1e5), new Decimal(1e6), new Decimal(1e7), new Decimal(1e8)]
+
 function getGeneratorCost(gen){
   let base = generatorCost[gen].mul(generatorCostScaling[gen].pow(game.generatorBought[gen]))
   return base
@@ -23,7 +26,7 @@ function getGeneratorCost(gen){
 function buyGenerator(gen){
   if (game.atoms.gte(getGeneratorCost(gen))){
     game.atoms = game.atoms.sub(getGeneratorCost(gen))
-    game.generator = game.generator[gen].add(1)
-    game.generatorBought = game.generatorBought[gen].add(1)
+    game.generator[gen] = game.generator[gen].add(1)
+    game.generatorBought[gen] = game.generatorBought[gen].add(1)
   }
 }
