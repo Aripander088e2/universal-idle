@@ -4,8 +4,9 @@ let game = {
   size: new Decimal(1),
   generator: [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
   generatorBought: [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
-  
 }
+
+loadGame(JSON.parse(localStorage.getItem("universal-idle")))
 
 let deltaTime;
 const calculate = window.setInterval(() => {

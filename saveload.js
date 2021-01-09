@@ -17,12 +17,11 @@ function loadGame(loadgame) {
   for (const i in loadgame) {
     game[i] = loadgame[i];
   }
-  for (let i = 0; i < 2; i++) {
-    game.prestige[i] = new Decimal(game.prestige[i])
-    game.best[i] = new Decimal(game.best[i])
-    for (let j = 0; j < 4; j++) {
-      game.upgradeBought[i][j] = new Decimal(game.upgradeBought[i][j])
-    }
+  game.atoms = new Decimal(game.atoms)
+  game.size = new Decimal(game.size)
+  for (let i = 1; i < 8.5; i++) {
+    game.generator[i] = new Decimal(game.generator[i])
+    game.generatorBought[i] = new Decimal(game.generatorBought[i])
   }
 }
 
