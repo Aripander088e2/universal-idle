@@ -18,9 +18,11 @@ const calculate = window.setInterval(() => {
 }, 20);
 
 function loop(ms){
-  document.getElementById("atom").innerHTML = game.atoms
-  document.getElementById("size").innerHTML = game.size
+  document.getElementById("atom").innerHTML = formate(game.atoms, 2)
+  document.getElementById("size").innerHTML = formate(game.size, 2)
   
-  document.getElementById("sizeSpeed").innerHTML = getSizeSpeed()
-  document.getElementById("sizeBoost").innerHTML = getSizeBoost()
+  document.getElementById("sizeSpeed").innerHTML = formate(getSizeSpeed(), 2)
+  document.getElementById("sizeBoost").innerHTML = formate(getSizeBoost(), 3)
+  
+  
 }
