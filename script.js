@@ -1,5 +1,14 @@
-/* If you're feeling fancy you can add interactivity 
-    to your site with Javascript */
+let game = {
+  tLast: Date.now(),
+}
 
-// prints "hi" in the browser's dev tools console
-console.log("hi");
+let deltaTime;
+const calculate = window.setInterval(() => {
+  deltaTime = Date.now() - game.tLast;
+  loop(20);
+  game.tLast = Date.now()
+}, 20);
+
+function loop(ms){
+  
+}
