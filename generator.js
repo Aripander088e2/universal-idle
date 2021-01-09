@@ -18,6 +18,7 @@ function getGeneratorMulti(gen){
 
 function getGeneratorExp(gen){
   let base = new Decimal(1)
+  if (game.atoms.gte(1e80)) base = base.div(game.atoms.log10().div(80)))
   return base
 }
 
