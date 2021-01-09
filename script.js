@@ -31,5 +31,6 @@ function loop(ms){
     document.getElementById("gen" + i + "Bought").innerHTML = formate(game.generatorBought[i], 0)
     document.getElementById("gen" + i + "Amount").innerHTML = formate(game.generator[i], 0)
     document.getElementById("gen" + i + "Multi").innerHTML = formate(getGeneratorMulti(i), 2)
+    document.getElementById("gen" + i + "Cost").innerHTML = undefined
   }
 }
