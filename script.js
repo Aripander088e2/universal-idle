@@ -20,4 +20,7 @@ const calculate = window.setInterval(() => {
 function loop(ms){
   document.getElementById("atom").innerHTML = game.atoms
   document.getElementById("size").innerHTML = game.size
+  
+  document.getElementById("sizeSpeed").innerHTML = getSizeSpeed()
+  document.getElementById("sizeBoost").innerHTML = getSizeBoost()
 }
