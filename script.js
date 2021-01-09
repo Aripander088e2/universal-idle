@@ -31,4 +31,6 @@ function loop(ms){
     document.getElementById("gen" + i + "Multi").innerHTML = formate(getGeneratorMulti(i), 2)
     document.getElementById("gen" + i + "Cost").innerHTML = formate(getGeneratorCost(i), 0)
   }
+  
+  document.getElementById("title").innerHTML = formate(game.atoms) + " atoms, " + formate(game.size) + " meters"
 }

@@ -77,6 +77,13 @@ function importy() {
 }
 
 function reset(){
+game = {
+  tLast: Date.now(),
+  atoms: new Decimal(10),
+  size: new Decimal(1),
+  generator: [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
+  generatorBought: [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
+}
   save()
 }
 

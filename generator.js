@@ -12,6 +12,22 @@ function updateSize(ms){
 function getGeneratorMulti(gen){
   let base = new Decimal(2).pow(game.generatorBought[gen])
   base = base.mul(getSizeBoost())
+  base = base.pow(getGeneratorExp(gen))
+  return base
+}
+
+function getGeneratorExp(gen){
+  let base = new Decimal(1)
+  return base
+}
+
+function getSizeSpeed(){
+  let base = (game.atoms.gte(1024) && game.generator[2].gt(0) ? game.atoms.pow(0.3).div(8) : new Decimal(0))
+  return base
+}
+
+function getSizeBoost(){
+  let base = game.size.log(10).add(1)
   return base
 }
 
