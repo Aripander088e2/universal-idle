@@ -18,6 +18,9 @@ const calculate = window.setInterval(() => {
 }, 20);
 
 function loop(ms){
+  updateGenerator(ms)
+  updateSize(ms)
+  
   document.getElementById("atom").innerHTML = formate(game.atoms, 2)
   document.getElementById("size").innerHTML = formate(game.size, 2)
   
@@ -27,5 +30,6 @@ function loop(ms){
   for (let i=1; i<8.5; i++){
     document.getElementById("gen" + i + "Bought").innerHTML = formate(game.generatorBought[i], 0)
     document.getElementById("gen" + i + "Amount").innerHTML = formate(game.generator[i], 0)
+    document.getElementById("gen" + i + "Multi").innerHTML = formate(getGeneratorMulti(i), 0)
   }
 }
