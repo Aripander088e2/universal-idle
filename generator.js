@@ -18,12 +18,13 @@ function getGeneratorMulti(gen){
 
 function getGeneratorExp(gen){
   let base = new Decimal(1)
-  if (game.atoms.gte(1e80)) base = base.div(game.atoms.log10().div(80)))
+  if (game.atoms.gte(1e80)) base = base.div(game.atoms.log10().div(80).pow(0.5))
   return base
 }
 
 function getSizeSpeed(){
   let base = (game.atoms.gte(1024) && game.generator[2].gt(0) ? game.atoms.pow(0.3).div(8) : new Decimal(0))
+  if (game.size.gte(4.4e26)) base = base.pow(game.size.log10().div(new Decimal(4.4).log10()).add(26)).pow(0.5)
   return base
 }
 
