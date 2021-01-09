@@ -19,3 +19,11 @@ function getGeneratorCost(gen){
   let base = generatorCost[gen].mul(generatorCostScaling[gen].pow(game.generatorBought[gen]))
   return base
 }
+
+function buyGenerator(gen){
+  if (game.atoms.gte(getGeneratorCost(gen))){
+    game.atoms = game.atoms.sub(getGeneratorCost(gen))
+    game.generator = game.generator[gen].add(1)
+    game.generatorBought = game.generatorBought[gen].add(1)
+  }
+}
