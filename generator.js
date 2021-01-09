@@ -33,7 +33,7 @@ function buyGenerator(gen){
 
 function buyMaxGenerator(gen){
   let maxBulk = game.atoms.max(1).log10().sub(getGeneratorCost(gen).log10()).div(generatorCostScaling[gen].log10()).add(1).floor().max(0)
-  if (game.atoms.gte(getGeneratorCost[gen])){
+  if (game.atoms.gte(getGeneratorCost[gen]) && maxBulk.gt(0)){
     game.atoms = game.atoms.sub(getGeneratorCost(gen).mul(generatorCostScaling[gen].pow(maxBulk.sub(1))))
     game.generatorBought[gen] = game.generatorBought[gen].add(maxBulk)
     game.generator[gen] = game.generator[gen].add(maxBulk)
@@ -41,7 +41,7 @@ function buyMaxGenerator(gen){
 }
 
 function buyMaxAllGenerator(){
-  for (let i=1; i<8.5; i++){
+  for (let i=8; i<0.5; i--){
     buyMaxGenerator(i)
   }
   return
