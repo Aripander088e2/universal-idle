@@ -18,7 +18,7 @@ function getGeneratorMulti(gen){
 
 function getGeneratorExp(gen){
   let base = new Decimal(1)
-  if (game.atoms.gte(1e80)) base = base.div(game.atoms.log10().div(80).pow(1))
+  if (game.atoms.gte(1e80)) base = base.div(game.atoms.log10().div(80).pow(2))
   return base
 }
 
@@ -30,12 +30,12 @@ function getSizeSpeed(){
 
 function getSizeSpeedExp(){
   let base = new Decimal(1)
-  if (game.size.gte(4.4e26)) base = base.div(game.size.log10().div(new Decimal(4.4).log10().add(26)).pow(1))
+  if (game.size.gte(4.4e26)) base = base.div(game.size.log10().div(new Decimal(4.4).log10().add(26)).pow(2))
   return base
 }
 
 function getSizeBoost(){
-  let base = game.size.log(10).add(1)
+  let base = game.size.max(1).log(10).add(1)
   return base
 }
 
