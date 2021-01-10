@@ -1,7 +1,7 @@
 function updateGenerator(ms){
-  game.atoms = game.atoms.add(game.generator[1].mul(getGeneratorMulti(1)).mul(ms).div(1000))
+  game.atoms = game.atoms.add(game.generator[1].mul(getGeneratorMulti(1)).pow(getGeneratorExp(1)).mul(ms).div(1000))
   for (let i=1; i<7.5; i++){
-    game.generator[i] = game.generator[i].add(game.generator[i+1].mul(getGeneratorMulti(i+1)).mul(ms).div(1000))
+    game.generator[i] = game.generator[i].add(game.generator[i+1].mul(getGeneratorMulti(i+1)).pow(getGeneratorExp(i+1)).mul(ms).div(1000))
   }
 }
 
@@ -12,25 +12,24 @@ function updateSize(ms){
 function getGeneratorMulti(gen){
   let base = new Decimal(2).pow(game.generatorBought[gen])
   base = base.mul(getSizeBoost())
-  base = base.pow(getGeneratorExp(gen))
   return base
 }
 
 function getGeneratorExp(gen){
   let base = new Decimal(1)
-  if (game.atoms.gte(1e80)) base = base.div(game.atoms.log10().div(80).pow(2))
+  if (game.atoms.gte(1e80)) base = base.div(game.atoms.log10().div(80))
   return base
 }
 
 function getSizeSpeed(){
-  let base = (game.atoms.gte(1024) && game.generator[2].gt(0) ? game.atoms.pow(0.3).div(8) : new Decimal(0))
+  let base = (game.atoms.gte(1024) && game.generator[2].gt(0) ? game.atoms.pow(0.3) : new Decimal(0))
   base = base.pow(getSizeSpeedExp())
   return base
 }
 
 function getSizeSpeedExp(){
   let base = new Decimal(1)
-  if (game.size.gte(4.4e26)) base = base.div(game.size.log10().div(new Decimal(4.4).log10().add(26)).pow(2))
+  if (game.size.gte(8.8e26)) base = base.div(game.size.log10().div(new Decimal(8.8).log10().add(26)).pow(2))
   return base
 }
 
