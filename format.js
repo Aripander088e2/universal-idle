@@ -24,10 +24,25 @@ function formate(num, dp) {
 function formateNum(num, dp) {
   let exponent = num.log10().floor().toNumber();
   let mantissa = num.div(new Decimal(10).pow(exponent)).toNumber();
-  return mantissa.toFixed(dp) + "e" + exponent
+  if (num.gte(new Decimal(10).pow(3 * 10 ** game.notation + 3))) {
+    return mantissa.toFixed(dp) + "e" + exponent
+  } else {
+    let mod = exponent % 3
+    exponent = (exponent - mod) / 3 - 1
+    mantissa = mantissa * 10 ** mod
+    if (num.lt(new Decimal(1e33))) {
+      return mantissa.toFixed(dp) + " " + standardPreE33[exponent]
+    } else {
+      return mantissa.toFixed(dp) + " " + standardUnits[exponent % 10] + standardTens[Math.floor(exponent / 10) % 10] + standardHundreds[Math.floor(exponent / 100)]
+    }
+  }
 }
 
 const standardPreE33 = ["K", "M", "B", "T", "Qa", "Qt", "Sx", "Sp", "Oc", "No"]
 const standardUnits = ["", "U", "D", "T", "Qa", "Qt", "Sx", "Sp", "O", "N"]
 const standardTens = ["", "Dc", "Vg", "Tg", "Qd", "Qi", "Se", "St", "Og", "Nn"]
 const standardHundreds = ["", "Ce", "Dn", "Tc", "Qe", "Qu", "Sc", "Si", "Oe", "Ne"]
+
+function toggleNotation() {
+  game.notation = (game.notation + 1) % 4
+}
