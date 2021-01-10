@@ -16,6 +16,8 @@ function getGeneratorMulti(gen){
 }
 
 function getGeneratorSpeed(gen){
+  gen = Math.floor(gen)
+  if (gen > 8.5 || gen < 0.5) return new Decimal(0)
   let base = game.generator[gen].mul(getGeneratorMulti(gen))
   if (base.gte(1)) base = base.pow(getGeneratorSpeedExp(gen))
   return base

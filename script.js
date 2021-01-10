@@ -22,14 +22,16 @@ function loop(ms){
   updateSize(ms)
   
   document.getElementById("atom").innerHTML = formate(game.atoms, 2)
-  document.getElementById("size").innerHTML = formate(game.size, 2)
+  document.getElementById("atomSpeed").innerHTML = formate(getGeneratorSpeed(1), 2)
   
+  document.getElementById("size").innerHTML = formate(game.size, 2)
   document.getElementById("sizeSpeed").innerHTML = formate(getSizeSpeed(), 2)
   document.getElementById("sizeBoost").innerHTML = formate(getSizeBoost(), 3)
   
   for (let i=1; i<8.5; i++){
     document.getElementById("gen" + i + "Bought").innerHTML = formate(game.generatorBought[i], 0)
     document.getElementById("gen" + i + "Amount").innerHTML = formate(game.generator[i], 0)
+    document.getElementById("gen" + i + "Speed").innerHTML = formate(getGeneratorSpeed(i+1), 0)
     document.getElementById("gen" + i + "Multi").innerHTML = formate(getGeneratorMulti(i), 2)
     document.getElementById("gen" + i + "Cost").innerHTML = formate(getGeneratorCost(i), 0)
   }
