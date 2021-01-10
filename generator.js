@@ -22,7 +22,7 @@ function getGeneratorExp(gen){
 }
 
 function getSizeSpeed(){
-  let base = (game.atoms.gte(1024) && game.generator[2].gt(0) ? game.atoms.pow(0.3) : new Decimal(0))
+  let base = (game.atoms.gte(1e20) && game.generator[6].gt(0) ? game.atoms.pow(0.4).div(1e8) : new Decimal(0))
   base = base.pow(getSizeSpeedExp())
   return base
 }
