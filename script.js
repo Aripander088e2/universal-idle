@@ -6,6 +6,7 @@ let game = {
   generatorBought: [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
 }
 
+moveTab1()
 loadGame(JSON.parse(localStorage.getItem("universal-idle")))
 
 let deltaTime;

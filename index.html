@@ -15,6 +15,12 @@ They explaining universe size by <text id="sizeSpeed"></text> meter per second
 <h2>Your universe size is <text id="size"></text> meter</h2>
 They multiply all Generator speed by <text id="sizeBoost"></text>
 <br><br>
+<div>
+  <button onclick="Tab(1)" id="t1">Main</button>
+  <button onclick="Tab(101)" id="t101">Option</button>
+</div>
+<br>
+<div id="tab1">
 <button onclick="buyMaxAllGenerator()">Buy Max All Generator</button>
 <br><br>
 Generator I<sup id="gen1Bought"></sup>: <text id="gen1Amount"></text> (Power: <text id="gen1Multi"></text>x)
@@ -57,3 +63,11 @@ Generator VIII<sup id="gen8Bought"></sup>: <text id="gen8Amount"></text> (Power:
 <button onclick="buyGenerator(8)">Upgrade Generator VIII, Cost: <text id="gen8Cost"></text></button>
 <button onclick="buyMaxGenerator(8)">Buy Max Generator VIII</button>
 <br><br>
+</div>
+<div id="tab101">
+<button onclick="save()">Save your game</button>
+<button onclick="exporty()">Export your game</button>
+<button onclick="importy()">Import your game</button>
+<button onclick="resetConf()">Reset your game</button>
+<br><br>
+</div>
