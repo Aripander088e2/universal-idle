@@ -1,7 +1,7 @@
 function updateGenerator(ms){
-  game.atoms = game.atoms.add(getGeneratorPerSecond(1).mul(ms).div(1000))
+  game.atoms = game.atoms.add(getGeneratorSpeed(1).mul(ms).div(1000))
   for (let i=1; i<7.5; i++){
-    game.generator[i] = game.generator[i].add(getGeneratorPerSecond(i+1).mul(ms).div(1000))
+    game.generator[i] = game.generator[i].add(getGeneratorSpeed(i+1).mul(ms).div(1000))
   }
 }
 
@@ -15,13 +15,13 @@ function getGeneratorMulti(gen){
   return base
 }
 
-function getGeneratorPerSecond(gen){
+function getGeneratorSpeed(gen){
   let base = game.generator[gen].mul(getGeneratorMulti(gen))
-  if (base.lt(1)) base = base.pow(getGeneratorExp(gen))
+  if (base.gte(1)) base = base.pow(getGeneratorSpeedExp(gen))
   return base
 }
 
-function getGeneratorExp(gen){
+function getGeneratorSpeedExp(gen){
   let base = new Decimal(1)
   if (game.atoms.gte(1e80)) base = base.div(game.atoms.log10().div(80))
   return base
