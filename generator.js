@@ -10,7 +10,7 @@ function updateSize(ms){
 }
 
 function getGeneratorMulti(gen){
-  let base = new Decimal(2).pow(game.generatorBought[gen])
+  let base = new Decimal(2).pow(game.generatorBought[gen].gte(60) ? game.generatorBought[gen].mul(60).pow(0.5) : game.generatorBought[gen])
   base = base.mul(getSizeBoost())
   return base
 }
@@ -25,7 +25,6 @@ function getGeneratorSpeed(gen){
 
 function getGeneratorSpeedExp(gen){
   let base = new Decimal(1)
-  if (game.atoms.gte(1e80)) base = base.div(game.atoms.log10().div(80))
   return base
 }
 
