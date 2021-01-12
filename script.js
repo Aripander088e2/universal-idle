@@ -48,7 +48,7 @@ function loop(ms){
   document.getElementById("postgen8_3").style.display = (game.achievement.includes(18) ? "block" : "none")
   
   document.getElementById("t2").style.display = ((game.atoms.gte(1e80) && game.size.gte(8.8e26)) || game.achievement.includes(21) ? "inline-block" : "none")
-  document.getElementById("uniReset").innerHTML = (game.atoms.gte(1e80) && game.size.gte(8.8e26)) ? "Reset for " + formate(game.atoms.div(1e80).pow(0.0125).mul(game.size.log10().div(new Decimal(8.8).a)), 2) + " Universe Points" : "Reach " + formate(new Decimal(1e80)) + " atoms and " + formate(new Decimal(8.8e26)) + " meters to reset"
+  document.getElementById("uniReset").innerHTML = (game.atoms.gte(1e80) && game.size.gte(8.8e26)) ? "Reset for " + formate(game.atoms.div(1e80).pow(0.0125), 2) + " Universe Points" : "Reach " + formate(new Decimal(1e80)) + " atoms and " + formate(new Decimal(8.8e26)) + " meters to reset"
   
   updateAchievement()
   getAchievement()
