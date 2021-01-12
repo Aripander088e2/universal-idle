@@ -1,4 +1,5 @@
 function formate(num, dp) {
+  num = new Decimal(num)
   let output = ""
   let ret = num.abs()
   if (ret.lt(1e6)) {
