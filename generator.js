@@ -29,7 +29,7 @@ function getGeneratorSpeedExp(gen){
 }
 
 function getSizeSpeed(){
-  let base = (game.atoms.gte(1e36) && game.generator[8].gt(0) ? game.atoms.pow(0.5).div(1e18) : new Decimal(0))
+  let base = (game.achievement.includes(18) ? game.atoms.pow(0.5).div(1e18) : new Decimal(0))
   if (base.gte(1e24)) base = new Decimal(10).pow(base.log10().mul(24).pow(0.5))
   return base
 }

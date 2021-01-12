@@ -22,7 +22,7 @@ const achreward =
         "", 
         "", 
         "", 
-        ""
+        ", Reward: Your atoms explain your universe size"
        ]
       ]
 
