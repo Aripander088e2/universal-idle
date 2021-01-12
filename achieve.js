@@ -9,7 +9,17 @@ const achdesc =
         "We couldn't afford 9: Buy a Generator VI", 
         "Not a luck related achievement: Buy a Generator VII", 
         "90 degrees to infinity: Buy a Generator VIII"
-       ]
+       ],
+       [null, 
+        "Perform a Universe reset", 
+        "???", 
+        "???", 
+        "???", 
+        "???", 
+        "???", 
+        "???", 
+        "???"
+       ],
       ]
 
 const achreward =
@@ -23,7 +33,17 @@ const achreward =
         "", 
         "", 
         ", Reward: Your atoms explain your universe size"
-       ]
+       ],
+       [null, 
+        "", 
+        "", 
+        "", 
+        "", 
+        "", 
+        "", 
+        "", 
+        ""
+       ],
       ]
 
 function updateAchievement(){

@@ -47,6 +47,8 @@ function loop(ms){
   document.getElementById("postgen8_2").style.display = (game.achievement.includes(18) ? "block" : "none")
   document.getElementById("postgen8_3").style.display = (game.achievement.includes(18) ? "block" : "none")
   
+  document.getElementById("t2").style.display = ((game.atoms.gte(1e80) && game.size.gte(8.8e26)) || game.achievement.includes(21) ? "inline-block" : "none")
+  
   updateAchievement()
   getAchievement()
 }
