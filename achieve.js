@@ -51,17 +51,16 @@ function checkAchieve() {
   for (let row in achieveData) {
     let rowData = achieveData[row]
     let numberrow = Number(row)
-      achieveGain = true
-    
+    if (true) {
       for (let col in rowData.achieve) {
         let numbercol = Number(col)
-        let achieveId=numberrow*10+numbercol+1
+        let achieveId=(numberrow+1)*10+numbercol+1
         if ((!game.achievement.includes(achieveId))&&(rowData.achieve[col]())) {
           game.achievement.push(achieveId)
           $.notify("New Achievement Unlocked: " + rowData.name[col],"achieve")
           achieveGain = true
         }
-      
+      }
     }
   }
   if (achieveGain) {
