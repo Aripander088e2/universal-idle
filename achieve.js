@@ -47,7 +47,7 @@ const achreward =
       ]
 
 function updateAchievement(){
-  for (let i = 1; i < 1.5; i++){
+  for (let i = 1; i < 2.5; i++){
     for (let j = 1; j < 8.5; j++){
       document.getElementById("ach" + i + j).innerHTML = achdesc[i][j] + achreward[i][j] + (game.achievement.includes(10*i+j) ? " (Achieved)" : "")
     }
@@ -63,4 +63,13 @@ function getAchievement(){
   if (game.generatorBought[6].gt(0) && !game.achievement.includes(16)) game.achievement.push(16)
   if (game.generatorBought[7].gt(0) && !game.achievement.includes(17)) game.achievement.push(17)
   if (game.generatorBought[8].gt(0) && !game.achievement.includes(18)) game.achievement.push(18)
+  
+  if (false && !game.achievement.includes(21)) game.achievement.push(21)
+  if (false && !game.achievement.includes(22)) game.achievement.push(22)
+  if (false && !game.achievement.includes(23)) game.achievement.push(23)
+  if (false && !game.achievement.includes(24)) game.achievement.push(24)
+  if (false && !game.achievement.includes(25)) game.achievement.push(25)
+  if (false && !game.achievement.includes(26)) game.achievement.push(26)
+  if (false && !game.achievement.includes(27)) game.achievement.push(27)
+  if (false && !game.achievement.includes(28)) game.achievement.push(28)
 }
