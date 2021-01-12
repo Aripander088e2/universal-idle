@@ -1,4 +1,7 @@
-function formate(num, dp, dp2) {
+function formate(num, dp, dp2) { 
+  // num: number that you need to formate
+  // dp: decimal points below 1e6
+  // dp2: decimal points between 1e6 and e1e6, 1 more decimal point than dp2 after e1e6
   num = new Decimal(num)
   let output = ""
   let ret = num.abs()

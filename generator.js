@@ -68,5 +68,4 @@ function buyMaxAllGenerator(){
   for (let i=8; i>0.5; i--){
     buyMaxGenerator(i)
   }
-  return
 }

@@ -20,15 +20,15 @@ const calculate = window.setInterval(() => {
 }, 20);
 
 function loop(ms){
-  updateGenerator(ms)
-  updateSize(ms)
+  updateGenerator(ms) // update Generators and Atoms amount
+  updateSize(ms) // update Universe size
   
   document.getElementById("atom").innerHTML = formate(game.atoms, 2, 2)
   document.getElementById("atomSpeed").innerHTML = formate(getGeneratorSpeed(1), 2, 2)
   
   document.getElementById("size").innerHTML = formate(game.size, 2, 2)
   document.getElementById("sizeSpeed").innerHTML = formate(getSizeSpeed(), 2, 2)
-  document.getElementById("sizeBoost").innerHTML = formate(getSizeBoost(), 3, 2)
+  document.getElementById("sizeBoost").innerHTML = formate(getSizeBoost(), 3, 3)
   
   for (let i=1; i<8.5; i++){
     document.getElementById("gen" + i + "Bought").innerHTML = formate(game.generatorBought[i], 0, 2)
@@ -50,6 +50,6 @@ function loop(ms){
   document.getElementById("t2").style.display = ((game.atoms.gte(1e80) && game.size.gte(8.8e26)) || game.achievement.includes(21) ? "inline-block" : "none")
   document.getElementById("uniReset").innerHTML = (game.atoms.gte(1e80) && game.size.gte(8.8e26)) ? "Reset for " + formate(game.atoms.div(1e80).pow(new Decimal(0.0125).mul(new Decimal(2).log10())), 2, 2) + " Universe Points" : "Reach " + formate(new Decimal(1e80), 2, 2) + " atoms and " + formate(new Decimal(8.8e26), 2, 2) + " meters to reset"
   
-  updateAchievement()
-  getAchievement()
+  updateAchievement() // update Achievements
+  getAchievement() // get Achievements
 }
