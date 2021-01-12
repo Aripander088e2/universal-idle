@@ -39,8 +39,8 @@ function getAchievement(){
   if (game.generatorBought[2].gt(0) && !game.achievement.includes(12)) game.achievement.push(12)
   if (game.generatorBought[3].gt(0) && !game.achievement.includes(13)) game.achievement.push(13)
   if (game.generatorBought[4].gt(0) && !game.achievement.includes(14)) game.achievement.push(14)
-  if (game.generatorBought[5].gt(0) && !game.achievement.includes(11)) game.achievement.push(11)
-  if (game.generatorBought[6].gt(0) && !game.achievement.includes(12)) game.achievement.push(12)
-  if (game.generatorBought[7].gt(0) && !game.achievement.includes(13)) game.achievement.push(13)
-  if (game.generatorBought[4].gt(0) && !game.achievement.includes(14)) game.achievement.push(14)
+  if (game.generatorBought[5].gt(0) && !game.achievement.includes(15)) game.achievement.push(15)
+  if (game.generatorBought[6].gt(0) && !game.achievement.includes(16)) game.achievement.push(16)
+  if (game.generatorBought[7].gt(0) && !game.achievement.includes(17)) game.achievement.push(17)
+  if (game.generatorBought[8].gt(0) && !game.achievement.includes(18)) game.achievement.push(18)
 }
