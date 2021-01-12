@@ -27,7 +27,7 @@ function formateNum(num, dp) {
   let mantissa = num.div(new Decimal(10).pow(exponent)).toNumber();
   if (game.notation <= 3){
     if (num.gte(new Decimal(10).pow(3 * 10 ** game.notation + 3))) {
-      return mantissa.toFixed(dp) + "e" + exponent.toLocaleString()
+      return mantissa.toFixed(dp) + "e" + exponent
     } else {
       let mod = exponent % 3
       exponent = (exponent - mod) / 3 - 1
