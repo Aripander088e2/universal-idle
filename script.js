@@ -41,7 +41,7 @@ function loop(ms){
   document.getElementById("title").innerHTML = formate(game.atoms) + " atoms, " + formate(game.size) + " meters"
   document.getElementById("notation").innerHTML = "Notation: " + (game.notation == 0 ? "Scientific " : "Standard I" + (game.notation >= 2 ? (game.notation >= 3 ? "II " : "I ") : " ")) + "(Scientific Notation start at 1e" + (3 * 10 ** game.notation + 3) + ")"
   
-  document.getElementById("achieveTotal").textContent=game.achievement.length
-  updateAchieveColor()
+  document.getElementById("achieveTotal").textContent = game.achievement.length
+  
   //$.notify(game.atoms.toString(), "achieve")
 }
