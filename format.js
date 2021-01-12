@@ -1,23 +1,23 @@
-function formate(num, dp) {
+function formate(num, dp, dp2) {
   num = new Decimal(num)
   let output = ""
   let ret = num.abs()
   if (ret.lt(1e6)) {
     output = ret.toFixed(dp)
   } else if (ret.lt("e1e6")) {
-    output = formateNum(ret, 2)
+    output = formateNum(ret, dp2)
   } else if (ret.lt("ee1e6")) {
     ret = ret.log10()
-    output = "e" + formateNum(ret, 3)
+    output = "e" + formateNum(ret, dp2 + 1)
   } else if (ret.lt("eee1e6")) {
     ret = ret.log10().log10()
-    output = "ee" + formateNum(ret, 3)
+    output = "ee" + formateNum(ret, dp2 + 1)
   } else if (ret.lt("eeee1e6")) {
     ret = ret.log10().log10().log10()
-    output = "eee" + formateNum(ret, 3)
+    output = "eee" + formateNum(ret, dp2 + 1)
   } else if (ret.lt("eeeee1e6")) {
     ret = ret.log10().log10().log10().log10()
-    output = "eeee" + formateNum(ret, 3)
+    output = "eeee" + formateNum(ret, dp2 + 1)
   } else output = ret.toString()
   return (num.lt(0) ? "-" : "") + output
 }
@@ -27,11 +27,19 @@ function formateNum(num, dp) {
   let mantissa = num.div(new Decimal(10).pow(exponent)).toNumber();
   if (game.notation <= 3){
     if (num.gte(new Decimal(10).pow(3 * 10 ** game.notation + 3))) {
+      if (mantissa >= 10 - 10 ** (-1 * dp) / 2){
+        mantissa /= 10
+        exponent += 1
+      }
       return mantissa.toFixed(dp) + "e" + exponent
     } else {
       let mod = exponent % 3
       exponent = (exponent - mod) / 3 - 1
       mantissa = mantissa * 10 ** mod
+      if (mantissa >= 1000 - 10 ** (-1 * dp) / 2){
+        mantissa /= 1000
+        exponent += 1
+      }
       if (num.lt(new Decimal(1e33))) {
         return mantissa.toFixed(dp) + " " + standardPreE33[exponent]
       } else {
