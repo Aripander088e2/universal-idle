@@ -11,6 +11,7 @@ let game = {
 moveTab1()
 loadGame(JSON.parse(localStorage.getItem("universal-idle")))
 
+
 let deltaTime;
 const calculate = window.setInterval(() => {
   deltaTime = Date.now() - game.tLast;
@@ -41,6 +42,6 @@ function loop(ms){
   document.getElementById("notation").innerHTML = "Notation: " + (game.notation == 0 ? "Scientific " : "Standard I" + (game.notation >= 2 ? (game.notation >= 3 ? "II " : "I ") : " ")) + "(Scientific Notation start at 1e" + (3 * 10 ** game.notation + 3) + ")"
   
   document.getElementById("achieveTotal").textContent=game.achievement.length
-  
+  updateAchieveColor()
   //$.notify(game.atoms.toString(), "achieve")
 }

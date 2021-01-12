@@ -70,10 +70,10 @@ function checkAchieve() {
 }
 
 function updateAchieveColor() {
-  for (let row=0;row<10;row++) {
+  for (let row=0;row<1;row++) {
     document.getElementById("achievementTable").children[0].children[row].style.display=""
-    for (let col=0;col<10;col++) {
-      document.getElementById("achievementTable").children[0].children[row].children[col].style.background=(game.achievement.includes(row*10+col+1)?"green":"grey")
+    for (let col=0;col<8;col++) {
+      document.getElementById("achievementTable").children[0].children[row].children[col].style.background=(game.achievement.includes((row+1)*10+col+1)?"green":"grey")
     }
   }
 }
