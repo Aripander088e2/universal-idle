@@ -43,5 +43,6 @@ function loop(ms){
   
   document.getElementById("achieveTotal").textContent = game.achievement.length
   updateAchievement()
+  //getAchievement()
   //$.notify(game.atoms.toString(), "achieve")
 }
