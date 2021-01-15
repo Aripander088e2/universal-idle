@@ -6,8 +6,9 @@
 <script src="notify.js" defer></script>
 <script src="saveload.js" defer></script>
 <script src="break_eternity.js" defer></script>
-<script src="function.js" defer></script>
 <script src="format.js" defer></script>
+<script src="function.js" defer></script>
+<script src="prestige.js" defer></script>
 <script src="tab.js" defer></script>
 <script src="generator.js" defer></script>
 <script src="achieve.js" defer></script>
@@ -18,6 +19,8 @@
 <p>You are getting <text id="atomSpeed"></text> atoms per second</p>
 <h2 id="postgen8_2">Your universe size is <text id="size"></text> meter</h2>
 <p id="postgen8_3">They multiply all Generator speed by <text id="sizeBoost"></text></p>
+<h2 id="postuni2_1">Your universe age is <text id="time"></text> second</h2>
+<p id="postuni2_2">They raising all Generator multiplier to the power of <text id="timeBoost"></text></p>
 <div>
   <button onclick="Tab(1)" id="t1">Generator</button>
   <button onclick="Tab(2)" id="t2">Universe</button>
@@ -28,53 +31,91 @@
 <div id="tab1">
 <button onclick="buyMaxAllGenerator()">Buy Max All Generator</button>
 <br><br>
+<span id="gen1">
 Generator I<sup id="gen1Bought"></sup>: <text id="gen1Amount"></text> (+<text id="gen1Speed"></text>/s, Power: <text id="gen1Multi"></text>x)
 <br>
 <button onclick="buyGenerator(1)">Upgrade Generator I, Cost: <text id="gen1Cost"></text></button>
 <button onclick="buyMaxGenerator(1)">Buy Max Generator I</button>
 <br><br>
+</span>
+<span id="gen2">
 Generator II<sup id="gen2Bought"></sup>: <text id="gen2Amount"></text> (+<text id="gen2Speed"></text>/s, Power: <text id="gen2Multi"></text>x)
 <br>
 <button onclick="buyGenerator(2)">Upgrade Generator II, Cost: <text id="gen2Cost"></text></button>
 <button onclick="buyMaxGenerator(2)">Buy Max Generator II</button>
 <br><br>
+</span>
+<span id="gen3">
 Generator III<sup id="gen3Bought"></sup>: <text id="gen3Amount"></text> (+<text id="gen3Speed"></text>/s, Power: <text id="gen3Multi"></text>x)
 <br>
 <button onclick="buyGenerator(3)">Upgrade Generator III, Cost: <text id="gen3Cost"></text></button>
 <button onclick="buyMaxGenerator(3)">Buy Max Generator III</button>
 <br><br>
+</span>
+<span id="gen4">
 Generator IV<sup id="gen4Bought"></sup>: <text id="gen4Amount"></text> (+<text id="gen4Speed"></text>/s, Power: <text id="gen4Multi"></text>x)
 <br>
 <button onclick="buyGenerator(4)">Upgrade Generator IV, Cost: <text id="gen4Cost"></text></button>
 <button onclick="buyMaxGenerator(4)">Buy Max Generator IV</button>
 <br><br>
+</span>
+<span id="gen5">
 Generator V<sup id="gen5Bought"></sup>: <text id="gen5Amount"></text> (+<text id="gen5Speed"></text>/s, Power: <text id="gen5Multi"></text>x)
 <br>
 <button onclick="buyGenerator(5)">Upgrade Generator V, Cost: <text id="gen5Cost"></text></button>
 <button onclick="buyMaxGenerator(5)">Buy Max Generator V</button>
 <br><br>
+</span>
+<span id="gen6">
 Generator VI<sup id="gen6Bought"></sup>: <text id="gen6Amount"></text> (+<text id="gen6Speed"></text>/s, Power: <text id="gen6Multi"></text>x)
 <br>
 <button onclick="buyGenerator(6)">Upgrade Generator VI, Cost: <text id="gen6Cost"></text></button>
 <button onclick="buyMaxGenerator(6)">Buy Max Generator VI</button>
 <br><br>
+</span>
+<span id="gen7">
 Generator VII<sup id="gen7Bought"></sup>: <text id="gen7Amount"></text> (+<text id="gen7Speed"></text>/s, Power: <text id="gen7Multi"></text>x)
 <br>
 <button onclick="buyGenerator(7)">Upgrade Generator VII, Cost: <text id="gen7Cost"></text></button>
 <button onclick="buyMaxGenerator(7)">Buy Max Generator VII</button>
 <br><br>
+</span>
+<span id="gen8">
 Generator VIII<sup id="gen8Bought"></sup>: <text id="gen8Amount"></text> (+<text id="gen8Speed"></text>/s, Power: <text id="gen8Multi"></text>x)
 <br>
 <button onclick="buyGenerator(8)">Upgrade Generator VIII, Cost: <text id="gen8Cost"></text></button>
 <button onclick="buyMaxGenerator(8)">Buy Max Generator VIII</button>
 <br><br>
+</span>
+<span id="genB">
+Generator Boost (<text id="genBoostAmount"></text>): Require <text id="genBoostCost"></text> Generator VIII
+<button onclick="buyGeneratorBoost()">Reset everything for a Generator Boost</button><br>
+Current Boost:<br>
+<text id="genBoostEff1"></text>x All Generators Speed<br>
++<text id="genBoostEff2"></text> exponent from Atoms to Size speed<br>
++<text id="genBoostEff3"></text>% Universe Points Gain<br>
+</span>
 </div>
 <div id="tab2">
-  Coming Soon! <br>
-  <button id="uniReset">Reset for Universes</button>
+You have <text id="uniPts"></text> Universe Points
+<br>
+<button id="uniReset" onclick="prestige(1)">Reset for Universes</button>
+<br><br>
+Upgrade:
+<br>
+<button onclick="buyRepeatableUpgrade(1,1)">You gain 2x more Universe Points (softcap past level 60), cost: <text id="repeatUniUpg1Cost"></text> Universe Points, Level <text id="repeatUniUpg1Level"></text></button>
+<br>
+<button onclick="buyUpgrade(1,1)">Generators are Faster based on your Universe Points, cost: <text id="uniUpg1Cost"></text> Universe Points <text id="uniUpg1Bought"></text></button>
+<br>
+<button onclick="buyUpgrade(1,2)">Your Universe Points produce Time, cost: <text id="uniUpg2Cost"></text> Universe Points <text id="uniUpg2Bought"></text></button>
+<br>
+<button onclick="buyUpgrade(1,3)">???, cost: <text id="uniUpg3Cost"></text> Universe Points <text id="uniUpg3Bought"></text></button>
+<br>
+<button onclick="buyUpgrade(1,4)">???, cost: <text id="uniUpg4Cost"></text> Universe Points <text id="uniUpg4Bought"></text></button>
+<br>
 </div>
 <div id="tab101">
-<button onclick="save()">Save your game</button>
+<button onclick="save2()">Save your game</button>
 <button onclick="exporty()">Export your game</button>
 <button onclick="importy()">Import your game</button>
 <button onclick="resetConf()">Reset your game</button>
@@ -84,24 +125,24 @@ Generator VIII<sup id="gen8Bought"></sup>: <text id="gen8Amount"></text> (+<text
 </div>
 <div id="tab102">
   <p>Achievements Completed: <text id="achieveTotal"></text> (Total: 16)</p>
-  Set 1:
-  <br>
-  <p id="ach11"></p>
-  <p id="ach12"></p>
-  <p id="ach13"></p>
-  <p id="ach14"></p>
-  <p id="ach15"></p>
-  <p id="ach16"></p>
-  <p id="ach17"></p>
-  <p id="ach18"></p>
-  Set 2:
-  <br>
-  <p id="ach21"></p>
-  <p id="ach22"></p>
-  <p id="ach23"></p>
-  <p id="ach24"></p>
-  <p id="ach25"></p>
-  <p id="ach26"></p>
-  <p id="ach27"></p>
-  <p id="ach28"></p>
+  Set 1: <text id="achP1"></text><br>
+  You gotta start somewhere: Buy a Generator I. <text id="ach11"></text><br>
+  1000 atoms is a lot: Buy a Generator II. <text id="ach12"></text><br>
+  Half life 3 CONFIRMED: Buy a Generator III. <text id="ach13"></text><br>
+  L4G: Left 4 Generators: Buy a Generator IV.<text id="ach14"></text><br>
+  5 Generators Atom Punch: Buy a Generator V. <text id="ach15"></text><br>
+  We couldn't afford 9: Buy a Generator VI. <text id="ach16"></text><br>
+  Not a luck related achievement: Buy a Generator VII. <text id="ach17"></text><br>
+  90 degrees to infinity: Buy a Generator VIII. <text id="ach18"></text><br>
+  Full Set reward: Your Atoms Explain Universe size. <text id="achS1"></text><br><br>
+  Set 2: <text id="achP2"></text><br>
+  Universal Collapser: Perform a Universe reset. Reward: Unlock Generator Boost and you gain Atoms 10x faster. <text id="ach21"></text><br>
+  The Ninth Generator is a lie: Have Exactly 9 Generator VIII. Reward: Generator VIII is Faster based on its amount. <text id="ach22"></text><br>
+  Equality: Bought same amount of each Generator 1-8 and Generator Boost (at least 1). <text id="ach23"></text><br>
+  Where is the Generator 8: Reach <text id="ach24Goal">1e100</text> Atoms with no Generator VIII or Generator Boost. Reward: Generator VIII is Faster based on Generator Boost. <text id="ach24"></text><br>
+  <text id="ach25"></text><br>
+  <text id="ach26"></text><br>
+  <text id="ach27"></text><br>
+  <text id="ach28"></text><br>
+  Full Set reward: Universe Explain <text id="achS2Reward">1e10</text>x faster <text id="achS2"></text><br><br>
 </div>
