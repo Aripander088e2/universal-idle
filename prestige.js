@@ -1,0 +1,28 @@
+function prestige(layer){
+  if (layer == 1){
+    if (isPrestigeAvailable(layer)){
+      game.universePoints = game.universePoints.add(getPrestigeGain(1))
+      game.atoms = new Decimal(10)
+      game.size = new Decimal(1)
+      game.generator = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
+      game.generatorBought =  [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
+      game.generatorBoost = new Decimal(0)
+      if(!game.achievement.includes(21)) game.achievement.push(21)
+    }
+  }
+}
+
+function isPrestigeAvailable(layer){
+  if (layer == 1) return game.atoms.gte(1e80) && game.size.gte(8.8e26)
+}
+
+function getPrestigeGain(layer){
+  if (layer == 1){
+    if (!isPrestigeAvailable(1)) return new Decimal(0)
+    let base = new Decimal(2).pow(game.atoms.log10().div(80).sub(1))
+    if (base.gte(1e24)) base = new Decimal(10).pow(new Decimal(24).mul(base.log10()).pow(0.5))
+    base = base.mul(new Decimal(1).add(game.generatorBoost.div(10)))
+    base = base.mul(new Decimal(2).pow(game.repeatableUniverseUpgrade[1].gte(60) ? game.repeatableUniverseUpgrade[1].mul(60).pow(0.5) : game.repeatableUniverseUpgrade[1]))
+    return base
+  }
+}

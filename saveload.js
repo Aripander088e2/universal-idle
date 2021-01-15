@@ -2,9 +2,14 @@ function save() {
   localStorage.setItem("universal-idle", JSON.stringify(game))
 }
 
+function save2(){
+  save()
+  $.notify("Game Saved","success")
+}
+
 var autoSave = window.setInterval(function() {
   save();
-}, 10000);
+}, 30000);
 
 function load() {
   const loadgame = JSON.parse(localStorage.getItem("universal-idle"));
@@ -19,9 +24,17 @@ function loadGame(loadgame) {
   }
   game.atoms = new Decimal(game.atoms)
   game.size = new Decimal(game.size)
+  game.time = new Decimal(game.time)
+  game.totalAtoms = new Decimal(game.totalAtoms)
+  game.bestSize = new Decimal(game.bestSize)
+  game.generatorBoost = new Decimal(game.generatorBoost)
+  game.universePoints = new Decimal(game.universePoints)
   for (let i = 1; i < 8.5; i++) {
     game.generator[i] = new Decimal(game.generator[i])
     game.generatorBought[i] = new Decimal(game.generatorBought[i])
+  }
+  for (let i = 1; i < 1.5; i++) {
+    game.repeatableUniverseUpgrade[i] = new Decimal(game.repeatableUniverseUpgrade[i])
   }
 }
 
@@ -40,6 +53,7 @@ function copyStringToClipboard(str) {
   };
   document.body.appendChild(el);
   copyToClipboard(el);
+  $.notify("Exported to Clipboard!","success")
   document.body.removeChild(el);
 }
 
@@ -81,8 +95,15 @@ game = {
   tLast: Date.now(),
   atoms: new Decimal(10),
   size: new Decimal(1),
+  time: new Decimal(0),
   generator: [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
   generatorBought: [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
+  generatorBoost: new Decimal(0),
+  universePoints: new Decimal(0),
+  universeUpgrade: [null, false, false, false, false],
+  repeatableUniverseUpgrade: [null, new Decimal(0)],
+  totalAtoms: new Decimal(0),
+  bestSize: new Decimal(0),
   notation: 0,
   achievement: [],
 }
