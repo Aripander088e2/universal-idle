@@ -5,6 +5,7 @@ function formate(num, dp, dp2) {
   num = new Decimal(num)
   let output = ""
   let ret = num.abs()
+  if (ret.gte(new Decimal(2).pow(1024))) return "Infinity"
   if (ret.lt(1e6)) {
     output = ret.toFixed(dp)
   } else if (ret.lt("e1e6")) {
@@ -89,4 +90,34 @@ function getNotation(){
     output = ""
   }
   return output
+}
+
+function formateTime(ret, dp, dp2) {
+  let y = new Decimal(86400*365)
+  let d = new Decimal(86400)
+  let h = new Decimal(3600)
+  let m = new Decimal(60)
+  let s = new Decimal(1)
+  ret = new Decimal(ret)
+  if (ret.lt(m)) {
+    return formate(ret, dp, dp2) + " seconds"
+  } else if (ret.lt(h)) {
+    let modS = ret.sub(ret.div(m).floor().mul(m)) // seconds
+    return formate(ret.div(m).floor()) + " minutes, " + formate(modS, dp, dp2) + " seconds"
+  } else if (ret.lt(d)) {
+    let modS = ret.sub(ret.div(m).floor().mul(m)) // seconds
+    let modM = ret.sub(ret.div(h).floor().mul(h)) // minutes
+    return formate(ret.div(h).floor()) + " hours, " + formate(modM.div(m).floor()) + " minutes, " + formate(modS, dp, dp2) + " seconds"
+  } else if (ret.lt(y)) {
+    let modS = ret.sub(ret.div(m).floor().mul(m)) // seconds
+    let modM = ret.sub(ret.div(h).floor().mul(h)) // minutes
+    let modH = ret.sub(ret.div(d).floor().mul(d)) // hours
+    return formate(ret.div(d).floor()) + " days, " + formate(modH.div(h).floor()) + " hours, " + formate(modM.div(m).floor()) + " minutes, " + formate(modS, dp, dp2) + " seconds"
+  } else if (ret.lt(y.mul(1e6))){
+    let modS = ret.sub(ret.div(m).floor().mul(m)) // seconds
+    let modM = ret.sub(ret.div(h).floor().mul(h)) // minutes
+    let modH = ret.sub(ret.div(d).floor().mul(d)) // hours
+    let modD = ret.sub(ret.div(y).floor().mul(y)) // days
+    return formate(ret.div(y).floor()) + " years, " + formate(modD.div(d).floor()) + " days, " + formate(modH.div(h).floor()) + " hours, " + formate(modM.div(m).floor()) + " minutes, " + formate(modS, dp, dp2) + " seconds"
+  } else return formate(ret.div(y), dp, dp2) + " years"
 }
