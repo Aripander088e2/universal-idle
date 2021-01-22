@@ -5,6 +5,11 @@ function formate(num, dp, dp2) {
   num = new Decimal(num)
   let output = ""
   let ret = num.abs()
+  let dec = false
+  if (ret.lt(new Decimal(10).pow(-dp)) && ret.gt(0)){
+    ret = ret.pow(-1)
+    dec = true
+  }
   if (ret.gte(new Decimal(2).pow(1024))) return "Infinity"
   if (ret.lt(1e6)) {
     output = ret.toFixed(dp)
@@ -23,7 +28,7 @@ function formate(num, dp, dp2) {
     ret = ret.log10().log10().log10().log10()
     output = "eeee" + formateNum(ret, dp2 + 1)
   } else output = ret.toString()
-  return (num.lt(0) ? "-" : "") + output
+  return (num.lt(0) ? "-" : "") + (dec ? "1/" : "") + output
 }
 
 function formateNum(num, dp) {
