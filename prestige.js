@@ -8,7 +8,7 @@ function prestige(layer){
       game.generatorBought =  [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
       game.generatorBoost = new Decimal(0)
       if(!game.achievement.includes(21)) game.achievement.push(21)
-      if(!game.achievement.includes(25) && game.generator[5].eq(0)) game.achievement.push(25)
+      if(!game.achievement.includes(25) && game.generator[5].eq(0) && game.generator[6].eq(0) && game.generator[7].eq(0) && game.generator[8].eq(0)) game.achievement.push(25)
     }
   }
 }
