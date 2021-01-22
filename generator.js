@@ -18,12 +18,15 @@ function updateTime(ms){
 function getGeneratorMulti(gen){
   let base = getBoughtBoostMulti().pow(game.generatorBought[gen].gte(60) ? game.generatorBought[gen].mul(60).pow(0.5) : game.generatorBought[gen])
   base = base.mul(getSizeBoost())
-  base = base.mul(new Decimal(2).pow(game.generatorBoost))
+  base = base.mul(getGeneratorBoostBaseEffect()[1].pow(game.generatorBoost))
   if (game.universeUpgrade[1]) base = base.mul(game.universePoints.add(1))
+  if (game.universeUpgrade[3]) base = base.mul(calculateTotalGenBought().max(1).pow(0.5))
   if (game.achievement.includes(21) && gen == 1) base = base.mul(10)
   if (game.achievement.includes(22) && gen == 8) base = base.mul(new Decimal(1).add(game.generator[8].div(100)))
   if (game.achievement.includes(24) && gen == 8) base = base.mul(new Decimal(1).add(game.generatorBoost))
+  if (game.universeUpgrade[6] && gen == 1) base = base.mul(game.time.pow(3).max(1))
   base = base.pow(getTimeBoost())
+  if (game.achievement.includes(28)) base = base.pow(new Decimal(1).add(game.atoms.max(1).log10().div(30000)).min(1.01))
   return base
 }
 
@@ -49,17 +52,19 @@ function getSizeSpeed(){
   let base = (isFullSetAchieved(1) ? game.atoms.pow(getSizeSpeedExp()).div(1e18) : new Decimal(0))
   if (base.gte(1e24)) base = new Decimal(10).pow(base.log10().mul(24).pow(0.5))
   if (isFullSetAchieved(2)) base = base.mul(1e10)
+  if (game.universeUpgrade[6]) base = base.mul(game.time.max(1))
   return base
 }
 
 function getSizeSpeedExp(){
   let base = new Decimal(0.5)
-  base = base.add(game.generatorBoost.div(200))
+  base = base.add(game.generatorBoost.mul(getGeneratorBoostBaseEffect()[2]))
   return base
 }
 
 function getSizeBoost(){
   let base = game.size.max(1).log(10).add(1)
+  if (game.universeUpgrade[4]) base = base.pow(2)
   return base
 }
 
@@ -73,6 +78,15 @@ function getTimeBoost(){
   return base
 }
 
+function getGeneratorBoostBaseEffect(){
+  let output = [null, new Decimal(2), new Decimal(0.005), new Decimal(10)] // first one is multiply value, second one is add value, third one is add percentage
+  if (game.universeUpgrade[5]) {
+    output[1] = output[1].mul(1.5)
+    output[2] = output[2].mul(1.5)
+    output[3] = output[3].mul(1.5)
+  }
+  return output
+}
 
 const generatorCost = [null, new Decimal(10), new Decimal(1e3), new Decimal(1e6), new Decimal(1e10), new Decimal(1e15), new Decimal(1e21), new Decimal(1e28), new Decimal(1e36)]
 const generatorCostScaling = [null, new Decimal(10), new Decimal(100), new Decimal(1e3), new Decimal(1e4), new Decimal(1e5), new Decimal(1e6), new Decimal(1e7), new Decimal(1e8)]
@@ -83,7 +97,7 @@ function getGeneratorCost(gen){
 }
 
 function getGeneratorBoostCost(){
-  let base = game.generatorBoost.add(1).pow(2)
+  let base = game.generatorBoost.add(1).pow(2).round()
   return base
 }
 
@@ -127,4 +141,12 @@ function buyMaxGeneratorBoost(){
     game.generatorBought =  [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
     game.generatorBoost = max
   }
+}
+
+function calculateTotalGenBought(){
+  let output = new Decimal(0)
+    for (let i=1; i<8.5; i++){
+    output = output.add(game.generatorBought[i])
+  }
+  return output
 }

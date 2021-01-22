@@ -93,6 +93,7 @@ function importy() {
 function reset(){
 game = {
   tLast: Date.now(),
+  tStart: Date.now(),
   atoms: new Decimal(10),
   size: new Decimal(1),
   time: new Decimal(0),
@@ -100,7 +101,7 @@ game = {
   generatorBought: [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
   generatorBoost: new Decimal(0),
   universePoints: new Decimal(0),
-  universeUpgrade: [null, false, false, false, false],
+  universeUpgrade: [null, false, false, false, false, false, false, false, false, false, false],
   repeatableUniverseUpgrade: [null, new Decimal(0)],
   totalAtoms: new Decimal(0),
   bestSize: new Decimal(0),
