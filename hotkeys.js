@@ -9,7 +9,7 @@ const keybinds = {
   7: () => buyMaxGenerator(7),
   8: () => buyMaxGenerator(8),
   m: () => buyMaxAllGenerator(),
-  b: () => buyGeneratorBoost(),
+  b: () => {if (game.achievement.includes(21)) buyGeneratorBoost()},
 };
 
 // Declaring it once is probably faster

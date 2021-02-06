@@ -2,6 +2,7 @@
 
 <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet">
 <style>* {font-family: 'Inter', sans-serif;}</style>
+<link rel="stylesheet" type="text/css" href="style.css" />
 <script src="jquery.js" defer></script>
 <script src="notify.js" defer></script>
 <script src="saveload.js" defer></script>
@@ -9,11 +10,17 @@
 <script src="format.js" defer></script>
 <script src="function.js" defer></script>
 <script src="prestige.js" defer></script>
-<script src="tab.js" defer></script>
 <script src="generator.js" defer></script>
 <script src="achieve.js" defer></script>
 <script src="hotkeys.js" defer></script>
+<script src="update.js" defer></script>
+<script src="tab.js" defer></script>
 <script src="script.js" defer></script>
+<script src="news.js" defer></script>
+
+<div id="topbar" style="">
+    <div id="news" style=""></div>
+</div>
 
 <text id="gameSpeed"></text>
 <h1>You have <text id="atom"></text> atoms on universe</h1>
@@ -100,7 +107,7 @@ Current Boost:<br>
 </span>
 </div>
 <div id="tab2">
-You have <text id="uniPts"></text> Universe Points
+You have <text id="uniPts"></text> Universe Points<br>
 <p id="postuni2_3">They make Time increase <text id="timeSpeed"></text> per second</p>
 <button id="uniReset" onclick="prestige(1)">Reset for Universes</button>
 <br><br>
@@ -136,14 +143,26 @@ Upgrade:
 <button onclick="resetConf()">Reset your game</button>
 <br>
 <button onclick="toggleNotation()" id="notation">Notation: Scientific</button>
+<button onclick="toggleTimeDisplay()" id="timedisplay">Time: Long Display</button>
+<button onclick="toggleProductionDisplay()" id="productiondisplay">Production Display: Addition</button>
 <br>
 </div>
 <div id="tab102">
-  You have played for <text id="statistic1"></text>
+  You have played for <text id="statistic1"></text> (Real-Life Time)
+  <br>
+  You have played for <text id="statistic4"></text> (In-Game Time)
   <br>
   You have make a total of <text id="statistic2"></text> Atoms
   <br>
   Your best Universe Size was <text id="statistic3"></text> meters
+  <br><br>
+  <b>Note: All below this is estimated as Logarithm</b>
+  <br>
+  <text id="resourcestat1"></text>
+  <br>
+  <text id="resourcestat2"></text>
+  <br>
+  <text id="resourcestat3"></text>
   <br>
 </div>
 <div id="tab103">
@@ -169,3 +188,4 @@ Upgrade:
   To Infinity: Reach <text id="ach28Goal">1.80e308</text> Atoms, Reward: Raise all Generator multiplier to the power of 1+log10(Atoms)/30000, with a maximum of ^1.01. <text id="ach28"></text><br>
   Full Set reward: Universe Explain <text id="achS2Reward">1e10</text>x faster <text id="achS2"></text><br><br>
 </div>
+<br><br><br>

@@ -8,7 +8,7 @@ function save2(){
 }
 
 var autoSave = window.setInterval(function() {
-  save();
+  save2();
 }, 30000);
 
 function load() {
@@ -22,11 +22,13 @@ function loadGame(loadgame) {
   for (const i in loadgame) {
     game[i] = loadgame[i];
   }
+  game.tPlayedWTimeSpeed = new Decimal(game.tPlayedWTimeSpeed)
   game.atoms = new Decimal(game.atoms)
   game.size = new Decimal(game.size)
   game.time = new Decimal(game.time)
   game.totalAtoms = new Decimal(game.totalAtoms)
   game.bestSize = new Decimal(game.bestSize)
+  game.bestGenBoost = new Decimal(game.bestGenBoost)
   game.generatorBoost = new Decimal(game.generatorBoost)
   game.universePoints = new Decimal(game.universePoints)
   for (let i = 1; i < 8.5; i++) {
@@ -93,6 +95,7 @@ function importy() {
 function reset(){
 game = {
   tLast: Date.now(),
+  tPlayedWTimeSpeed: new Decimal(0),
   tStart: Date.now(),
   atoms: new Decimal(10),
   size: new Decimal(1),
@@ -105,7 +108,11 @@ game = {
   repeatableUniverseUpgrade: [null, new Decimal(0)],
   totalAtoms: new Decimal(0),
   bestSize: new Decimal(0),
+  bestGenBoost: new Decimal(0),
+  tab: 1,
   notation: 0,
+  timeDisplay: 0,
+  productionDisplay: 0,
   achievement: [],
 }
   save()
