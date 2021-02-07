@@ -98,6 +98,7 @@ function getGeneratorCost(gen){
 
 function getGeneratorBoostCost(){
   let base = game.generatorBoost.add(1).pow(2)
+  if (getGenBoostCostDivider().eq(0)) return new Decimal(Infinity)
   base = base.div(getGenBoostCostDivider())
   base = base.round()
   return base
@@ -154,6 +155,7 @@ function buyMaxGeneratorBoost(){
 
 
 function getGenBoostCostDivider(){
+  if (!game.achievement.includes(21)) return new Decimal(0)
   let base = new Decimal(1)
   return base
 }

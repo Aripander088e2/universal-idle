@@ -11,8 +11,7 @@ function formate(num, dp, dp2, postinf, fixed) {
   let output = ""
   let ret = num.abs()
   if (ret.lt(new Decimal(10).pow(-dp)) && ret.gt(0)) return new Decimal(0).toFixed(dp)
-  if ((ret.gte(new Decimal(2).pow(1024)) && postinf !== 1 && (!false || postinf !== -1)) || ret.eq(Infinity)) return "Infinity"
-  // false will be replaced with anything if something can break the limit
+  if ((ret.gte(new Decimal(2).pow(1024)) && postinf !== 1 && (!game.achievement.includes(31) || postinf == -1)) || ret.eq(Infinity)) return "Infinity"
   if (isNaN(ret) && !ret.gte(new Decimal("e9e15"))) return "NaN" // Fix unexpected NaN
   if (ret.lt(1e6)) {
     output = ret.toFixed(dp)

@@ -211,9 +211,10 @@ news.news = [
   // Note: Some of them is not actually 1%, it probably slightly higher/lower 1%
   
   // Atoms Related
-	() => "Still " + formate(new Decimal(10).pow(game.atoms.max(10).log10().pow(1)), 2, 2, 1) + " Atoms, huh? - Atom Man with " + formate(new Decimal(10).pow(game.atoms.max(10).log10().pow(2 ** Math.random())), 2, 2, 1) + " Atoms",
+  () => "Still " + formate(new Decimal(10).pow(game.atoms.max(10).log10().pow(1)), 2, 2, 1) + " Atoms, huh? - Atom Man with " + formate(new Decimal(10).pow(game.atoms.max(10).log10().pow(2 ** Math.random())), 2, 2, 1) + " Atoms",
   () => "How do you get " + formate(new Decimal(10).pow(game.atoms.max(10).log10().pow(1)), 2, 2, 1) + " Atoms? - Atom Man with " + formate(new Decimal(10).pow(game.atoms.max(10).log10().pow(0.5 ** Math.random())), 2, 2, 1) + " Atoms",
   () => "Dilate All Atoms into " + formate(game.atoms.max(1).log10().pow(1 / Math.random()), 2, 2, 1) + " Dilated Atoms",
+  () => "I can't believe you can have " + formate(game.atoms.tetrate(1 + Math.random()), 2, 2, 1) + " Atoms",
   
   // Generators Related
   () => "Generator IX: " + formate(game.generator[Math.floor(1 + Math.random() * 7)].add(1e10).slog(10).sub(2), 12, 2, 1),
@@ -224,8 +225,8 @@ news.news = [
   () => "Dilate Your Universe to reduce the size to " + formate(game.size.pow(Math.random()), 2, 2, 1) + " Meters",
   
   // Universe Related
-  () => "Your Universe Points on Universes is enough to reach " + formate(new Decimal(1e80).pow(game.universePoints.pow(Math.random())), 2, 2, 1) + " Atoms",
-  () => "Your Universe Points on Universes is enough to reach " + formate(new Decimal(8.8e26).pow(game.universePoints.pow(Math.random())), 2, 2, 1) + " Meters",
+  () => "Your Universe Points on Universes is enough to reach " + formate(new Decimal(1e80).pow(game.universePoints.max(1).pow(Math.random())), 2, 2, 1) + " Atoms",
+  () => "Your Universe Points on Universes is enough to reach " + formate(new Decimal(8.8e26).pow(game.universePoints.max(1).pow(Math.random())), 2, 2, 1) + " Meters",
   
   // Time Related
   () => "Dilate Your Time for " + formate(game.time.mul(Math.random()), 2, 2, 1) + " Dilated Time",
@@ -239,18 +240,19 @@ news.news = [
   () => "We are not adding an exit the incrementyverse update - TheMKeyHolder#" + (Math.random() < 1/11 ? "66" : number2digits(Math.floor(Math.random() * 100))) + (Math.random() < 1/11 ? "74" : number2digits(Math.floor(Math.random() * 100))), // 1% ticker possible if generate 66 and 74 respectively
   () => "Removed " + (Math.random() < 0.5 ? "Facebook " : "Messenger ") + (Math.random() < 0.01 ? "Cardinals" : "Ordinals") + " since it will be never exist in the game", // 1% ticker possible if generate "Facebook Cardinals" or "Messenger Cardinals"
   () => "When I can reach ε" + (Math.random() < 0.01 ? "ω" : Math.floor(1 / Math.random() - 1).toLocaleString()), // 1% ticker possible if generate Epsilon Omega
+  () => "Ordinal Markup will be released in skype on " + (Math.random < 0.01 ? "Never" : randomTime(1e308)), // 1% ticker possible if generate "Never"
   
   // Synergism Related
   () => "Shouldn't e" + formate(new Decimal(2).pow(20 + Math.floor(Math.random() * 100)).div(1.048576), 3, 3, 1, 1) + " is better than 1.00e" + formate(new Decimal(2).pow(20 + Math.floor(Math.random() * 100)).div(1.048576), 3, 3, 1, 1) + "?", // 1% ticker possible if both Number are same
   
   // Discord Related
-  () => formate(new Decimal(2).pow(4 + Math.floor(Math.random() * 1030)), 2, 2, -1) + " Strikes to " + getRandomUsername(1) + " for leaking the test link", // 1% ticker possible if strikes = Infinity
+  () => formate(new Decimal(2).pow(4 + Math.floor(Math.random() * 1030)), 0, 2, -1) + " Strikes to " + getRandomUsername(1) + " for leaking the test link", // 1% ticker possible if strikes = Infinity
   
   // Youtube Related
   
   
   // Fandom Related
-  () => "E308.25 blocked JakeCampbell19 with an expiration time of " + randomTime(Math.random() < 0.1 ? (Math.random() < 0.1 ? 2999 : 2099) : 2029), // 1% ticker possible if years > 2100
+  () => "E308.25 blocked JakeCampbell19 with an expiration time of " + randomTime(Math.random() < 0.01 ? 2999 : 2099), // 1% ticker possible if years > 2100
   () => "E" + (Math.random() < 0.1 ? 308.25 : Math.floor((100 + Math.random() * 900) * 100) / 100).toFixed(2) + " blocked JakeCampbell" + (Math.random() < 0.1 ? 19 : number2digits(Math.floor(Math.random() * 100))) + " with an expiration time of indefinite", // 1% ticker possible if all 308.25, 19, indefinite are generated
   
   () => "IdleSquadron deleted page " + numToOrd(Math.floor(1 + Math.random() * 99)) + " page", // 1% ticker possible if page = 33
@@ -259,6 +261,8 @@ news.news = [
   () => "IdleSquadron blocked JakeCampbell19 with an expiration time of " + Math.ceil(Math.floor(1 + Math.random() * 100) * 3.65) + " days", // 1% ticker possible if days = 92
   () => "IdleSquadron blocked " + (Math.random() < 0.01 ? "72.185.158.165" : randomIPAdress()) + " with an expiration time of 00:00, January 1, 2021", // 1% ticker possible if generate "72.185.158.165"
   () => "IdleSquadron blocked 203.54.223.134 with an expiration time of " + (Math.floor(1 + Math.random() * 10) * 10 ** Math.floor(Math.random() * 10)).toLocaleString() + " days", // 1% ticker possible if generate 7 days
+  
+  () => "Patcail deleted page Post " + (Math.random() < 0.01 ? "Collapse" : "Factor Boost"), // 1% ticker possible if generate "Collapse"
   
   () => (Math.random() < 0.01 ? "Cardinal " : "Ordinal ") + "is UselessThis page is bad IP ban me", // 1% ticker possible if generate "Cardinal"
   () => (Math.random() < 0.01 ? "!style=background:#cfcfcf; font-size: 12px; border:1px solid #323341; width:75%; text-align:left; padding-left:5px|[[Ordinal|(SPOILERS)]] • [[Base]] • [[Guide]] • [[Abbreviations]]" : "(SPOILERS)"), // 1% ticker possible if generate a long message with "(SPOILERS)"
@@ -278,12 +282,15 @@ news.news = [
   () => randomRickroll(8), // 1% ticker possible if generate Rickroll Link
   
   // Random Number Generator
-  () => "Random Number with Tetrational rate is Generated: " + formate(new Decimal(10).tetrate(-1 * Math.log10(Math.random())), 2, 2, 1), // 1% ticker possible if number > 1e10
-  () => "Random Number with Exponential rate is Generated: " + formate(new Decimal(10).pow(1 / Math.random() - 1), 2, 2, 1), // 1% ticker possible if number > 1e99
+  () => "Random Number with Tetrational rate is Generated: " + formate(new Decimal(10).tetrate(-1 * Math.log10(Math.random())), 3, 3, 1), // 1% ticker possible if number > 1e10
+  () => "Random Number with Exponential rate is Generated: " + formate(new Decimal(10).pow(1 / Math.random() - 1), 3, 3, 1), // 1% ticker possible if number > 1e99
   () => "Random Number with Linear rate is Generated: " + Number(1 / Math.random()).toLocaleString(), // 1% ticker possible if number > 100
   () => "Random Base 36 Character is Generated: " + Math.floor((36**9)*100*Math.random()).toString(36).toLocaleUpperCase(), // 1% ticker possible if character length < 10
   () => "Random Base 10 Number is Generated: " + number2digits(Math.floor(Math.random() * 100)) + number2digits(Math.floor(Math.random() * 100)) + number2digits(Math.floor(Math.random() * 100)) + number2digits(Math.floor(Math.random() * 100)) + number2digits(Math.floor(Math.random() * 100)), // 1% ticker possible if first 2 characters are 00
   () => "Random Time at 2021 is Generated: " + (Math.random < 0.01 ? Math.floor(1609430400 + 31536000 * Math.random()).toLocaleString() : randomTime(2021)), // 1% ticker possible if generate any Unix
+  
+  // Other
+  
   
   // Credit (no random ticker/1% ticker)
   () => "Credit to Patashu, for break_eternity.js",
@@ -296,6 +303,6 @@ news.news = [
   () => "News Ticker #" + (Math.random() < 0.01 ? formate(new Decimal(10).pow(news.news.length), 0, 0, 1, 0) : formate(news.news.length, 0, 0)) + " is created", // 1% ticker possible if generate 10^(Unique News Tickers)
 ];
 
-// total: 50 (10 game-related, 40 non-game-related, 35 of them contain 1% ticker)
+// total: 53 (11,42)
 
 news.begin();

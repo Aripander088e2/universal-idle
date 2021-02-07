@@ -1,10 +1,11 @@
 const achName = [null, 
                  [null, "You gotta start somewhere", "1000 atoms is a lot", "Half life 3 CONFIRMED", "L4G: Left 4 Generators", "5 Generators Atom Punch", "We couldn't afford 9", "Not a luck related achievement", "90 degrees to infinity"], 
-                 [null, "Universal Collapser", "The Ninth Generator is a lie", "Equality", "Where is the Generator 8", "This is Hard", "Overpowered", "Squared Universe", "To Infinity"]
+                 [null, "Universal Collapser", "The Ninth Generator is a lie", "Equality", "Where is the Generator 8", "This is Hard", "Overpowered", "Squared Universe", "To Infinity"],
+                 [null, "", "", "", "", "", "", "", ""],
                 ]
 
 function updateAchievement(){
-  for (let i = 1; i < 2.5; i++){
+  for (let i = 1; i < 3.5; i++){
     for (let j = 1; j < 8.5; j++){
       document.getElementById("ach" + i + j).innerHTML = (game.achievement.includes(10*i+j) ? " (Achieved)" : "")
     }
@@ -81,6 +82,11 @@ function getAchievement(){
   if (game.atoms.gte(new Decimal(2).pow(1024)) && !game.achievement.includes(28)) {
     game.achievement.push(28)
     achNotify(2, 8)
+  }
+  
+  if (false && !game.achievement.includes(31)) {
+    game.achievement.push(31)
+    achNotify(3, 1)
   }
 }
 
