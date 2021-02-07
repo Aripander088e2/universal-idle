@@ -10,10 +10,10 @@ function updateStuffs(ms){
 
 function renderVariable(ms){
   updateGenerator(gameSpeed().mul(ms)) // update Generators and Atoms amount
-  if (game.atoms.gte(new Decimal(2).pow(1024)) && !false) game.atoms = new Decimal(2).pow(1024)
+  if (game.atoms.gte(new Decimal(2).pow(1024)) && !game.achievement.includes(31)) game.atoms = new Decimal(2).pow(1024)
   if (game.generatorBoost.gte(game.bestGenBoost)) game.bestGenBoost = game.generatorBoost
   updateSize(gameSpeed().mul(ms)) // update Universe size
-  updateTime(gameSpeed().mul(ms)) // update Universe time
+  updateTime(ms) // update Universe time
   game.tPlayedWTimeSpeed = game.tPlayedWTimeSpeed.add(gameSpeed().mul(ms).div(1000))
   getAchievement()
 }
