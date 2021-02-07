@@ -21,10 +21,10 @@ function renderVariable(ms){
 function renderMain(){
   // Atom
   document.getElementById("atom").innerHTML = formate(game.atoms, 2, 2)
-  document.getElementById("atomSpeed").innerHTML = formate(game.productionDisplay == 0 ? getGeneratorSpeed(1) : productionRate(game.atoms, getGeneratorSpeed(1), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "% of " : " OoM of "))
+  document.getElementById("atomSpeed").innerHTML = formate(game.productionDisplay == 0 ? getGeneratorSpeed(1).mul(gameSpeed()) : productionRate(game.atoms, getGeneratorSpeed(1).mul(gameSpeed()), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "% of " : " OoM of "))
   // Size
   document.getElementById("size").innerHTML = formate(game.size, 2, 2)
-  document.getElementById("sizeSpeed").innerHTML = formate(game.productionDisplay == 0 ? getSizeSpeed() : productionRate(game.size, getSizeSpeed(), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "% of " : " OoM of "))
+  document.getElementById("sizeSpeed").innerHTML = formate(game.productionDisplay == 0 ? getSizeSpeed().mul(gameSpeed()) : productionRate(game.size, getSizeSpeed().mul(gameSpeed()), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "% of " : " OoM of "))
   document.getElementById("sizeBoost").innerHTML = formate(getSizeBoost(), 3, 3)
   document.getElementById("postgen8_1").style.display = (isFullSetAchieved(1) ? "block" : "none")
   document.getElementById("postgen8_2").style.display = (isFullSetAchieved(1) ? "block" : "none")
@@ -47,7 +47,7 @@ function renderTab1(){
     document.getElementById("gen" + i).style.display = (i == 1 ? "block" : (game.generator[i-1].gt(0) ? "block" : "none"))
     document.getElementById("gen" + i + "Bought").innerHTML = formate(game.generatorBought[i], 0, 3)
     document.getElementById("gen" + i + "Amount").innerHTML = formate(game.generator[i], 0, 2)
-    document.getElementById("gen" + i + "Speed").innerHTML = formate(game.productionDisplay == 0 ? getGeneratorSpeed(i+1) : productionRate(game.generator[i],getGeneratorSpeed(i+1),game.productionDisplay-1), (game.productionDisplay == 0 ? 0 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "%" : " OoM"))
+    document.getElementById("gen" + i + "Speed").innerHTML = formate(game.productionDisplay == 0 ? getGeneratorSpeed(i+1).mul(gameSpeed()) : productionRate(game.generator[i],getGeneratorSpeed(i+1).mul(gameSpeed()),game.productionDisplay-1), (game.productionDisplay == 0 ? 0 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "%" : " OoM"))
     document.getElementById("gen" + i + "Multi").innerHTML = formate(getGeneratorMulti(i), 2, 2)
     document.getElementById("gen" + i + "Cost").innerHTML = formate(getGeneratorCost(i), 0, 2)
   }
