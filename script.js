@@ -9,6 +9,7 @@ let game = {
   generatorBought: [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
   generatorBoost: new Decimal(0),
   universePoints: new Decimal(0),
+  bestUniPtsInOneReset: new Decimal(0),
   universeUpgrade: [null, false, false, false, false, false, false, false, false, false, false],
   repeatableUniverseUpgrade: [null, new Decimal(0)],
   totalAtoms: new Decimal(0),

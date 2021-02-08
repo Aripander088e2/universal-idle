@@ -31,6 +31,7 @@ function loadGame(loadgame) {
   game.bestGenBoost = new Decimal(game.bestGenBoost)
   game.generatorBoost = new Decimal(game.generatorBoost)
   game.universePoints = new Decimal(game.universePoints)
+  game.bestUniPtsInOneReset = new Decimal(game.bestUniPtsInOneReset)
   for (let i = 1; i < 8.5; i++) {
     game.generator[i] = new Decimal(game.generator[i])
     game.generatorBought[i] = new Decimal(game.generatorBought[i])
@@ -104,6 +105,7 @@ game = {
   generatorBought: [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
   generatorBoost: new Decimal(0),
   universePoints: new Decimal(0),
+  bestUniPtsInOneReset: new Decimal(0),
   universeUpgrade: [null, false, false, false, false, false, false, false, false, false, false],
   repeatableUniverseUpgrade: [null, new Decimal(0)],
   totalAtoms: new Decimal(0),
