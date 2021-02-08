@@ -89,6 +89,7 @@ function renderTab102(){
   document.getElementById("statistic2").textContent = formate(game.totalAtoms, 2, 2)
   document.getElementById("statistic3").textContent = formate(game.bestSize, 2, 2)
   document.getElementById("statistic4").textContent = formateTime(game.tPlayedWTimeSpeed, 3, 3)
+  document.getElementById("statistic5").textContent = formate(game.bestUniPtsInOneReset, 2, 2)
   
   document.getElementById("resourcestat1").textContent = 
     "Your atoms is enough to fill " + (game.atoms.gte(1e80) ? formate(game.atoms.log(1e80).floor(), 0, 2) + " Universes" + (game.atoms.lt("e8e7") ? " and " + formate(game.atoms.div(new Decimal(1e80).pow(game.atoms.max(1).log(1e80).floor())).log(1e80).mul(100), 3, 3) + "% of another" : "") :

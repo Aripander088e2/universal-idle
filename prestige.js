@@ -6,6 +6,7 @@ function prestige(layer){
         achNotify(2, 5)
       }
       game.universePoints = game.universePoints.add(getPrestigeGain(1))
+      if (game.bestUniPtsInOneReset.gte(getPrestigeGain(1))) game.bestUniPtsInOneReset = getPrestigeGain(1)
       game.atoms = new Decimal(10)
       game.size = new Decimal(1)
       game.generator = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]

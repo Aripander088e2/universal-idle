@@ -15,7 +15,7 @@ function formate(num, dp, dp2, postinf, fixed) {
   if (isNaN(ret) && !ret.gte(new Decimal("e9e15"))) return "NaN" // Fix unexpected NaN
   if (ret.lt(1e6)) {
     output = ret.toFixed(dp)
-  } else if (ret.lt("e1e6") || usedNotations == 4) {
+  } else if (ret.lt("e1e6") || usedNotations == 4 || (usedNotations == 1 && ret.lt(new Decimal("e3e3000").mul(1e3)))) {
     output = formateNum(ret, dp2, usedNotations)
   } else if (ret.lt("ee1e6")) {
     ret = ret.log10()
@@ -39,7 +39,7 @@ function getMaximum(x){
       return 0
       break;
     case 1:
-      return 3
+      return 3000
       break;
     case 2:
       return 1
@@ -50,27 +50,37 @@ function getMaximum(x){
 }
 
 function formateNum(num, dp, used) {
-  let exponent = num.log10().floor().toNumber();
-  let mantissa = num.div(new Decimal(10).pow(exponent)).toNumber();
+  let exponent = num.log10().floor();
+  let mantissa = num.div(new Decimal(10).pow(exponent));
   if (used <= 2){
-    if (num.gte(new Decimal(10).pow(3 * 10 ** (getMaximum(used)) + 3))) {
-      if (mantissa >= 10 - 10 ** (-1 * dp) / 2){
-        mantissa /= 10
-        exponent += 1
+    if (num.gte(new Decimal(10).pow(new Decimal(3).mul(new Decimal(10).pow(getMaximum(used))).add(3)))) {
+      if (mantissa.gte(10 - 10 ** (-1 * dp) / 2)){
+        mantissa = mantissa.div(10)
+        exponent = exponent.add(1)
       }
-      return mantissa.toFixed(dp) + "e" + exponent.toLocaleString()
+      return mantissa.toFixed(dp) + "e" + exponent.toNumber().toLocaleString()
     } else {
-      let mod = exponent % 3
-      exponent = (exponent - mod) / 3 - 1
-      mantissa = mantissa * 10 ** mod
-      if (mantissa >= 1000 - 10 ** (-1 * dp) / 2){
-        mantissa /= 1000
-        exponent += 1
+      let exponent = num.log10().div(3).floor();
+      let mantissa = num.div(new Decimal(1000).pow(exponent))
+      let maxT1 = num.log10().sub(3).div(3).floor()
+      let maxT2 = maxT1.log10().div(3).floor().toNumber()
+      if (maxT1.lt(1e15)) maxT1 = maxT1.toNumber()
+      else maxT1 = maxT1.div(new Decimal(1000).pow(maxT2 - 4)).floor().toNumber()
+      let tril = Math.floor(maxT1/1e12)
+      let bill = Math.floor(maxT1/1e9) % 1000
+      let mill = Math.floor(maxT1/1e6) % 1000
+      let kill = Math.floor(maxT1/1e3) % 1000
+      let ones = maxT1 % 1000
+      if (mantissa.gte(1000 - 10 ** (-1 * dp) / 2)){
+        mantissa = mantissa.div(1000)
+        exponent = exponent.add(1)
       }
       if (num.lt(new Decimal(1e33))) {
-        return mantissa.toFixed(dp) + " " + standardPreE33[exponent]
+        return mantissa.toFixed(dp) + " " + standardPreE33[maxT1]
+      } else if (num.lt(new Decimal(10).pow(3e15).mul(1000))) {
+        return mantissa.toFixed(dp) + " " + standard(tril, 4, 1) + standard(bill, 3, 1) + standard(mill, 2, 1) + standard(kill, 1, 1) + standard(ones, 0, 0)
       } else {
-        return mantissa.toFixed(dp) + " " + standardUnits[exponent % 10] + standardTens[Math.floor(exponent / 10) % 10] + standardHundreds[Math.floor(exponent / 100)]
+        return standard(tril, maxT2, (ones + kill + mill + bill !== 0 ? 1 : 0)) + standard(bill, maxT2 - 1, (ones + kill + mill !== 0 ? 1 : 0)) + standard(mill, maxT2 - 2, (ones + kill !== 0 ? 1 : 0)) + standard(kill, maxT2 - 3, (ones !== 0 ? 1 : 0)) + standard(ones, maxT2 - 4, 0) + "s"
       }
     }
   } else {
@@ -88,11 +98,42 @@ function formateNum(num, dp, used) {
   }
 }
 
+function comma(num){
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
 
 const standardPreE33 = ["K", "M", "B", "T", "Qa", "Qt", "Sx", "Sp", "Oc", "No"]
 const standardUnits = ["", "U", "D", "T", "Qa", "Qt", "Sx", "Sp", "O", "N"]
 const standardTens = ["", "Dc", "Vg", "Tg", "Qd", "Qi", "Se", "St", "Og", "Nn"]
 const standardHundreds = ["", "Ce", "Dn", "Tc", "Qe", "Qu", "Sc", "Si", "Oe", "Ne"]
+const standardMilestonePreEE33 = ["", "MI", "MC", "NA", "PC", "FM", "AT", "ZP", "YC", "XN", "VE"]
+const standardMilestoneUnits = ["", "M", "D", "T", "Te", "P", "H", "He", "O", "E", "VE"]
+const standardMilestoneTens = ["", "E", "IS", "TN", "TeN", "PN", "HN", "HeN", "ON", "EN"]
+const standardMilestoneHundreds = ["", "HT", "DT", "TT", "TeT", "PT", "HxT", "HeT", "OT", "ET"] // HxT is prevent it mixed with HT
+
+function standard(t1, t2, more){
+  t1 = t1 % 1000
+  t2 = t2 % 1000
+  if (t1 == 0) return ""
+  let output1 = ""
+  let output2 = ""
+  if (t1 !== 1 || (t1 == 1 && t2 == 0)){
+    let ones1 = t1 % 10
+    let tens1 = Math.floor(t1 / 10) % 10
+    let hundreds1 = Math.floor(t1 / 100)
+    output1 = standardUnits[ones1] + standardTens[tens1] + standardHundreds[hundreds1]
+  }
+  if (t2 < 10.5) output2 = standardMilestonePreEE33[t2]
+  else{
+    let mod100 = t2 % 100
+    let ones2 = t2 % 10
+    let tens2 = Math.floor(t2 / 10) % 10
+    let hundreds2 = Math.floor(t2 / 100)
+    if (mod100 < 10.5) output2 = standardMilestoneUnits[mod100] + standardMilestoneHundreds[hundreds2]
+    else output2 = standardMilestoneUnits[ones2] + standardMilestoneTens[tens2] + standardMilestoneHundreds[hundreds2]
+  }
+  return output1 + output2 + (more && t2 !== 0 ? "-" : "")
+}
 
 function toggleNotation() {
   game.notation = (game.notation + 1) % 5

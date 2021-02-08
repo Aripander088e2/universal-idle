@@ -145,7 +145,7 @@ function randomRickroll(id){
     else if (random < 2/6) return "Your heart's been aching but you're too shy to say it"
     else if (random < 3/6) return "Inside we both known what's been going on"
     else if (random < 4/6) return "We know the game and we're gonna play it"
-    else if (random < 5/6) return "And if you ask me how I's feeling"
+    else if (random < 5/6) return "And if you ask me how I'm feeling"
     else return "Don't tell me you're too blind to see"
   } else if (id == 3){
     if (random < 1/6) return "We're known each other for so long"
@@ -232,7 +232,7 @@ news.news = [
   () => "Dilate Your Time for " + formate(game.time.mul(Math.random()), 2, 2, 1) + " Dilated Time",
   
   // Antimatter Dimensions Related
-  () => numToOrd(Math.floor(10 ** (Math.random() ** 2 * 15))) + " " + randomDimensions() + " Dimensions: " + formate(new Decimal(1 / Math.random()).tetrate(3), 2, 2, 1), // 1% ticker possible if generate not "Normal Dimensions"
+  () => numToOrd(Math.floor(10 ** (Math.random() ** 0.5 * 15))) + " " + randomDimensions() + " Dimensions: " + formate(new Decimal(1 / Math.random()).tetrate(3), 2, 2, 1), // 1% ticker possible if generate not "Normal Dimensions"
   () => "You have " + (Math.random() < 0.01 ? "Infinite" : formate(game.atoms.pow(Math.random() * 2), 2, 2, 1)) + " antimatter", // 1% ticker possible if generate "Infinite"
   
   // Ordinal Markup Related
@@ -244,9 +244,11 @@ news.news = [
   
   // Synergism Related
   () => "Shouldn't e" + formate(new Decimal(2).pow(20 + Math.floor(Math.random() * 100)).div(1.048576), 3, 3, 1, 1) + " is better than 1.00e" + formate(new Decimal(2).pow(20 + Math.floor(Math.random() * 100)).div(1.048576), 3, 3, 1, 1) + "?", // 1% ticker possible if both Number are same
+  () => "Never use Level 12 on Extinction Corruption, as it will impossible to " + (Math.random() < 0.01 ? "produce Crumb" : "Ant sacrifice") + ", therefore you can't earn a lot of Offering and Obtainium when you ant sacrifice",
   
   // Discord Related
   () => formate(new Decimal(2).pow(4 + Math.floor(Math.random() * 1030)), 0, 2, -1) + " Strikes to " + getRandomUsername(1) + " for leaking the test link", // 1% ticker possible if strikes = Infinity
+  () => "Can you " + (Math.random < 0.01 ? "delete" : "unpin") + " this message, it seem SUPER ANNOYING - User_2.005e220#3012", // 1% ticker possible if generate "delete this message"
   
   // Youtube Related
   
@@ -303,6 +305,6 @@ news.news = [
   () => "News Ticker #" + (Math.random() < 0.01 ? formate(new Decimal(10).pow(news.news.length), 0, 0, 1, 0) : formate(news.news.length, 0, 0)) + " is created", // 1% ticker possible if generate 10^(Unique News Tickers)
 ];
 
-// total: 53 (11,42)
+// total: 55 (11,44)
 
 news.begin();
