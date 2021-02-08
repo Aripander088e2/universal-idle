@@ -244,7 +244,7 @@ news.news = [
   
   // Synergism Related
   () => "Shouldn't e" + formate(new Decimal(2).pow(20 + Math.floor(Math.random() * 100)).div(1.048576), 3, 3, 1, 1) + " is better than 1.00e" + formate(new Decimal(2).pow(20 + Math.floor(Math.random() * 100)).div(1.048576), 3, 3, 1, 1) + "?", // 1% ticker possible if both Number are same
-  () => "Never use Level 12 on Extinction Corruption, as it will impossible to " + (Math.random() < 0.01 ? "produce Crumb" : "Ant sacrifice") + ", therefore you can't earn a lot of Offering and Obtainium when you ant sacrifice",
+  () => "Never use Level 12 on Extinction Corruption, as it will impossible to " + (Math.random() < 0.01 ? "produce Crumb" : "Ant sacrifice") + ", therefore you can't earn a lot of Offering and Obtainium when you ant sacrifice", // 1% ticker possible if generate "produce Crumb"
   
   // Discord Related
   () => formate(new Decimal(2).pow(4 + Math.floor(Math.random() * 1030)), 0, 2, -1) + " Strikes to " + getRandomUsername(1) + " for leaking the test link", // 1% ticker possible if strikes = Infinity
