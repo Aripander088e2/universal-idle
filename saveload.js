@@ -39,6 +39,7 @@ function loadGame(loadgame) {
   for (let i = 1; i < 1.5; i++) {
     game.repeatableUniverseUpgrade[i] = new Decimal(game.repeatableUniverseUpgrade[i])
   }
+  game.version = 20210209
 }
 
 function exporty() {
@@ -111,10 +112,13 @@ game = {
   totalAtoms: new Decimal(0),
   bestSize: new Decimal(0),
   bestGenBoost: new Decimal(0),
+  challenge: 0,
+  challengeCompletion: [null, false],
   tab: 1,
   notation: 0,
   timeDisplay: 0,
   productionDisplay: 0,
+  version: 20210209,
   achievement: [],
 }
   save()

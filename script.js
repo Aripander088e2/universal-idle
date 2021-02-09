@@ -15,10 +15,13 @@ let game = {
   totalAtoms: new Decimal(0),
   bestSize: new Decimal(0),
   bestGenBoost: new Decimal(0),
+  challenge: 0,
+  challengeCompletion: [null, false],
   tab: 1,
   notation: 0,
   timeDisplay: 0,
   productionDisplay: 0,
+  version: 20210209,
   achievement: [],
 }
 
@@ -28,6 +31,7 @@ Tab(game.tab)
 const universeUpgradeCost = [null, new Decimal(2), new Decimal(5), new Decimal(25), new Decimal(100), new Decimal(400), new Decimal(1000), new Decimal(Infinity), new Decimal(Infinity), new Decimal(Infinity), new Decimal(Infinity)]
 const repeatableUniverseUpgradeCost = [null, new Decimal(10)]
 const repeatableUniverseUpgradeCostScaling = [null, new Decimal(10)]
+const challengeGoal = [null, new Decimal(Infinity)]
 
 let deltaTime;
 const calculate = window.setInterval(() => {

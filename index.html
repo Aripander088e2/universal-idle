@@ -33,6 +33,7 @@
 <div>
   <button onclick="Tab(1)" id="t1">Generators</button>
   <button onclick="Tab(2)" id="t2">Universe</button>
+  <button onclick="Tab(3)" id="t3">Challenges</button>
   <button onclick="Tab(101)" id="t101">Options</button>
   <button onclick="Tab(102)" id="t102">Statistics</button>
   <button onclick="Tab(103)" id="t103">Achievements</button>
@@ -109,7 +110,7 @@ Current Boost:<br>
 <div id="tab2">
 You have <text id="uniPts"></text> Universe Points<br>
 <p id="postuni2_3">They make Time increase <text id="timeSpeed"></text> per second</p>
-<button id="uniReset" onclick="prestige(1)">Reset for Universes</button>
+<button id="uniReset" onclick="prestige(1, 0)">Reset for Universe Points</button>
 <br><br>
 Upgrade:
 <br>
@@ -136,6 +137,15 @@ Upgrade:
 <button onclick="buyUpgrade(1,10)" style="display: none">???, Cost: <text id="uniUpg10Cost"></text> Universe Points <text id="uniUpg10Bought"></text></button>
 <br>
 </div>
+<div id="tab3">
+<button onclick="exitChallenge(1)" id="exitChallenge">Exit Challenge</button>
+<br>
+You are currently in Challenge <text id="activeUniChal"></text>
+<br><br>
+In any Universe Challenge, your Time Boost will do nothing
+<br>
+<button onclick="enterChallenge(1, 1)">Challenge 1: You gain Atoms <text id="uniChal1Eff">1e18</text>x slower and all other Generators multiplier ^0.425, Goal: <text id="uniChal1Goal"></text> Atoms <text id="uniChal1Comp"></text></button>
+</div>
 <div id="tab101">
 <button onclick="save2()">Save your game</button>
 <button onclick="exporty()">Export your game</button>
@@ -148,7 +158,7 @@ Upgrade:
 <br><br>
   <a href="https://discord.gg/QgKE6xp">Game Server</a> | <a href="https://github.com/1e1000000/universal-idle">Source Code</a> | <a href="https://discord.gg/dvXxYfF">User Server</a> | <a href="https://docs.google.com/document/d/1OQtvBEINop_UuG0Ozs00mSaLd1x_8Yw82ZZMj15POcs/edit">Change Log</a>
 <br>
-  Current Version: v1.1.4.1 | Current Build: 20210208.1
+  Current Version: v1.1.4.2 | Current Build: 20210209
 </div>
 <div id="tab102">
   You have played for <text id="statistic1"></text> (Real-Life Time)
@@ -191,9 +201,9 @@ Upgrade:
   Overpowered: Reach <text id="ach26Goal">1e48</text>x Power of any Generator. <text id="ach26"></text><br>
   Squared Universe: Reach <text id="ach27Goal">7.744e53</text> meters universe size. <text id="ach27"></text><br>
   To Infinity: Reach <text id="ach28Goal">1.80e308</text> Atoms, Reward: Raise all Generator multiplier to the power of 1+log10(Atoms)/30000, with a maximum of ^1.01. <text id="ach28"></text><br>
-  Full Set reward: Universe Explain <text id="achS2Reward">1e10</text>x faster <text id="achS2"></text><br><br>
+  Full Set reward: Universe Explain <text id="achS2Reward">1e12</text>x faster <text id="achS2"></text><br><br>
   Set 3: <text id="achP3"></text><br>
-  Coming Soon! Reward: Remove the limit of Atoms. <text id="ach31"></text><br>
+  Coming Soon. Reward: Remove the limit of Atoms. <text id="ach31"></text><br>
   <text id="ach32"></text><br>
   <text id="ach33"></text><br>
   <text id="ach34"></text><br>

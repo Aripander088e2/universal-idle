@@ -102,14 +102,14 @@ function comma(num){
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
 
-const standardPreE33 = ["K", "M", "B", "T", "Qa", "Qt", "Sx", "Sp", "Oc", "No"]
-const standardUnits = ["", "U", "D", "T", "Qa", "Qt", "Sx", "Sp", "O", "N"]
-const standardTens = ["", "Dc", "Vg", "Tg", "Qd", "Qi", "Se", "St", "Og", "Nn"]
-const standardHundreds = ["", "Ce", "Dn", "Tc", "Qe", "Qu", "Sc", "Si", "Oe", "Ne"]
-const standardMilestonePreEE33 = ["", "MI", "MC", "NA", "PC", "FM", "AT", "ZP", "YC", "XN", "VE"]
-const standardMilestoneUnits = ["", "M", "D", "T", "Te", "P", "H", "He", "O", "E", "VE"]
-const standardMilestoneTens = ["", "E", "IS", "TN", "TeN", "PN", "HN", "HeN", "ON", "EN"]
-const standardMilestoneHundreds = ["", "HT", "DT", "TT", "TeT", "PT", "HxT", "HeT", "OT", "ET"] // HxT is prevent it mixed with HT
+const standardPreE33 = ["K", "M", "B", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No"]
+const standardUnits = ["", "U", "D", "T", "Qa", "Qi", "Sx", "Sp", "Oc", "No"]
+const standardTens = ["", "Dc", "Vg", "Tg", "Qag", "Qig", "Sxg", "Spg", "Ocg", "Nog"]
+const standardHundreds = ["", "Ct", "Dct", "Tct", "Qact", "Qict", "Sxct", "Spct", "Occt", "Noct"]
+const standardMilestonePreEE33 = ["", "Mi", "Mc", "Na", "Pc", "Fm", "At", "Zp", "Yc", "Xn", "Ve"]
+const standardMilestoneUnits = ["", "M", "Du", "Tr", "Te", "P", "Hx", "He", "O", "E", "Ve"]
+const standardMilestoneTens = ["", "e", "Is", "Trn", "Ten", "Pn", "Hxn", "Hen", "On", "En"]
+const standardMilestoneHundreds = ["", "Ht", "Dt", "Trt", "Tet", "Pt", "Hxt", "Het", "Ot", "Et"]
 
 function standard(t1, t2, more){
   t1 = t1 % 1000

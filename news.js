@@ -244,7 +244,7 @@ news.news = [
   
   // Synergism Related
   () => "Shouldn't e" + formate(new Decimal(2).pow(20 + Math.floor(Math.random() * 100)).div(1.048576), 3, 3, 1, 1) + " is better than 1.00e" + formate(new Decimal(2).pow(20 + Math.floor(Math.random() * 100)).div(1.048576), 3, 3, 1, 1) + "?", // 1% ticker possible if both Number are same
-  () => "Never use Level 12 on Extinction Corruption, as it will impossible to " + (Math.random() < 0.01 ? "produce Crumb" : "Ant sacrifice") + ", therefore you can't earn a lot of Offering and Obtainium when you ant sacrifice", // 1% ticker possible if generate "produce Crumb"
+  () => "Never use Level 12 on Extinction Corruption, as it will impossible to " + (Math.random() < 0.01 ? "produce Crumb" : "Ant sacrifice") + ", therefore you can't earn a lot of Offering and Obtainium from ant sacrifice", // 1% ticker possible if generate "produce Crumb"
   
   // Discord Related
   () => formate(new Decimal(2).pow(4 + Math.floor(Math.random() * 1030)), 0, 2, -1) + " Strikes to " + getRandomUsername(1) + " for leaking the test link", // 1% ticker possible if strikes = Infinity
@@ -292,7 +292,11 @@ news.news = [
   () => "Random Time at 2021 is Generated: " + (Math.random < 0.01 ? Math.floor(1609430400 + 31536000 * Math.random()).toLocaleString() : randomTime(2021)), // 1% ticker possible if generate any Unix
   
   // Other
-  
+  () => "❤",
+  () => "❤❤",
+  () => "❤❤❤",
+  () => "❤❤❤❤",
+  () => "❤❤❤❤❤",
   
   // Credit (no random ticker/1% ticker)
   () => "Credit to Patashu, for break_eternity.js",
@@ -305,6 +309,6 @@ news.news = [
   () => "News Ticker #" + (Math.random() < 0.01 ? formate(new Decimal(10).pow(news.news.length), 0, 0, 1, 0) : formate(news.news.length, 0, 0)) + " is created", // 1% ticker possible if generate 10^(Unique News Tickers)
 ];
 
-// total: 55 (11,44)
+// total: 55+5 (11,44+5)
 
 news.begin();

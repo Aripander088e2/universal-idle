@@ -27,6 +27,8 @@ function getGeneratorMulti(gen){
   if (game.universeUpgrade[6] && gen == 1) base = base.mul(game.time.pow(3).max(1))
   base = base.pow(getTimeBoost())
   if (game.achievement.includes(28)) base = base.pow(new Decimal(1).add(game.atoms.max(1).log10().div(30000)).min(1.01))
+  if (game.challenge == 1 && gen == 1) base = base.div(1e18)
+  if (game.challenge == 1 && gen !== 1) base = base.pow(0.425)
   return base
 }
 
@@ -74,6 +76,7 @@ function getTimeSpeed(){
 }
 
 function getTimeBoost(){
+  if (game.challenge !== 0) return new Decimal(1)
   let base = game.time.max(1).log(13.799e9*31.536e6).div(2).add(1)
   return base
 }
