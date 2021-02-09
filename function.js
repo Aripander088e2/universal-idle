@@ -59,3 +59,16 @@ function productionRate(current, increase, logarithm){ // logarithm = false: ((c
   }
   return current.add(increase).div(current.max(1)).sub(1).mul(100).max(0)
 }
+
+function enterChallenge(layer, id){
+  if (game.challenge == 0) prestige(layer, id)
+  game.challenge = id
+}
+
+function exitChallenge(layer){
+  if (game.challenge !== 0){
+    if (game.atoms.gte(challengeGoal[game.challenge])) game.challengeCompletion[game.challenge] = true
+    game.challenge = 0
+    prestige(layer, 0)
+  }
+}

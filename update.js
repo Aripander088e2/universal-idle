@@ -3,6 +3,7 @@ function updateStuffs(ms){
   renderMain()
   if (game.tab == 1) renderTab1()
   if (game.tab == 2) renderTab2()
+  if (game.tab == 3) renderTab3()
   if (game.tab == 101) renderTab101()
   if (game.tab == 102) renderTab102()
   if (game.tab == 103) renderTab103()
@@ -38,6 +39,7 @@ function renderMain(){
   // Misc
   document.getElementById("title").innerHTML = formate(game.atoms, 0, 2) + " atoms, " + formate(game.size, 0, 2) + " meters"
   document.getElementById("t2").style.display = (isPrestigeAvailable(1) || game.achievement.includes(21) ? "inline-block" : "none")
+  document.getElementById("t3").style.display = (game.totalAtoms.gte(new Decimal(2).pow(1024)) ? "none" : "none")
   document.getElementById("gameSpeed").textContent = (gameSpeed().eq(1) ? "" : "Game Speed: " + formate(gameSpeed(), 2, 2) + "x")
 }
 
@@ -63,7 +65,7 @@ function renderTab1(){
 
 function renderTab2(){
   // universe reset
-  document.getElementById("uniReset").innerHTML = isPrestigeAvailable(1) ? "Reset for " + formate(getPrestigeGain(1), 2, 2) + " Universe Points" : "Reach " + formate(new Decimal(1e80), 2, 2) + " atoms and " + formate(new Decimal(8.8e26), 2, 2) + " meters to reset"
+  document.getElementById("uniReset").innerHTML = game.challenge ? "You are currently in a Challenge" : (isPrestigeAvailable(1) ? "Reset for " + formate(getPrestigeGain(1), 2, 2) + " Universe Points" : "Reach " + formate(new Decimal(1e80), 2, 2) + " atoms and " + formate(new Decimal(8.8e26), 2, 2) + " meters to reset")
   document.getElementById("uniPts").innerHTML = formate(game.universePoints, 2, 2)
   
   document.getElementById("postuni2_3").style.display = (game.universeUpgrade[2] ? "block" : "none")
@@ -76,6 +78,16 @@ function renderTab2(){
     document.getElementById("repeatUniUpg" + i + "Cost").innerHTML = formate(getRepeatableUniverseUpgradeCost(1, 1), 0, 2)
     document.getElementById("repeatUniUpg" + i + "Level").innerHTML = formate(game.repeatableUniverseUpgrade[i], 0, 2)
   }
+}
+
+function renderTab3(){
+  document.getElementById("activeUniChal").innerHTML = game.challenge
+  for (let i=1; i<1.5; i++){
+    document.getElementById("uniChal" + i + "Goal").innerHTML = formate(challengeGoal[i], 0, 2)
+    document.getElementById("uniChal" + i + "Comp").innerHTML = game.challengeCompletion[i] ? "(COMPLETED)" : ""
+  }
+  document.getElementById("uniChal1Eff").innerHTML = formate(new Decimal(1e18), 0, 2)
+  document.getElementById("exitChallenge").innerHTML = game.atoms.gte(challengeGoal[game.challenge]) && game.challenge !== 0 ? "Complete Challenge" : "Exit Challenge"
 }
 
 function renderTab101(){
@@ -93,7 +105,7 @@ function renderTab102(){
   
   document.getElementById("resourcestat1").textContent = 
     "Your atoms is enough to fill " + (game.atoms.gte(1e80) ? formate(game.atoms.log(1e80).floor(), 0, 2) + " Universes" + (game.atoms.lt("e8e7") ? " and " + formate(game.atoms.div(new Decimal(1e80).pow(game.atoms.max(1).log(1e80).floor())).log(1e80).mul(100), 3, 3) + "% of another" : "") :
-                                       formate(game.atoms.div(new Decimal(1e80).pow(game.atoms.max(1).log(1e80).floor())).log(1e80).mul(100), 3, 3) + "% of universe") + " (" + formate(game.atoms.max(1).log(1e80).ceil().max(1), 0, 2) + " Universe" + (game.atoms.gte(1e80) ? "s" : "") + " = " + formate(new Decimal(1e80).pow(game.atoms.max(1).log(1e80).ceil().max(1)), 2, 2) + " atoms)"
+                                       formate(game.atoms.max(1).div(new Decimal(1e80).pow(game.atoms.max(1).log(1e80).floor())).log(1e80).mul(100), 3, 3) + "% of universe") + " (" + formate(game.atoms.max(1).log(1e80).ceil().max(1), 0, 2) + " Universe" + (game.atoms.gte(1e80) ? "s" : "") + " = " + formate(new Decimal(1e80).pow(game.atoms.max(1).log(1e80).ceil().max(1)), 2, 2) + " atoms)"
   document.getElementById("resourcestat2").textContent = 
     "Your size is enough to explain " + (game.size.gte(8.8e26) ? formate(game.size.log(8.8e26).floor(), 0, 2) + " Universes" + (game.size.lt(new Decimal(8.8e26).pow(1e6)) ? " and " + formate(game.size.div(new Decimal(8.8e26).pow(game.size.max(1).log(8.8e26).floor())).log(8.8e26).mul(100), 3, 3) + "% of another" : "") :
                                          formate(game.size.max(1).div(new Decimal(8.8e26).pow(game.size.max(1).log(8.8e26).floor())).log(8.8e26).mul(100), 3, 3) + "% of universe") + " (" + formate(game.size.max(1).log(8.8e26).ceil().max(1), 0, 2) + " Universe" + (game.size.gte(8.8e26) ? "s" : "") + " = " + formate(new Decimal(8.8e26).pow(game.size.max(1).log(8.8e26).ceil().max(1)), 2, 2) + " meters)"

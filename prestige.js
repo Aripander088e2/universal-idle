@@ -1,18 +1,19 @@
-function prestige(layer){
+function prestige(layer, enterChallenge){
+  if (enterChallenge == undefined) enterChallenge = 0
   if (layer == 1){
-    if (isPrestigeAvailable(layer)){
-      if(!game.achievement.includes(25) && game.generator[5].eq(0) && game.generator[6].eq(0) && game.generator[7].eq(0) && game.generator[8].eq(0)) {
+    if ((isPrestigeAvailable(layer) || enterChallenge) && game.challenge == 0){
+      if(!game.achievement.includes(25) && game.generator[5].eq(0) && game.generator[6].eq(0) && game.generator[7].eq(0) && game.generator[8].eq(0) && isPrestigeAvailable(layer)) {
         game.achievement.push(25)
         achNotify(2, 5)
       }
       game.universePoints = game.universePoints.add(getPrestigeGain(1))
-      if (game.bestUniPtsInOneReset.gte(getPrestigeGain(1))) game.bestUniPtsInOneReset = getPrestigeGain(1)
+      if (getPrestigeGain(1).gte(game.bestUniPtsInOneReset)) game.bestUniPtsInOneReset = getPrestigeGain(1)
       game.atoms = new Decimal(10)
       game.size = new Decimal(1)
       game.generator = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
       game.generatorBought =  [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
       game.generatorBoost = new Decimal(0)
-      if(!game.achievement.includes(21)) {
+      if(!game.achievement.includes(21) && isPrestigeAvailable(layer)) {
         game.achievement.push(21)
         achNotify(2, 1)
       }
