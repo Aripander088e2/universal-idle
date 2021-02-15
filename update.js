@@ -32,7 +32,6 @@ function renderMain(){
   document.getElementById("postgen8_3").style.display = (isFullSetAchieved(1) ? "block" : "none")
   // Time
   document.getElementById("time").innerHTML = formateTime(game.time, 3, 3)
-  document.getElementById("timeSpeed").innerHTML = game.productionDisplay == 0 ? formateTime(getTimeSpeed(), 3, 3) : formate(productionRate(game.time, getTimeSpeed(), game.productionDisplay-1), (game.productionDisplay == 0 ? 3 : game.productionDisplay+2), 3) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "% of time " : " OoM of time "))
   document.getElementById("timeBoost").innerHTML = formate(getTimeBoost(), 4, 4)
   document.getElementById("postuni2_1").style.display = (game.universeUpgrade[2] ? "block" : "none")
   document.getElementById("postuni2_2").style.display = (game.universeUpgrade[2] ? "block" : "none")
@@ -48,7 +47,7 @@ function renderTab1(){
   for (let i=1; i<8.5; i++){
     document.getElementById("gen" + i).style.display = (i == 1 ? "block" : (game.generator[i-1].gt(0) ? "block" : "none"))
     document.getElementById("gen" + i + "Bought").innerHTML = formate(game.generatorBought[i], 0, 3)
-    document.getElementById("gen" + i + "Amount").innerHTML = formate(game.generator[i], 0, 2)
+    document.getElementById("gen" + i + "Amount").innerHTML = formate(game.generator[i], 0, (i == 8 ? 3 : 2))
     document.getElementById("gen" + i + "Speed").innerHTML = formate(game.productionDisplay == 0 ? getGeneratorSpeed(i+1).mul(gameSpeed()) : productionRate(game.generator[i],getGeneratorSpeed(i+1).mul(gameSpeed()),game.productionDisplay-1), (game.productionDisplay == 0 ? 0 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "%" : " OoM"))
     document.getElementById("gen" + i + "Multi").innerHTML = formate(getGeneratorMulti(i), 2, 2)
     document.getElementById("gen" + i + "Cost").innerHTML = formate(getGeneratorCost(i), 0, 2)
@@ -67,8 +66,6 @@ function renderTab2(){
   // universe reset
   document.getElementById("uniReset").innerHTML = game.challenge ? "You are currently in a Challenge" : (isPrestigeAvailable(1) ? "Reset for " + formate(getPrestigeGain(1), 2, 2) + " Universe Points" : "Reach " + formate(new Decimal(1e80), 2, 2) + " atoms and " + formate(new Decimal(8.8e26), 2, 2) + " meters to reset")
   document.getElementById("uniPts").innerHTML = formate(game.universePoints, 2, 2)
-  
-  document.getElementById("postuni2_3").style.display = (game.universeUpgrade[2] ? "block" : "none")
   // universe upgrades
   for (let i=1; i<10.5; i++){
     document.getElementById("uniUpg" + i + "Cost").innerHTML = formate(universeUpgradeCost[i], 0, 2)
@@ -78,16 +75,24 @@ function renderTab2(){
     document.getElementById("repeatUniUpg" + i + "Cost").innerHTML = formate(getRepeatableUniverseUpgradeCost(1, 1), 0, 2)
     document.getElementById("repeatUniUpg" + i + "Level").innerHTML = formate(game.repeatableUniverseUpgrade[i], 0, 2)
   }
+  document.getElementById("uniUpg1Eff").innerHTML = formate(getUpgradeEffect(1, 1), 2, 2)
+  document.getElementById("uniUpg2Eff").innerHTML = formateTime(getTimeSpeed(), 3, 3)
+  document.getElementById("uniUpg3Eff").innerHTML = formate(getUpgradeEffect(1, 3), 2, 2)
+  document.getElementById("uniUpg6Eff1").innerHTML = formate(getUpgradeEffect(1, 6).pow(3), 2, 2)
+  document.getElementById("uniUpg6Eff2").innerHTML = formate(getUpgradeEffect(1, 6).pow(1), 2, 2)
+  document.getElementById("uniRep1Eff").innerHTML = formate(getRepeatableUpgradeEffect(1, 1), 0, 2)
 }
 
 function renderTab3(){
-  document.getElementById("activeUniChal").innerHTML = game.challenge
+  document.getElementById("activeUniChal").innerHTML = game.challenge ? "in Challenge " + game.challenge : "not in a Challenge"
   for (let i=1; i<1.5; i++){
     document.getElementById("uniChal" + i + "Goal").innerHTML = formate(challengeGoal[i], 0, 2)
     document.getElementById("uniChal" + i + "Comp").innerHTML = game.challengeCompletion[i] ? "(COMPLETED)" : ""
   }
   document.getElementById("uniChal1Eff").innerHTML = formate(new Decimal(1e18), 0, 2)
   document.getElementById("exitChallenge").innerHTML = game.atoms.gte(challengeGoal[game.challenge]) && game.challenge !== 0 ? "Complete Challenge" : "Exit Challenge"
+  document.getElementById("totalChallengeComp").innerHTML = getTotalChallengeCompletion(1).toLocaleString()
+  document.getElementById("metaChallengeReward").innerHTML = formate(getTotalChallengeCompletion(1) * 50, 0, 2)
 }
 
 function renderTab101(){
@@ -97,11 +102,11 @@ function renderTab101(){
 }
 
 function renderTab102(){
-  document.getElementById("statistic1").textContent = formateTime((game.tLast - game.tStart)/1000, 3, 3)
-  document.getElementById("statistic2").textContent = formate(game.totalAtoms, 2, 2)
-  document.getElementById("statistic3").textContent = formate(game.bestSize, 2, 2)
-  document.getElementById("statistic4").textContent = formateTime(game.tPlayedWTimeSpeed, 3, 3)
-  document.getElementById("statistic5").textContent = formate(game.bestUniPtsInOneReset, 2, 2)
+  document.getElementById("statistic1").textContent = "You have played for " + formateTime((game.tLast - game.tStart)/1000, 3, 3) + " (Real-Life Time)"
+  document.getElementById("statistic2").textContent = "You have make a total of " + formate(game.totalAtoms, 2, 2) + " atoms"
+  document.getElementById("statistic3").textContent = (isFullSetAchieved(1) ? "Your best Universe Size was " + formate(game.bestSize, 2, 2) + " meters" : "")
+  document.getElementById("statistic4").textContent = "You have played for " + formateTime(game.tPlayedWTimeSpeed, 3, 3) + " (In-Game Time)"
+  document.getElementById("statistic5").textContent = (game.achievement.includes(21) ? "Your best Universe Points gained in one reset was " + formate(game.bestUniPtsInOneReset, 2, 2) : "")
   
   document.getElementById("resourcestat1").textContent = 
     "Your atoms is enough to fill " + (game.atoms.gte(1e80) ? formate(game.atoms.log(1e80).floor(), 0, 2) + " Universes" + (game.atoms.lt("e8e7") ? " and " + formate(game.atoms.div(new Decimal(1e80).pow(game.atoms.max(1).log(1e80).floor())).log(1e80).mul(100), 3, 3) + "% of another" : "") :
@@ -113,6 +118,9 @@ function renderTab102(){
     "Your age is enough to goes " + (game.time.gte(31.536e6*13.799e9) ? formate(game.time.log(31.536e6*13.799e9).floor(), 0, 2) + " Universes" + (game.time.lt(new Decimal(31.536e6*13.799e9).pow(1e6)) ? " and " + formate(game.time.max(1).div(new Decimal(31.536e6*13.799e9).pow(game.time.max(1).log(31.536e6*13.799e9).floor())).log(31.536e6*13.799e9).mul(100), 3, 3) + "% of another" : "") :
                                      formate(game.time.max(1).div(new Decimal(31.536e6*13.799e9).pow(game.time.max(1).log(31.536e6*13.799e9).floor())).log(31.536e6*13.799e9).mul(100), 3, 3) + "% of universe") + " (" + formate(game.time.max(1).log(31.536e6*13.799e9).ceil().max(1), 0, 2) + " Universe = " + (game.time.gte(31.536e6*13.799e9) ? "s" : "") + formate(new Decimal(31.536e6*13.799e9).pow(game.time.max(1).log(31.536e6*13.799e9).ceil().max(1)), 3, 3) + " seconds)"
   // Mantissa Part is hidden after ^1 M because it no longer accelerate
+  
+  document.getElementById("resourcestat2").style.display = (isFullSetAchieved(1) ? "inline-block" : "none")
+  document.getElementById("resourcestat3").style.display = (game.universeUpgrade[2] ? "inline-block" : "none")
 }
 
 function renderTab103(){

@@ -1,4 +1,4 @@
-let game = {
+/*let game = {
   tLast: Date.now(),
   tPlayedWTimeSpeed: new Decimal(0),
   tStart: Date.now(), 
@@ -23,8 +23,10 @@ let game = {
   productionDisplay: 0,
   version: 20210209,
   achievement: [],
-}
+}*/
 
+let game;
+reset()
 loadGame(JSON.parse(localStorage.getItem("universal-idle")))
 Tab(game.tab)
 

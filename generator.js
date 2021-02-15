@@ -19,14 +19,15 @@ function getGeneratorMulti(gen){
   let base = getBoughtBoostMulti().pow(game.generatorBought[gen].gte(getUpgradeSoftcapStart(0)) ? game.generatorBought[gen].mul(getUpgradeSoftcapStart(0)).pow(getUpgradeSoftcapEff(0)) : game.generatorBought[gen])
   base = base.mul(getSizeBoost())
   base = base.mul(getGeneratorBoostBaseEffect()[1].pow(game.generatorBoost))
-  if (game.universeUpgrade[1]) base = base.mul(game.universePoints.add(1))
-  if (game.universeUpgrade[3]) base = base.mul(calculateTotalGenBought().add(1).pow(0.5))
+  if (game.universeUpgrade[1]) base = base.mul(getUpgradeEffect(1, 1))
+  if (game.universeUpgrade[3]) base = base.mul(getUpgradeEffect(1, 3))
   if (game.achievement.includes(21) && gen == 1) base = base.mul(10)
   if (game.achievement.includes(22) && gen == 8) base = base.mul(new Decimal(1).add(game.generator[8].div(100)))
   if (game.achievement.includes(24) && gen == 8) base = base.mul(new Decimal(1).add(game.generatorBoost))
-  if (game.universeUpgrade[6] && gen == 1) base = base.mul(game.time.pow(3).max(1))
+  if (game.universeUpgrade[6] && gen == 1) base = base.mul(getUpgradeEffect(1, 6).pow(3))
   base = base.pow(getTimeBoost())
   if (game.achievement.includes(28)) base = base.pow(new Decimal(1).add(game.atoms.max(1).log10().div(30000)).min(1.01))
+  if (base.gte(new Decimal(10).pow(getGenMultiSoftcapStart(1)))) base = new Decimal(10).pow(base.log10().mul(getGenMultiSoftcapStart(1)).pow(getGenMultiSoftcapEff(1)))
   if (game.challenge == 1 && gen == 1) base = base.div(1e18)
   if (game.challenge == 1 && gen !== 1) base = base.pow(0.425)
   return base
@@ -54,7 +55,7 @@ function getSizeSpeed(){
   let base = (isFullSetAchieved(1) && game.generatorBought[1].gte(1) ? game.atoms.pow(getSizeSpeedExp()).div(1e18) : new Decimal(0))
   if (base.gte(new Decimal(10).pow(getResourceSoftcapStart(0)))) base = new Decimal(10).pow(base.log10().mul(getResourceSoftcapStart(0)).pow(getResourceSoftcapEff(0)))
   if (isFullSetAchieved(2)) base = base.mul(1e10)
-  if (game.universeUpgrade[6]) base = base.mul(game.time.max(1))
+  if (game.universeUpgrade[6]) base = base.mul(getUpgradeEffect(1, 6))
   return base
 }
 
@@ -72,6 +73,7 @@ function getSizeBoost(){
 
 function getTimeSpeed(){
   let base = game.universeUpgrade[2] ? game.universePoints.max(1).log(1000) : new Decimal(0)
+  base = base.mul(1 + getTotalChallengeCompletion(1) / 2)
   return base
 }
 
@@ -100,7 +102,7 @@ function getGeneratorCost(gen){
 }
 
 function getGeneratorBoostCost(){
-  let base = game.generatorBoost.add(1).pow(2)
+  let base = game.generatorBoost.add(1).pow(getGenBoostCostExp())
   if (getGenBoostCostDivider().eq(0)) return new Decimal(Infinity)
   base = base.div(getGenBoostCostDivider())
   base = base.round()
@@ -124,7 +126,7 @@ function buyMaxGenerator(gen){
   }
 }
 
-// note: ee12 current is a placeholder, it will be changed at someday
+// note: game.atoms.lt(new Decimal("ee12")) or game.atoms.gte(new Decimal("ee12")) current is a placeholder, it will be changed at someday
 
 function buyMaxAllGenerator(){
   for (let i=8; i>0.5; i--){
@@ -139,7 +141,7 @@ function getGenCostDivider(gen){
 
 function buyGeneratorBoost(){
   if (game.generator[8].gte(getGeneratorBoostCost())){
-    game.atoms = new Decimal(10)
+    game.atoms = atomsOnReset()
     game.generator = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
     game.generatorBought =  [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
     game.generatorBoost = game.generatorBoost.add(1)
@@ -147,9 +149,9 @@ function buyGeneratorBoost(){
 }
 
 function buyMaxGeneratorBoost(){
-  let max = game.generator[8].mul(getGenBoostCostDivider()).round().pow(0.5).floor()
+  let max = game.generator[8].mul(getGenBoostCostDivider()).round().pow(new Decimal(1).div(getGenBoostCostExp())).floor()
   if (game.generator[8].gte(getGeneratorBoostCost())){
-    game.atoms = new Decimal(10)
+    game.atoms = atomsOnReset()
     game.generator = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
     game.generatorBought =  [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
     game.generatorBoost = max
@@ -160,6 +162,11 @@ function buyMaxGeneratorBoost(){
 function getGenBoostCostDivider(){
   if (!game.achievement.includes(21)) return new Decimal(0)
   let base = new Decimal(1)
+  return base
+}
+
+function getGenBoostCostExp(){
+  let base = new Decimal(2)
   return base
 }
 
