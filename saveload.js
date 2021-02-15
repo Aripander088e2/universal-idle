@@ -19,6 +19,7 @@ function load() {
 }
 
 function loadGame(loadgame) {
+  reset()
   for (const i in loadgame) {
     game[i] = loadgame[i];
   }
@@ -39,7 +40,7 @@ function loadGame(loadgame) {
   for (let i = 1; i < 1.5; i++) {
     game.repeatableUniverseUpgrade[i] = new Decimal(game.repeatableUniverseUpgrade[i])
   }
-  game.version = 20210209
+  game.version = 20210215
 }
 
 function exporty() {
@@ -87,10 +88,7 @@ function importy() {
   loadgame = JSON.parse(atob(prompt("Paste in your save WARNING: WILL OVERWRITE YOUR CURRENT SAVE")));
   if (loadgame !== "") {
     loadGame(loadgame);
-    window.setTimeout(() => {
     save()
-    window.location.reload()
-    },200)
   }
 }
 
@@ -118,10 +116,10 @@ game = {
   notation: 0,
   timeDisplay: 0,
   productionDisplay: 0,
-  version: 20210209,
+  version: 20210200,
   achievement: [],
 }
-  save()
+  //save()
 }
 
 function resetConf() {
@@ -131,4 +129,5 @@ function resetConf() {
   if (!confirm("Are you sure you want to delete all of your progress? You can't undo this process! Remaining confirmation: 1")) return
   if (!confirm("Are you sure you want to delete all of your progress? You can't undo this process! Remaining confirmation: 0")) return
   reset()
+  save()
 }

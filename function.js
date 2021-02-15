@@ -1,3 +1,8 @@
+function atomsOnReset(){
+  let base = new Decimal(10)
+  return base
+}
+
 function gameSpeed(){
   let base = new Decimal(1)
   return base
@@ -31,6 +36,39 @@ function buyMaxRepeatableUpgrade(layer, id){
   }
 }
 
+function getUpgradeEffect(layer, id){ // only non-constant boost will listed here
+  if (layer == 1){
+    switch(id){
+      case 1:
+        return game.universePoints.add(1)
+        break;
+      case 2:
+        return getTimeSpeed()
+        break;
+      case 3:
+        return calculateTotalGenBought().add(1).pow(0.5)
+        break;
+      case 6:
+        return game.time.add(1) // base effect
+        break;
+      default:
+        return new Decimal(0)
+    }
+  }
+}
+
+function getRepeatableUpgradeEffect(layer, id){ // only non-constant boost will listed here
+  if (layer == 1){
+    switch(id){
+      case 1:
+        return new Decimal(2).pow(game.repeatableUniverseUpgrade[1].gte(getUpgradeSoftcapStart(1)) ? game.repeatableUniverseUpgrade[1].mul(getUpgradeSoftcapStart(1)).pow(getUpgradeSoftcapEff(1)) : game.repeatableUniverseUpgrade[1])
+        break;
+      default:
+        return new Decimal(0)
+    }
+  }
+}
+
 function getUpgradeSoftcapStart(layer){ // 0 is generators
   let base = new Decimal(60)
   return base
@@ -39,6 +77,16 @@ function getUpgradeSoftcapStart(layer){ // 0 is generators
 function getUpgradeSoftcapEff(layer){ // 0 is generators
   let base = new Decimal(0.5)
   return base
+}
+
+function getGenMultiSoftcapStart(Stage){ // logarithm
+  let start = [null,new Decimal(100)]
+  return start[Stage]
+}
+
+function getGenMultiSoftcapEff(Stage){ // exponential rate
+  let effect = [null,new Decimal(0.5)]
+  return effect[Stage]
 }
 
 function getResourceSoftcapStart(layer){ // 0 is size, logarithm
@@ -58,17 +106,4 @@ function productionRate(current, increase, logarithm){ // logarithm = false: ((c
     return current.add(increase).max(1).log(10).sub(current.max(1).log(10))
   }
   return current.add(increase).div(current.max(1)).sub(1).mul(100).max(0)
-}
-
-function enterChallenge(layer, id){
-  if (game.challenge == 0) prestige(layer, id)
-  game.challenge = id
-}
-
-function exitChallenge(layer){
-  if (game.challenge !== 0){
-    if (game.atoms.gte(challengeGoal[game.challenge])) game.challengeCompletion[game.challenge] = true
-    game.challenge = 0
-    prestige(layer, 0)
-  }
 }

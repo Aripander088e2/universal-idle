@@ -128,9 +128,10 @@ function randomIPAdress(){
 }
 
 function randomRickroll(id){
-  if (Math.random() < 0.025) {
-    if (id % 2 == 1) return "Rickroll"
-    else return "https://youtu.be/dQw4w9WgXcQ"
+  if (Math.random() < 0.00125) {
+    if (id % 3 == 0) return "Rickroll"
+    else if (id % 3 == 1) return "https://youtu.be/dQw4w9WgXcQ"
+    else return "Never Gonna Give Never Gonna Give"
   }
   let random = Math.random()
   if (id == 1){
@@ -181,6 +182,18 @@ function getRandomUsername(id){
   else return ""
 }
 
+const randomSmith = ["glitchsmith", "petsmith", "spinsmith", "wavesmith", "Angrysmith", "antiballer", "antismith", "aromanticsmith", "ascendedsmith", "asexualsmith", // count: 10
+                     "atomsmith", "beesmith", "bisexualsmith", "blueeyeswhitesmith", "catsmith", "censorsmith", "communismith", "coolsmith", "coronasmith", "corruptionsmith", // count: 20
+                     "cringesmith", "depression", "derpbluesmith", "derpsmith", "eggsmith", "eyesmith", "fancysmith", "flippedantismith", "flippedballer", "flipsmith", // count: 30
+                     "footballsmith", "fsmith", "gaysmith", "genderfluidsmith", "ghastballer", "ghastsmith", "ghostsmith", "goldsmith", "gunsmith", "hazmat", // count: 40
+                     "heartarrowsmith", "heartsmith", "invertedballer", "joysmith", "lasersmith", "lesbiansmith", "loffsmith", "lovesmith", "moosmith", "mysteryballer", // count: 50
+                     "nonbinarysmith", "nosesmith", "pansexualsmith", "partyhatsmith", "Pengsmith", "photosynthesmith", "pingsmith", "pokesmith", "prestigedballer", "quarkballer",  // count: 60
+                     "reincarnatedballer", "remasteredsmith", "researchsmith", "reverbsmith", "santasmith", "sleepsmith", "smithcube", "smithpreme", "smithramsay", "smithshard", // count: 70
+                     "smithsnake", "smithtear", "smithtonic", "smithyankeewithnobrim", "smolsmith", "snowsmith", "stocksmith", "sunsmith", "swedensmith", "talkingsmith", // count: 80
+                     "tanksmith", "thanosmith", "thinksmith", "thisissmith", "thonksmith", "thumbsmith", "transcendedballer", "transmith", "transparentsmith", "trulyanballer", // count: 90
+                     "ultraascendent", "Unsmith", "Unsmithyeah", "upsidedownsmith", "vikingsmith", "villainsmith", "whatissmith", "whereissmith", "yarahsmith", "yarasmith", // count: 100
+                    ]
+
 // functions end
 
 news.begin = function () {
@@ -218,8 +231,8 @@ news.news = [
   
   // Generators Related
   () => "Generator IX: " + formate(game.generator[Math.floor(1 + Math.random() * 7)].add(1e10).slog(10).sub(2), 12, 2, 1),
-  () => "Generator IX: " + formate(game.generator[Math.floor(1 + Math.random() * 7)].add(1e10).slog(10).sub(2), 12, 2, 1),
   () => "Generator X: " + formate(game.generator[8].add(1).log10().div(new Decimal(10).tetrate(1 + Math.random())), 12, 2, 1),
+  () => "Generator XI: " + formate(new Decimal(10).tetrate(game.generatorBoost.mul(Math.random())), 2, 2, 1),
   
   // Size Related
   () => "Dilate Your Universe to reduce the size to " + formate(game.size.pow(Math.random()), 2, 2, 1) + " Meters",
@@ -237,28 +250,36 @@ news.news = [
   
   // Ordinal Markup Related
   () => (Math.random() < 0.25 ? "Enter" : "Exit") + " the " + Number(Math.floor(10 + Math.random() * 26)).toString(36).toLocaleUpperCase(), // 1% ticker possible if generate "Enter the E"
-  () => "We are not adding an exit the incrementyverse update - TheMKeyHolder#" + (Math.random() < 1/11 ? "66" : number2digits(Math.floor(Math.random() * 100))) + (Math.random() < 1/11 ? "74" : number2digits(Math.floor(Math.random() * 100))), // 1% ticker possible if generate 66 and 74 respectively
   () => "Removed " + (Math.random() < 0.5 ? "Facebook " : "Messenger ") + (Math.random() < 0.01 ? "Cardinals" : "Ordinals") + " since it will be never exist in the game", // 1% ticker possible if generate "Facebook Cardinals" or "Messenger Cardinals"
   () => "When I can reach ε" + (Math.random() < 0.01 ? "ω" : Math.floor(1 / Math.random() - 1).toLocaleString()), // 1% ticker possible if generate Epsilon Omega
-  () => "Ordinal Markup will be released in skype on " + (Math.random < 0.01 ? "Never" : randomTime(1e308)), // 1% ticker possible if generate "Never"
+  () => "Ordinal Markup will be released on skype in " + (Math.random() < 0.01 ? "Never" : randomTime(1e308)), // 1% ticker possible if generate "Never"
   
   // Synergism Related
   () => "Shouldn't e" + formate(new Decimal(2).pow(20 + Math.floor(Math.random() * 100)).div(1.048576), 3, 3, 1, 1) + " is better than 1.00e" + formate(new Decimal(2).pow(20 + Math.floor(Math.random() * 100)).div(1.048576), 3, 3, 1, 1) + "?", // 1% ticker possible if both Number are same
   () => "Never use Level 12 on Extinction Corruption, as it will impossible to " + (Math.random() < 0.01 ? "produce Crumb" : "Ant sacrifice") + ", therefore you can't earn a lot of Offering and Obtainium from ant sacrifice", // 1% ticker possible if generate "produce Crumb"
+  () => randomSmith[Math.floor(Math.random() * 100)], // 1% ticker possible if generate "unsmith"
   
   // Discord Related
   () => formate(new Decimal(2).pow(4 + Math.floor(Math.random() * 1030)), 0, 2, -1) + " Strikes to " + getRandomUsername(1) + " for leaking the test link", // 1% ticker possible if strikes = Infinity
-  () => "Can you " + (Math.random < 0.01 ? "delete" : "unpin") + " this message, it seem SUPER ANNOYING - User_2.005e220#3012", // 1% ticker possible if generate "delete this message"
+  () => "Can you " + (Math.random() < 0.01 ? "delete" : "unpin") + " this message, it seem SUPER ANNOYING - User_2.005e220#3012", // 1% ticker possible if generate "delete this message"
+  () => "someone ghost pinged me dont be shy, ITS CALLED PINGLOL NOT GHOST PING LOL - reda" + (Math.random() < 0.01 ? "cted" : "") + "#8195", // 1% ticker possible if generate "redacted"
+  () => "you used to only be able to hit with the double OP gain incrementy upgrade, but the quadrupler actually isn't disabled in c8 - NoHaxJust" + (Math.random() < 0.01 ? Math.PI : "Pi") + "#5200", // 1% ticker possible if generate 3.14159...
+  () => (Math.random() < 0.5 ? (Math.random() < 0.01 ? "Cheapen" : "Chicken") + " Nuggies - System Shark#3953" : "chicken " + (Math.random() < 0.01 ? "nukekit" : "nugget") + " - YT kerfuffles#2827"), // 1% ticker possible if generate "Cheapen Nuggies" or "chicken nukekit"
+  () => "WHO JUST GHOSTPINGED ME " + (1 + Math.floor(Math.random() * 100)) + " TIMES - SuperSpruce#0135", // 1% ticker possible if generate 7
+  () => (Math.random() < 0.01 ? (Math.random() < 0.5 ? "YEET" : "SIKE") : "Instant Karma") + " did you ghost ping pinglol again - unp©gged™#2216", // 1% ticker possible if generate "YEET" or "SIKE"
+  () => (Math.random() < 0.01 ? "they wake down the conrades early, wait, you wrote it in the correct place... is even in discard.com actually" : "we wake up the conrades late, wait, i wrote it in the wrong place... not even in discord.com actually") + " - Nayuta Ito#5829", // 1% ticker possible if generate totally different ticker
+  () => "we're " + (Math.random() < 0.01 ? "" : "not ") + "adding an exit the incrementyverse update - TheMKeyHolder#6674", // 1% ticker possible if not generate "not"
+  () => "Yahtzee Master is an impostor, " + (Math.random() < 0.1 ? (Math.random() < 0.1 ? 0 : 1) : 2) + " impostors remain.", // 1% ticker possible if generate 0 impostors
   
   // Youtube Related
-  
+  () => (Math.random() < 0.01 ? "cya l8r" : "BUH BYE"), // 1% ticker possible if generate "cya l8r"
   
   // Fandom Related
   () => "E308.25 blocked JakeCampbell19 with an expiration time of " + randomTime(Math.random() < 0.01 ? 2999 : 2099), // 1% ticker possible if years > 2100
   () => "E" + (Math.random() < 0.1 ? 308.25 : Math.floor((100 + Math.random() * 900) * 100) / 100).toFixed(2) + " blocked JakeCampbell" + (Math.random() < 0.1 ? 19 : number2digits(Math.floor(Math.random() * 100))) + " with an expiration time of indefinite", // 1% ticker possible if all 308.25, 19, indefinite are generated
   
   () => "IdleSquadron deleted page " + numToOrd(Math.floor(1 + Math.random() * 99)) + " page", // 1% ticker possible if page = 33
-  () => "IdleSquadron deleted page " + classifiedredactedcomingsoonquestionmarkrandomgenerate(), // 1% ticker possible if generate "RP"
+  () => "IdleSquadron deleted page " + classifiedredactedcomingsoonquestionmarkrandomgenerate(), // 1% ticker possible if generate "Milestones of this wiki"
   () => "IdleSquadron deleted page " + fakeupdatepagerandomgenerate(), // 1% ticker possible if generate "Extensions of Updates on the switch"
   () => "IdleSquadron blocked JakeCampbell19 with an expiration time of " + Math.ceil(Math.floor(1 + Math.random() * 100) * 3.65) + " days", // 1% ticker possible if days = 92
   () => "IdleSquadron blocked " + (Math.random() < 0.01 ? "72.185.158.165" : randomIPAdress()) + " with an expiration time of 00:00, January 1, 2021", // 1% ticker possible if generate "72.185.158.165"
@@ -268,20 +289,20 @@ news.news = [
   
   () => (Math.random() < 0.01 ? "Cardinal " : "Ordinal ") + "is UselessThis page is bad IP ban me", // 1% ticker possible if generate "Cardinal"
   () => (Math.random() < 0.01 ? "!style=background:#cfcfcf; font-size: 12px; border:1px solid #323341; width:75%; text-align:left; padding-left:5px|[[Ordinal|(SPOILERS)]] • [[Base]] • [[Guide]] • [[Abbreviations]]" : "(SPOILERS)"), // 1% ticker possible if generate a long message with "(SPOILERS)"
-  
+    
   // Covonavirus Related
-  () => "Coronavirus has infected " + (Math.random() < 0.01 ? fullNumberDisplay(10**(Math.log10(7.8e9)*Math.random())) : Math.floor(10**(Math.log10(7.8e9)*Math.random())).toLocaleString() + " ") + "People", // 1% ticker possible if number using full written
+  () => "Coronavirus has " + (Math.random() < 0.2 ? "killed " : "infected ") + (Math.random() < 0.01 ? fullNumberDisplay(10**(Math.log10(7.8e9)*Math.random())) : Math.floor(10**(Math.log10(7.8e9)*Math.random())).toLocaleString() + " ") + "People", // 1% ticker possible if number using full written
   () => Number(21315973).toString(36) + "-" + number2digits(Math.floor(Math.random() * 100)), // 1% ticker possible if number = 19
   
   // Rickroll Related
-  () => randomRickroll(1), // 1% ticker possible if generate "Rickroll"
-  () => randomRickroll(4), // 1% ticker possible if generate Rickroll Link
-  () => randomRickroll(2), // 1% ticker possible if generate Rickroll Link
-  () => randomRickroll(5), // 1% ticker possible if generate "Rickroll"
-  () => randomRickroll(6), // 1% ticker possible if generate Rickroll Link
-  () => randomRickroll(3), // 1% ticker possible if generate "Rickroll"
-  () => randomRickroll(7), // 1% ticker possible if generate "Rickroll"
-  () => randomRickroll(8), // 1% ticker possible if generate Rickroll Link
+  () => randomRickroll(1),
+  () => randomRickroll(4),
+  () => randomRickroll(2),
+  () => randomRickroll(5),
+  () => randomRickroll(6),
+  () => randomRickroll(3),
+  () => randomRickroll(7),
+  () => randomRickroll(8), // 1% ticker possible if generate "Rickroll", "https://youtu.be/dQw4w9WgXcQ" or "Never Gonna Give Never Gonna Give"
   
   // Random Number Generator
   () => "Random Number with Tetrational rate is Generated: " + formate(new Decimal(10).tetrate(-1 * Math.log10(Math.random())), 3, 3, 1), // 1% ticker possible if number > 1e10
@@ -289,14 +310,11 @@ news.news = [
   () => "Random Number with Linear rate is Generated: " + Number(1 / Math.random()).toLocaleString(), // 1% ticker possible if number > 100
   () => "Random Base 36 Character is Generated: " + Math.floor((36**9)*100*Math.random()).toString(36).toLocaleUpperCase(), // 1% ticker possible if character length < 10
   () => "Random Base 10 Number is Generated: " + number2digits(Math.floor(Math.random() * 100)) + number2digits(Math.floor(Math.random() * 100)) + number2digits(Math.floor(Math.random() * 100)) + number2digits(Math.floor(Math.random() * 100)) + number2digits(Math.floor(Math.random() * 100)), // 1% ticker possible if first 2 characters are 00
-  () => "Random Time at 2021 is Generated: " + (Math.random < 0.01 ? Math.floor(1609430400 + 31536000 * Math.random()).toLocaleString() : randomTime(2021)), // 1% ticker possible if generate any Unix
+  () => "Random Time at 2021 is Generated: " + (Math.random() < 0.01 ? Math.floor(1609430400 + 31536000 * Math.random()).toLocaleString() : randomTime(2021)), // 1% ticker possible if generate any Unix
+  () => "When I insert all hyper operator, the output will be like this: " + formate(new Decimal(1 + Math.random()).add(1 + Math.random()).mul(1 + Math.random()).pow(1 + Math.random()).tetrate(1 + Math.random()).pentate(1 + Math.random()).max(1e10), 2, 2, 1, (Math.random() < 0.01 ? 4 : 5)), // 1% ticker possible if generate a number with Tetration Notation instead of Hyperscientifc Notation
   
-  // Other
-  () => "❤",
-  () => "❤❤",
-  () => "❤❤❤",
-  () => "❤❤❤❤",
-  () => "❤❤❤❤❤",
+  // Other (no random ticker/1% ticker)
+  () => "( ͡° ͜ʖ ͡°)",
   
   // Credit (no random ticker/1% ticker)
   () => "Credit to Patashu, for break_eternity.js",
@@ -309,6 +327,6 @@ news.news = [
   () => "News Ticker #" + (Math.random() < 0.01 ? formate(new Decimal(10).pow(news.news.length), 0, 0, 1, 0) : formate(news.news.length, 0, 0)) + " is created", // 1% ticker possible if generate 10^(Unique News Tickers)
 ];
 
-// total: 55+5 (11,44+5)
+// total: 66 (11,55)
 
 news.begin();

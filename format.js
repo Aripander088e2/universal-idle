@@ -15,7 +15,7 @@ function formate(num, dp, dp2, postinf, fixed) {
   if (isNaN(ret) && !ret.gte(new Decimal("e9e15"))) return "NaN" // Fix unexpected NaN
   if (ret.lt(1e6)) {
     output = ret.toFixed(dp)
-  } else if (ret.lt("e1e6") || usedNotations == 4 || (usedNotations == 1 && ret.lt(new Decimal("e3e3000").mul(1e3)))) {
+  } else if (ret.lt("e1e6") || usedNotations == 4 || usedNotations == 5 || (usedNotations == 1 && ret.lt(new Decimal("e3e3000").mul(1e3)))) {
     output = formateNum(ret, dp2, usedNotations)
   } else if (ret.lt("ee1e6")) {
     ret = ret.log10()
@@ -29,7 +29,7 @@ function formate(num, dp, dp2, postinf, fixed) {
   } else if (ret.lt("eeeee1e6")) {
     ret = ret.log10().log10().log10().log10()
     output = "eeee" + formateNum(ret, dp2 + 1, usedNotations)
-  } else output = formateNum(ret, dp2, 4)
+  } else output = formateNum(ret, dp2, (usedNotations == 4 ? 4 : 5))
   return (num.lt(0) ? "-" : "") + output
 }
 
@@ -52,6 +52,7 @@ function getMaximum(x){
 function formateNum(num, dp, used) {
   let exponent = num.log10().floor();
   let mantissa = num.div(new Decimal(10).pow(exponent));
+  let superlog = num.slog(10)
   if (used <= 2){
     if (num.gte(new Decimal(10).pow(new Decimal(3).mul(new Decimal(10).pow(getMaximum(used))).add(3)))) {
       if (mantissa.gte(10 - 10 ** (-1 * dp) / 2)){
@@ -89,8 +90,10 @@ function formateNum(num, dp, used) {
       return "e" + num.log10().toNumber().toFixed(dp)
       break;
     case 4:
-      let superlog = num.slog(10)
-      return "10^^" + (superlog >= 1e6 ? formateNum(superlog, dp + 2, 0) : superlog.toFixed(dp + 2))
+      return "10^^" + (superlog >= 1e6 ? formateNum(superlog, dp + 2, (game.notation == 4 || game.notation == 5 ? 0 : game.notation)) : superlog.toFixed(dp + 2))
+      break;
+    case 5:
+      return (superlog >= 1e6 ? "" : new Decimal(10).pow(superlog-Math.floor(superlog)).toFixed(dp + 2)) + "F" + (superlog >= 1e6 ? formateNum(superlog, dp + 2, (game.notation == 4 || game.notation == 5 ? 0 : game.notation)) : superlog.toFixed(0))
       break;
     default:
       return ""
@@ -136,7 +139,7 @@ function standard(t1, t2, more){
 }
 
 function toggleNotation() {
-  game.notation = (game.notation + 1) % 5
+  game.notation = (game.notation + 1) % 6
 }
 
 function getNotation(){
@@ -156,6 +159,9 @@ function getNotation(){
     break;
   case 4:
     output = "Tetration"
+    break;
+  case 5:
+    output = "Hyperscientific"
     break;
   default:
     output = "Unknown Notation"
