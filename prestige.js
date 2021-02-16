@@ -6,6 +6,10 @@ function prestige(layer, enterChallenge){
         game.achievement.push(25)
         achNotify(2, 5)
       }
+      if(!game.achievement.includes(21) && isPrestigeAvailable(layer)) {
+        game.achievement.push(21)
+        achNotify(2, 1)
+      }
       game.universePoints = game.universePoints.add(getPrestigeGain(1))
       if (getPrestigeGain(1).gte(game.bestUniPtsInOneReset)) game.bestUniPtsInOneReset = getPrestigeGain(1)
       game.atoms = atomsOnReset()
@@ -13,10 +17,6 @@ function prestige(layer, enterChallenge){
       game.generator = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
       game.generatorBought =  [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
       game.generatorBoost = new Decimal(0)
-      if(!game.achievement.includes(21) && isPrestigeAvailable(layer)) {
-        game.achievement.push(21)
-        achNotify(2, 1)
-      }
     }
   }
 }

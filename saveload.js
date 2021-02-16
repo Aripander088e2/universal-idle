@@ -40,7 +40,7 @@ function loadGame(loadgame) {
   for (let i = 1; i < 1.5; i++) {
     game.repeatableUniverseUpgrade[i] = new Decimal(game.repeatableUniverseUpgrade[i])
   }
-  game.version = 20210215
+  game.version = 20210216
 }
 
 function exporty() {
