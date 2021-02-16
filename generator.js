@@ -97,7 +97,7 @@ const generatorCost = [null, new Decimal(10), new Decimal(1e3), new Decimal(1e6)
 const generatorCostScaling = [null, new Decimal(10), new Decimal(100), new Decimal(1e3), new Decimal(1e4), new Decimal(1e5), new Decimal(1e6), new Decimal(1e7), new Decimal(1e8)]
 
 function getGeneratorCost(gen){
-  let base = generatorCost[gen].mul(generatorCostScaling[gen].pow(game.generatorBought[gen])).div(getGenCostDivider(gen))
+  let base = generatorCost[gen].mul(generatorCostScaling[gen].pow(game.generatorBought[gen].mul(getGenCostScalingExp(gen)))).div(getGenCostDivider(gen))
   return base
 }
 
@@ -118,9 +118,9 @@ function buyGenerator(gen){
 }
 
 function buyMaxGenerator(gen){
-  let maxBulk = game.atoms.max(1).log10().sub(getGeneratorCost(gen).log10()).div(generatorCostScaling[gen].log10()).add(1).floor().max(0)
+  let maxBulk = game.atoms.max(1).log10().sub(getGeneratorCost(gen).log10()).div(generatorCostScaling[gen].pow(getGenCostScalingExp(gen)).log10()).add(1).floor().max(0)
   if (game.atoms.gte(getGeneratorCost[gen]) && (maxBulk.gt(0) || game.atoms.gte(new Decimal("ee12")))){
-    if (game.atoms.lt(new Decimal("ee12"))) game.atoms = game.atoms.sub(getGeneratorCost(gen).mul(generatorCostScaling[gen].pow(maxBulk.sub(1))))
+    if (game.atoms.lt(new Decimal("ee12"))) game.atoms = game.atoms.sub(getGeneratorCost(gen).mul(generatorCostScaling[gen].pow(getGenCostScalingExp(gen).mul(maxBulk.sub(1)))))
     game.generatorBought[gen] = game.generatorBought[gen].add(maxBulk)
     game.generator[gen] = game.generator[gen].add(maxBulk)
   }
@@ -135,6 +135,11 @@ function buyMaxAllGenerator(){
 }
 
 function getGenCostDivider(gen){
+  let base = new Decimal(1)
+  return base
+}
+
+function getGenCostScalingExp(gen){
   let base = new Decimal(1)
   return base
 }
