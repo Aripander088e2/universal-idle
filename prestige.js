@@ -26,10 +26,12 @@ function isPrestigeAvailable(layer){
 }
 
 function getBasePrestigeGain(layer){
-  if (!isPrestigeAvailable(1)) return new Decimal(0)
-  let base = new Decimal(2).pow(game.atoms.log10().div(80).sub(1))
-  if (base.gte(new Decimal(10).pow(getResourceSoftcapStart(1)))) base = new Decimal(10).pow(new Decimal(getResourceSoftcapStart(1)).mul(base.log10()).pow(getResourceSoftcapEff(1)))
-  return base
+  if (layer == 1){
+    if (!isPrestigeAvailable(1)) return new Decimal(0)
+    let base = new Decimal(2).pow(game.atoms.log10().div(80).sub(1))
+    if (base.gte(new Decimal(10).pow(getResourceSoftcapStart(1)))) base = new Decimal(10).pow(new Decimal(getResourceSoftcapStart(1)).mul(base.log10()).pow(getResourceSoftcapEff(1)))
+    return base
+  }
 }
 
 function getPrestigeGain(layer){
