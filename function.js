@@ -140,3 +140,8 @@ function getFreeGenBoost(){
 function getTotalGenBoost(best){ // false = current gen boost, true = best gen boost
   return (best ? game.bestGenBoost : game.generatorBoost).add(getFreeGenBoost())
 }
+
+function toggleAlternateDisplay(){
+  if (game.alternateMain == true) game.alternateMain = false
+  else game.alternateMain = true
+}

@@ -6,6 +6,7 @@ function Tab(t) {
   document.getElementById("tab101").style.display = "none";
   document.getElementById("tab102").style.display = "none";
   document.getElementById("tab103").style.display = "none";
+  document.getElementById("tab104").style.display = "none";
   document.getElementById("tab" + t).style.display = "block"
   game.tab = t
 }
