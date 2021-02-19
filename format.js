@@ -11,7 +11,7 @@ function formate(num, dp, dp2, postinf, fixed) {
   let output = ""
   let ret = num.abs()
   if (ret.lt(new Decimal(10).pow(-dp)) && ret.gt(0)) return new Decimal(0).toFixed(dp)
-  if ((ret.gte(new Decimal(2).pow(1024)) && postinf !== 1 && (!game.achievement.includes(31) || postinf == -1)) || ret.eq(Infinity)) return "Infinity"
+  if ((ret.gte(new Decimal(2).pow(1024)) && postinf !== 1 && (!game.achievement.includes(31) || postinf == -1)) || ret.mag == Infinity) return "Infinity"
   if (isNaN(ret) && !ret.gte(new Decimal("e9e15"))) return "NaN" // Fix unexpected NaN
   if (ret.lt(1e6)) {
     output = ret.toFixed(dp)
@@ -93,7 +93,7 @@ function formateNum(num, dp, used) {
       return "10^^" + (superlog >= 1e6 ? formateNum(superlog, dp + 2, (game.notation == 4 || game.notation == 5 ? 0 : game.notation)) : superlog.toFixed(dp + 2))
       break;
     case 5:
-      return (superlog >= 1e6 ? "" : new Decimal(10).pow(superlog-Math.floor(superlog)).toFixed(dp + 2)) + "F" + (superlog >= 1e6 ? formateNum(superlog, dp + 2, (game.notation == 4 || game.notation == 5 ? 0 : game.notation)) : superlog.toFixed(0))
+      return (superlog >= 1e6 ? "" : new Decimal(10).pow(superlog-Math.floor(superlog)).toFixed(dp + 2)) + "F" + (superlog >= 1e6 ? formateNum(superlog, dp + 2, (game.notation == 4 || game.notation == 5 ? 0 : game.notation)) : superlog.floor(0))
       break;
     default:
       return ""

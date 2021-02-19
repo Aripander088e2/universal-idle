@@ -1,7 +1,7 @@
 const achName = [null, 
                  [null, "You gotta start somewhere", "1000 atoms is a lot", "Half life 3 CONFIRMED", "L4G: Left 4 Generators", "5 Generators Atom Punch", "We couldn't afford 9", "Not a luck related achievement", "90 degrees to infinity"], 
                  [null, "Universal Collapser", "The Ninth Generator is a lie", "Equality", "Where is the Generator 8", "This is Hard", "Overpowered", "Squared Universe", "To Infinity"],
-                 [null, "", "", "", "", "", "", "", ""],
+                 [null, "Limit Break", "log(Infinity) Universes at once", "Two Generators", "How do you do this", "Universes of Theory", "Hyper Generator Boost", "This sound like impossible", "Ultimate Universes"],
                 ]
 
 function updateAchievement(){
@@ -17,6 +17,11 @@ function updateAchievement(){
   document.getElementById("ach27Goal").innerHTML = formate(new Decimal(7.744e53), 2, 2)
   document.getElementById("ach28Goal").innerHTML = formate(new Decimal(2).pow(1024), 2, 2, 1)
   document.getElementById("achS2Reward").innerHTML = formate(new Decimal(1e10), 2, 2)
+  document.getElementById("ach33Goal").innerHTML = formate(new Decimal(1e100), 2, 2)
+  document.getElementById("ach34Goal").innerHTML = formate(new Decimal(1e140), 2, 2)
+  document.getElementById("ach35Goal").innerHTML = formate(new Decimal(1e7), 2, 2)
+  document.getElementById("ach37Goal").innerHTML = formate(new Decimal(1e150), 2, 2)
+  document.getElementById("ach38Goal").innerHTML = formate(new Decimal("1e1200"), 2, 2, 1)
 }
 
 function getAchievement(){
@@ -84,9 +89,37 @@ function getAchievement(){
     achNotify(2, 8)
   }
   
-  if (false && !game.achievement.includes(31)) {
+  if (game.challengeCompletion[1] && !game.achievement.includes(31)) {
     game.achievement.push(31)
     achNotify(3, 1)
+  }
+  if (game.bestUniPtsInOneReset.gte(308.25) && !game.achievement.includes(32)) {
+    game.achievement.push(32)
+    achNotify(3, 2)
+  }
+  if (checkAch33() && !game.achievement.includes(33)) {
+    game.achievement.push(33)
+    achNotify(3, 3)
+  }
+  if (game.challenge == 1 && game.generatorBoost.eq(0) && game.atoms.gte(1e140) && !game.achievement.includes(34)) {
+    game.achievement.push(34)
+    achNotify(3, 4)
+  }
+  if (game.universePoints.gte(1e7) && !game.achievement.includes(35)) {
+    game.achievement.push(35)
+    achNotify(3, 5)
+  }
+  if (game.generatorBoost.gte(10) && !game.achievement.includes(36)) {
+    game.achievement.push(36)
+    achNotify(3, 6)
+  }
+  if (game.challenge == 2 && game.generatorBoost.eq(0) && game.atoms.gte(1e150) && !game.achievement.includes(37)) {
+    game.achievement.push(37)
+    achNotify(3, 7)
+  }
+  if (game.atoms.gte(new Decimal("1e1200")) && !game.achievement.includes(38)) {
+    game.achievement.push(38)
+    achNotify(3, 8)
   }
 }
 
@@ -126,6 +159,14 @@ function checkAch26(){
     if (getGeneratorMulti(i).gte(1e50)) output = true
   }
   return output
+}
+
+function checkAch33(){
+  let output = true
+  for (let i = 3; i < 8.5; i++){
+    if (game.generator[i].neq(0)) output = false
+  }
+  return output && game.generatorBoost.eq(0) && game.atoms.gte(1e100)
 }
 
 function achNotify(r, c){

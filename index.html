@@ -35,6 +35,7 @@
   <button onclick="Tab(1)" id="t1">Generators</button>
   <button onclick="Tab(2)" id="t2">Universe</button>
   <button onclick="Tab(3)" id="t3">Challenges</button>
+  <button onclick="Tab(4)" id="t4">Automations</button>
   <button onclick="Tab(101)" id="t101">Options</button>
   <button onclick="Tab(102)" id="t102">Statistics</button>
   <button onclick="Tab(103)" id="t103">Achievements</button>
@@ -110,11 +111,13 @@ Current Boost:<br>
 </div>
 <div id="tab2">
 You have <text id="uniPts"></text> Universe Points<br>
-<button id="uniReset" onclick="prestige(1, 0)">Reset for Universe Points</button>
+<button id="uniReset" onclick="prestige(1, -1)">Reset for Universe Points</button>
 <br><br>
 Upgrade:
 <br>
 <button onclick="buyRepeatableUpgrade(1,1)" style="text-align: left">You gain 2x more Universe Points (softcap past level 60)<br>Cost: <text id="repeatUniUpg1Cost"></text> Universe Points, Currently: <text id="uniRep1Eff"></text>x (Level <text id="repeatUniUpg1Level"></text>)</button>
+<br>
+<button onclick="buyRepeatableUpgrade(1,2)" style="text-align: left">Generator multiplier softcap and Universe Explain Speed softcap starts <text id="uniRep2EffBase">1e27</text>x later (softcap past level 50)<br>Cost: <text id="repeatUniUpg2Cost"></text> Universe Points, Currently: <text id="uniRep2Eff"></text>x later (Level <text id="repeatUniUpg2Level"></text>)</button>
 <br>
 <button onclick="buyUpgrade(1,1)" style="text-align: left">Generators are Faster based on your Universe Points<br>Cost: <text id="uniUpg1Cost"></text> Universe Points, Currently: <text id="uniUpg1Eff"></text>x <text id="uniUpg1Bought"></text></button>
 <br>
@@ -128,9 +131,9 @@ Upgrade:
 <br>
 <button onclick="buyUpgrade(1,6)" style="text-align: left">Your Universe Age make Universe Explain faster and boost Atoms gain<br>Cost: <text id="uniUpg6Cost"></text> Universe Points, Currently: <text id="uniUpg6Eff2"></text>x Universe Explain Speed and <text id="uniUpg6Eff1"></text>x Atoms gain <text id="uniUpg6Bought"></text></button>
 <br>
-<button onclick="buyUpgrade(1,7)" style="display: none; text-align: left">???<br>Cost: <text id="uniUpg7Cost"></text> Universe Points <text id="uniUpg7Bought"></text></button>
+<button onclick="buyUpgrade(1,7)" style="text-align: left">Generator bought boost softcap starts 40 later<br>Cost: <text id="uniUpg7Cost"></text> Universe Points <text id="uniUpg7Bought"></text></button>
 <br>
-<button onclick="buyUpgrade(1,8)" style="display: none; text-align: left">???<br>Cost: <text id="uniUpg8Cost"></text> Universe Points <text id="uniUpg8Bought"></text></button>
+<button onclick="buyUpgrade(1,8)" style="text-align: left">Raise All Generators multiplier to the power of 1.09 (unaffected by softcap) and Achievement 32 multiplier is squared<br>Cost: <text id="uniUpg8Cost"></text> Universe Points <text id="uniUpg8Bought"></text></button>
 <br>
 <button onclick="buyUpgrade(1,9)" style="display: none; text-align: left">???<br>Cost: <text id="uniUpg9Cost"></text> Universe Points <text id="uniUpg9Bought"></text></button>
 <br>
@@ -144,9 +147,21 @@ You are currently <text id="activeUniChal"></text>
 <br>
 In any Universe Challenge, your Time Boost will do nothing
 <br>
+Unlocked Challenges: <text id="uniChalUnl"></text>, you need make a total of <text id="uniChalReq"></text> Atoms to unlock next one
+<br>
 Your <text id="totalChallengeComp"></text> Challenge completions increase Time production by <text id="metaChallengeReward"></text>%
 <br><br>
-<button onclick="enterChallenge(1, 1)" style="text-align: left">Challenge 1: You gain Atoms <text id="uniChal1Eff">1e18</text>x slower and all other Generators multiplier ^0.425<br>Goal: <text id="uniChal1Goal"></text> Atoms, Reward: ??? <text id="uniChal1Comp"></text></button>
+<button onclick="enterChallenge(1, 1)" style="text-align: left" id="uniChal1">Challenge 1: You gain Atoms <text id="uniChal1Eff1">1e16</text>x slower and all other Generators multiplier ^0.425, but Universe Explain <text id="uniChal1Eff2">1e4</text>x faster<br>Require: 1000 Universe Points, Goal: <text id="uniChal1Goal"></text> Atoms, Reward: Generator 2-8 are <text id="uniChal1Reward"></text>x faster <text id="uniChal1Comp"></text></button>
+<br>
+<button onclick="enterChallenge(1, 2)" style="text-align: left" id="uniChal2">Challenge 2: Bought boost multiplier is always 1x and Universe Never Explain<br>Require: 1.44x Game Speed, Goal: <text id="uniChal2Goal"></text> Atoms, Reward: Generator bought multiplier is increased by 0.35 <text id="uniChal2Comp"></text></button>
+<br>
+<button onclick="enterChallenge(1, 3)" style="text-align: left" id="uniChal3">Challenge 3: You can't buy odd numbered Generators and they multiplier ^0.01, but you start with 1,000 Atoms on reset<br>Require: Best <text id="uniChal3Req">1e143</text> Meters, Goal: <text id="uniChal3Goal"></text> Atoms, Reward: You gain <text id="uniChal3Reward"></text>x more Universe Points (based on Generator VIII multiplier) and Generator Bought boost softcap is weaker (^0.5 → ^0.52) <text id="uniChal3Comp"></text></button>
+<br>
+<button onclick="enterChallenge(1, 4)" style="text-align: left" id="uniChal4">Challenge 4: Generators multiplier softcap starts at 10x and Generator Bought boost softcap start at 1, but Generator Boost First effect is much stronger<br>Require: 101 Generator VIII, Goal: <text id="uniChal4Goal"></text> Atoms, Reward: Generator Boost first 2 effect is 20x stronger and first one effect is raised to the power of 1.65 <text id="uniChal4Comp"></text></button>
+</div>
+<div id="tab4">
+  <button onclick="toggleAutomation(1)" style="text-align: left" id="toggleAutomation1">Auto Generators: <text id="auto1"></text></button>
+  <button onclick="toggleAutomation(2)" style="text-align: left" id="toggleAutomation2">Auto Generator Boosts: <text id="auto2"></text></button>
 </div>
 <div id="tab101">
 <button onclick="save2()">Save your game</button>
@@ -160,7 +175,7 @@ Your <text id="totalChallengeComp"></text> Challenge completions increase Time p
 <br><br>
   <a href="https://discord.gg/QgKE6xp">Game Server</a> | <a href="https://github.com/1e1000000/universal-idle">Source Code</a> | <a href="https://discord.gg/dvXxYfF">User Server</a> | <a href="https://docs.google.com/document/d/1OQtvBEINop_UuG0Ozs00mSaLd1x_8Yw82ZZMj15POcs/edit">Change Log</a>
 <br>
-  Current Version: v1.1.4.4 | Current Build: 20210216
+  Current Version: v1.2.0 | Current Build: 20210219
 </div>
 <div id="tab102">
   <text id="statistic1"></text>
@@ -183,7 +198,7 @@ Your <text id="totalChallengeComp"></text> Challenge completions increase Time p
   <br>
 </div>
 <div id="tab103">
-  <p>Achievements Completed: <text id="achieveTotal"></text> (Total: 16+1)</p>
+  <p>Achievements Completed: <text id="achieveTotal"></text> (Total: 24)</p>
   Set 1: <text id="achP1"></text><br>
   1. You gotta start somewhere: Buy a Generator I. <text id="ach11"></text><br>
   2. 1000 atoms is a lot: Buy a Generator II. <text id="ach12"></text><br>
@@ -203,16 +218,16 @@ Your <text id="totalChallengeComp"></text> Challenge completions increase Time p
   6. Overpowered: Reach <text id="ach26Goal">1e48</text>x Power of any Generator. <text id="ach26"></text><br>
   7. Squared Universe: Reach <text id="ach27Goal">7.744e53</text> meters universe size. <text id="ach27"></text><br>
   8. To Infinity: Reach <text id="ach28Goal">1.80e308</text> Atoms, Reward: Raise all Generator multiplier to the power of 1+log10(Atoms)/30000, with a maximum of ^1.01. <text id="ach28"></text><br>
-  Full Set reward: Universe Explain <text id="achS2Reward">1e12</text>x faster <text id="achS2"></text><br><br>
+  Full Set reward: Universe Explain <text id="achS2Reward">1e12</text>x faster and Unlock Universe Challenges <text id="achS2"></text><br><br>
   Set 3: <text id="achP3"></text><br>
-  1. Coming Soon, Reward: Remove the limit of Atoms. <text id="ach31"></text><br>
-  2. <text id="ach32"></text><br>
-  3. <text id="ach33"></text><br>
-  4. <text id="ach34"></text><br>
-  5. <text id="ach35"></text><br>
-  6. <text id="ach36"></text><br>
-  7. <text id="ach37"></text><br>
-  8. <text id="ach38"></text><br>
-  Full Set reward: <text id="achS3"></text><br><br>
+  1. Limit Break: Complete a Universe Challenge, Reward: Remove the limit of Atoms and all Generators are always show. <text id="ach31"></text><br>
+  2. log(Infinity) Universes at once: Universe reset for at least 308.25 Universe Points, Reward: Time goes fast based on your Achievement completions. <text id="ach32"></text><br>
+  3. Two Generators: Reach <text id="ach33Goal">1e100</text> Atoms with no Generator 3-8 or Generator Boost. <text id="ach33"></text><br>
+  4. How do you do this: Reach <text id="ach34Goal">1e140</text> Atoms in Challenge 1 without Generator Boost, Reward: Unlock automation for Generators. <text id="ach34"></text><br>
+  5. Universes of Theory: Reach <text id="ach35Goal">1e7</text> Universe Points <text id="ach35"></text><br>
+  6. Hyper Generator Boost: Bought 10 Generator Boosts. <text id="ach36"></text><br>
+  7. This sound like impossible: Reach <text id="ach37Goal">1e150</text> Atoms in Challenge 2 without Generator Boost. <text id="ach37"></text><br>
+  8. Ultimate Universes: Reach <text id="ach38Goal">1e1200</text> Atoms, Reward: Unlock automation for Generator Boosts and Generator Boost 3rd effect now based on best Generator Boosts <text id="ach38"></text><br>
+  Full Set reward: Universe Upgrade 3 affect Time Speed with reduced effect and Unlock ??? <text id="achS3"></text><br><br>
 </div>
 <br><br><br>
