@@ -55,6 +55,8 @@ function renderMain(){
   document.getElementById("title").innerHTML = formate(game.atoms, 0, 2) + " atoms, " + formate(game.size, 0, 2) + " meters"
   document.getElementById("t2").style.display = (isPrestigeAvailable(1) || game.achievement.includes(21) ? "inline-block" : "none")
   document.getElementById("t3").style.display = (isFullSetAchieved(2) ? "inline-block" : "none")
+  document.getElementById("t4").style.display = (game.achievement.includes(34) ? "inline-block" : "none")
+  document.getElementById("t104").style.display = (isFullSetAchieved(1) ? "inline-block" : "none")
   document.getElementById("gameSpeed").textContent = (gameSpeed().eq(1) ? "" : "Game Speed: " + formate(gameSpeed(), 2, 2) + "x")
 }
 
