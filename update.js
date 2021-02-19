@@ -8,6 +8,7 @@ function updateStuffs(ms){
   if (game.tab == 101) renderTab101()
   if (game.tab == 102) renderTab102()
   if (game.tab == 103) renderTab103()
+  if (game.tab == 104) renderTab104()
 }
 
 function renderVariable(ms){
@@ -21,20 +22,35 @@ function renderVariable(ms){
 
 function renderMain(){
   // Atom
-  document.getElementById("atom").innerHTML = formate(game.atoms, 2, 2)
-  document.getElementById("atomSpeed").innerHTML = formate(game.productionDisplay == 0 ? getGeneratorSpeed(1).mul(gameSpeed()) : productionRate(game.atoms, getGeneratorSpeed(1).mul(gameSpeed()), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "% of " : " OoM of "))
+  document.getElementById("atom").innerHTML = "You have " + formate(game.atoms, 2, 2) + " atoms on universe"
+  document.getElementById("atomSpeed").innerHTML = "You are getting " + formate(game.productionDisplay == 0 ? getGeneratorSpeed(1).mul(gameSpeed()) : productionRate(game.atoms, getGeneratorSpeed(1).mul(gameSpeed()), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "% of " : " OoM of ")) + " atoms per second"
+  document.getElementById("atom").style.display = (!game.alternateMain ? "block" : "none")
+  document.getElementById("atomSpeed").style.display = (!game.alternateMain ? "block" : "none")
+  
+  document.getElementById("atomAlternate").innerHTML = "Atoms: " + formate(game.atoms, 2, 2) + " (+" + formate(game.productionDisplay == 0 ? getGeneratorSpeed(1).mul(gameSpeed()) : productionRate(game.atoms, getGeneratorSpeed(1).mul(gameSpeed()), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "%" : " OoM")) + "/s)"
+  document.getElementById("atomAlternate").style.display = (game.alternateMain ? "block" : "none")
   // Size
-  document.getElementById("size").innerHTML = formate(game.size, 2, 2)
-  document.getElementById("sizeSpeed").innerHTML = formate(game.productionDisplay == 0 ? getSizeSpeed().mul(gameSpeed()) : productionRate(game.size, getSizeSpeed().mul(gameSpeed()), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "% of " : " OoM of "))
-  document.getElementById("sizeBoost").innerHTML = formate(getSizeBoost(), 3, 3)
-  document.getElementById("postgen8_1").style.display = (isFullSetAchieved(1) ? "block" : "none")
-  document.getElementById("postgen8_2").style.display = (isFullSetAchieved(1) ? "block" : "none")
-  document.getElementById("postgen8_3").style.display = (isFullSetAchieved(1) ? "block" : "none")
+  document.getElementById("size").innerHTML = "Your universe size is " + formate(game.size, 2, 2) + " meter"
+  document.getElementById("sizeSpeed").innerHTML = "They explaining universe size by " + formate(game.productionDisplay == 0 ? getSizeSpeed().mul(gameSpeed()) : productionRate(game.size, getSizeSpeed().mul(gameSpeed()), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "% of " : " OoM of ")) + " meter per second"
+  document.getElementById("sizeBoost").innerHTML = "They multiply all Generator multiplier by " + formate(getSizeBoost(), 3, 3)
+  document.getElementById("sizeSpeed").style.display = (isFullSetAchieved(1) && !game.alternateMain ? "block" : "none")
+  document.getElementById("size").style.display = (isFullSetAchieved(1) && !game.alternateMain ? "block" : "none")
+  document.getElementById("sizeBoost").style.display = (isFullSetAchieved(1) && !game.alternateMain ? "block" : "none")
+  
+  document.getElementById("sizeAlternate").innerHTML = "Size: " + formate(game.size, 2, 2) + " meter (+" + formate(game.productionDisplay == 0 ? getSizeSpeed().mul(gameSpeed()) : productionRate(game.size, getSizeSpeed().mul(gameSpeed()), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "%" : " OoM")) + "/s, based on Atoms)"
+  document.getElementById("sizeAlternate2").innerHTML = "→ " + formate(getSizeBoost(), 3, 3) + "x all Generators multiplier"
+  document.getElementById("sizeAlternate").style.display = (isFullSetAchieved(1) && game.alternateMain ? "block" : "none")
+  document.getElementById("sizeAlternate2").style.display = (isFullSetAchieved(1) && game.alternateMain ? "block" : "none")
   // Time
-  document.getElementById("time").innerHTML = formateTime(game.time, 3, 3)
-  document.getElementById("timeBoost").innerHTML = formate(getTimeBoost(), 4, 4)
-  document.getElementById("postuni2_1").style.display = (game.universeUpgrade[2] ? "block" : "none")
-  document.getElementById("postuni2_2").style.display = (game.universeUpgrade[2] ? "block" : "none")
+  document.getElementById("time").innerHTML = "Your universe age is " + formateTime(game.time, 3, 3)
+  document.getElementById("timeBoost").innerHTML = "They raising all Generator multiplier to the power of " + formate(getTimeBoost(), 4, 4)
+  document.getElementById("time").style.display = (game.universeUpgrade[2] && !game.alternateMain ? "block" : "none")
+  document.getElementById("timeBoost").style.display = (game.universeUpgrade[2] && !game.alternateMain ? "block" : "none")
+  
+  document.getElementById("timeAlternate").innerHTML = "Time: " + formateTime(game.time, 3, 3) + " (+" + formateTime(getTimeSpeed(), 3, 3) + "/s)"
+  document.getElementById("timeAlternate2").innerHTML = "→ ^" + formate(getTimeBoost(), 4, 4) + " all Generators multiplier"
+  document.getElementById("timeAlternate").style.display = (game.universeUpgrade[2] && game.alternateMain ? "block" : "none")
+  document.getElementById("timeAlternate2").style.display = (game.universeUpgrade[2] && game.alternateMain ? "block" : "none")
   // Misc
   document.getElementById("title").innerHTML = formate(game.atoms, 0, 2) + " atoms, " + formate(game.size, 0, 2) + " meters"
   document.getElementById("t2").style.display = (isPrestigeAvailable(1) || game.achievement.includes(21) ? "inline-block" : "none")
@@ -132,6 +148,7 @@ function renderTab101(){
   document.getElementById("notation").innerHTML = "Notation: " + getNotation()
   document.getElementById("timedisplay").innerHTML = "Time Display: " + getTimeDisplay()
   document.getElementById("productiondisplay").innerHTML = "Production Display: " + getProductionDisplay()
+  document.getElementById("alternatedisplay").innerHTML = "Alternate Display: " + (game.alternateMain ? "ON" : "OFF")
 }
 
 function renderTab102(){
@@ -159,4 +176,31 @@ function renderTab102(){
 function renderTab103(){
   document.getElementById("achieveTotal").textContent = game.achievement.length.toLocaleString()
   updateAchievement()
+}
+
+function renderTab104(){
+  document.getElementById("softcaps_size").innerHTML = (getBaseSizeSpeed().gte(new Decimal(10).pow(getResourceSoftcapStart(0))) ? "Universe Explain Speed: Start at " + formate(new Decimal(10).pow(getResourceSoftcapStart(0)), 2, 2) + "/s, Exponent ^" + formate(getResourceSoftcapEff(0), 3, 3) : "")
+  document.getElementById("softcaps_generator_bought").innerHTML = (isAnyGenReachPostSoftCap() ? "Generator Bought Boost: Start at " + formate(getUpgradeSoftcapStart(), 0, 2) + ", Brought ^" + formate(getUpgradeSoftcapEff(), 3, 3) : "")
+  document.getElementById("softcaps_generator_multi").innerHTML = (isAnyGenMultiReachPostSoftCap() ? "Generator Multi: Start at " + formate(new Decimal(10).pow(getGenMultiSoftcapStart(1)), 2, 2) + "x, Exponent ^" + formate(getGenMultiSoftcapEff(1), 3, 3) : "")
+  document.getElementById("softcaps_universe_upgrade_6").innerHTML = (game.universeUpgrade[6] && game.time.add(1).gte(3600) ? "Universe Upgrade 6: Start at " + formate(new Decimal(3600), 0, 2) + "x of Size Speed and " + formate(new Decimal(3600).pow(3), 2, 2) + "x of Atoms gain, ^" + formate(new Decimal(0.5), 3, 3) : "")
+  document.getElementById("softcaps_universe_points_gain").innerHTML = (game.universePoints.gte(new Decimal(10).pow(getResourceSoftcapStart(1))) || getBasePrestigeGain(1).gte(new Decimal(10).pow(getResourceSoftcapStart(1))) ? "Universe Points gain: Start at " + formate(new Decimal(10).pow(getResourceSoftcapStart(1)), 2, 2) + ", Exponent ^" + formate(getResourceSoftcapEff(1), 3, 3) : "")
+  document.getElementById("softcaps_universe_upgrade_r1").innerHTML = (game.repeatableUniverseUpgrade[1].gte(getUniUpgradeSoftcapStart(1)) ? "Universe Upgrade 1: Start at " + formate(getUniUpgradeSoftcapStart(1), 0, 2) + ", Brought ^" + formate(getUniUpgradeSoftcapEff(1), 3, 3) : "")
+  document.getElementById("softcaps_universe_upgrade_r2").innerHTML = (game.repeatableUniverseUpgrade[2].gte(getUniUpgradeSoftcapStart(2)) ? "Universe Upgrade 2: Start at " + formate(getUniUpgradeSoftcapStart(2), 0, 2) + ", Brought ^" + formate(getUniUpgradeSoftcapEff(2), 3, 3) : "")
+  
+}
+
+function isAnyGenReachPostSoftCap(){
+  let output = false
+  for (let i = 1; i < 8.5; i++){
+    if (game.generatorBought[i].gte(getUpgradeSoftcapStart())) output = true
+  }
+  return output
+}
+
+function isAnyGenMultiReachPostSoftCap(){
+  let output = false
+  for (let i = 1; i < 8.5; i++){
+    if (getGeneratorMulti(i).gte(new Decimal(10).pow(getGenMultiSoftcapStart(1)))) output = true
+  }
+  return output
 }

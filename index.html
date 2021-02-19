@@ -24,13 +24,18 @@
 </div>
 
 <text id="gameSpeed"></text>
-<h1>You have <text id="atom"></text> atoms on universe</h1>
-<p id="postgen8_1">They explaining universe size by <text id="sizeSpeed"></text> meter per second</p>
-<p>You are getting <text id="atomSpeed"></text> atoms per second</p>
-<h2 id="postgen8_2">Your universe size is <text id="size"></text> meter</h2>
-<p id="postgen8_3">They multiply all Generator speed by <text id="sizeBoost"></text></p>
-<h2 id="postuni2_1">Your universe age is <text id="time"></text></h2>
-<p id="postuni2_2">They raising all Generator multiplier to the power of <text id="timeBoost"></text></p>
+<h1 id="atom">You have X atoms on universe</h1>
+<p id="sizeSpeed">They explaining universe size by X meter per second</p>
+<p id="atomSpeed">You are getting X atoms per second</p>
+<h1 id="atomAlternate"></h1>
+<h2 id="size">Your universe size is X meter</h2>
+<p id="sizeBoost">They multiply all Generator speed by X</p>
+<h2 id="sizeAlternate"></h2>
+<p id="sizeAlternate2"></p>
+<h2 id="time">Your universe age is X</h2>
+<p id="timeBoost">They raising all Generator multiplier to the power of X</p>
+<h2 id="timeAlternate"></h2>
+<p id="timeAlternate2"></p>
 <div>
   <button onclick="Tab(1)" id="t1">Generators</button>
   <button onclick="Tab(2)" id="t2">Universe</button>
@@ -39,6 +44,7 @@
   <button onclick="Tab(101)" id="t101">Options</button>
   <button onclick="Tab(102)" id="t102">Statistics</button>
   <button onclick="Tab(103)" id="t103">Achievements</button>
+  <button onclick="Tab(104)" id="t104">Softcaps</button>
 </div>
 <br>
 <div id="tab1">
@@ -172,10 +178,12 @@ Your <text id="totalChallengeComp"></text> Challenge completions increase Time p
 <button onclick="toggleNotation()" id="notation">Notation: Scientific</button>
 <button onclick="toggleTimeDisplay()" id="timedisplay">Time: Long Display</button>
 <button onclick="toggleProductionDisplay()" id="productiondisplay">Production Display: Addition</button>
+<br>
+<button onclick="toggleAlternateDisplay()" id="alternatedisplay">Alternate Display: OFF</button>
 <br><br>
   <a href="https://discord.gg/QgKE6xp">Game Server</a> | <a href="https://github.com/1e1000000/universal-idle">Source Code</a> | <a href="https://discord.gg/dvXxYfF">User Server</a> | <a href="https://docs.google.com/document/d/1OQtvBEINop_UuG0Ozs00mSaLd1x_8Yw82ZZMj15POcs/edit">Change Log</a>
 <br>
-  Current Version: v1.2.0 | Current Build: 20210219
+  Current Version: v1.2.0.1 | Current Build: 20210219.1
 </div>
 <div id="tab102">
   <text id="statistic1"></text>
@@ -218,16 +226,26 @@ Your <text id="totalChallengeComp"></text> Challenge completions increase Time p
   6. Overpowered: Reach <text id="ach26Goal">1e48</text>x Power of any Generator. <text id="ach26"></text><br>
   7. Squared Universe: Reach <text id="ach27Goal">7.744e53</text> meters universe size. <text id="ach27"></text><br>
   8. To Infinity: Reach <text id="ach28Goal">1.80e308</text> Atoms, Reward: Raise all Generator multiplier to the power of 1+log10(Atoms)/30000, with a maximum of ^1.01. <text id="ach28"></text><br>
-  Full Set reward: Universe Explain <text id="achS2Reward">1e12</text>x faster and Unlock Universe Challenges <text id="achS2"></text><br><br>
+  Full Set reward: Universe Explain <text id="achS2Reward">1e10</text>x faster and Unlock Universe Challenges <text id="achS2"></text><br><br>
   Set 3: <text id="achP3"></text><br>
-  1. Limit Break: Complete a Universe Challenge, Reward: Remove the limit of Atoms and all Generators are always show. <text id="ach31"></text><br>
+  1. Universal Challenger: Complete a Universe Challenge, Reward: Remove the limit of Atoms and all Generators are always show. <text id="ach31"></text><br>
   2. log(Infinity) Universes at once: Universe reset for at least 308.25 Universe Points, Reward: Time goes fast based on your Achievement completions. <text id="ach32"></text><br>
   3. Two Generators: Reach <text id="ach33Goal">1e100</text> Atoms with no Generator 3-8 or Generator Boost. <text id="ach33"></text><br>
   4. How do you do this: Reach <text id="ach34Goal">1e140</text> Atoms in Challenge 1 without Generator Boost, Reward: Unlock automation for Generators. <text id="ach34"></text><br>
   5. Universes of Theory: Reach <text id="ach35Goal">1e7</text> Universe Points <text id="ach35"></text><br>
   6. Hyper Generator Boost: Bought 10 Generator Boosts. <text id="ach36"></text><br>
-  7. This sound like impossible: Reach <text id="ach37Goal">1e150</text> Atoms in Challenge 2 without Generator Boost. <text id="ach37"></text><br>
+  7. This seem impossible: Reach <text id="ach37Goal">1e150</text> Atoms in Challenge 2 without Generator Boost. <text id="ach37"></text><br>
   8. Ultimate Universes: Reach <text id="ach38Goal">1e1200</text> Atoms, Reward: Unlock automation for Generator Boosts and Generator Boost 3rd effect now based on best Generator Boosts <text id="ach38"></text><br>
   Full Set reward: Universe Upgrade 3 affect Time Speed with reduced effect and Unlock ??? <text id="achS3"></text><br><br>
+</div>
+<div id="tab104">
+  <h1>Softcaps</h1>
+  <p id="softcaps_size"></p>
+  <p id="softcaps_generator_bought"></p>
+  <p id="softcaps_generator_multi"></p>
+  <p id="softcaps_universe_upgrade_6"></p>
+  <p id="softcaps_universe_points_gain"></p>
+  <p id="softcaps_universe_upgrade_r1"></p>
+  <p id="softcaps_universe_upgrade_r2"></p>
 </div>
 <br><br><br>

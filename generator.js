@@ -56,10 +56,15 @@ function getGeneratorSpeedExp(gen){
   return base
 }
 
-function getSizeSpeed(){
+function getBaseSizeSpeed(){
   if (game.challenge == 2) return new Decimal(0)
   let base = (isFullSetAchieved(1) && game.generator[1].gte(1) ? game.atoms.pow(getSizeSpeedExp()).div(1e18) : new Decimal(0))
   if (base.gte(new Decimal(10).pow(getResourceSoftcapStart(0)))) base = new Decimal(10).pow(base.log10().mul(getResourceSoftcapStart(0)).pow(getResourceSoftcapEff(0)))
+  return base
+}
+
+function getSizeSpeed(){
+  let base = getBaseSizeSpeed()
   if (isFullSetAchieved(2)) base = base.mul(1e10)
   if (game.universeUpgrade[6]) base = base.mul(getUpgradeEffect(1, 6))
   if (game.challenge == 1) base = base.mul(1e4)

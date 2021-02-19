@@ -129,6 +129,7 @@ game = {
   achievement: [],
   autoGen: false,
   autoGenBoost: false,
+  alternateMain: false,
 }
   //save()
 }

@@ -1,7 +1,7 @@
 const achName = [null, 
                  [null, "You gotta start somewhere", "1000 atoms is a lot", "Half life 3 CONFIRMED", "L4G: Left 4 Generators", "5 Generators Atom Punch", "We couldn't afford 9", "Not a luck related achievement", "90 degrees to infinity"], 
                  [null, "Universal Collapser", "The Ninth Generator is a lie", "Equality", "Where is the Generator 8", "This is Hard", "Overpowered", "Squared Universe", "To Infinity"],
-                 [null, "Limit Break", "log(Infinity) Universes at once", "Two Generators", "How do you do this", "Universes of Theory", "Hyper Generator Boost", "This sound like impossible", "Ultimate Universes"],
+                 [null, "Universal Challenger", "log(Infinity) Universes at once", "Two Generators", "How do you do this", "Universes of Theory", "Hyper Generator Boost", "This seem impossible", "Ultimate Universes"],
                 ]
 
 function updateAchievement(){
