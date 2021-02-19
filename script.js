@@ -1,39 +1,11 @@
-/*let game = {
-  tLast: Date.now(),
-  tPlayedWTimeSpeed: new Decimal(0),
-  tStart: Date.now(), 
-  atoms: new Decimal(10),
-  size: new Decimal(1),
-  time: new Decimal(0),
-  generator: [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
-  generatorBought: [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
-  generatorBoost: new Decimal(0),
-  universePoints: new Decimal(0),
-  bestUniPtsInOneReset: new Decimal(0),
-  universeUpgrade: [null, false, false, false, false, false, false, false, false, false, false],
-  repeatableUniverseUpgrade: [null, new Decimal(0)],
-  totalAtoms: new Decimal(0),
-  bestSize: new Decimal(0),
-  bestGenBoost: new Decimal(0),
-  challenge: 0,
-  challengeCompletion: [null, false],
-  tab: 1,
-  notation: 0,
-  timeDisplay: 0,
-  productionDisplay: 0,
-  version: 20210209,
-  achievement: [],
-}*/
-
 let game;
 reset()
 loadGame(JSON.parse(localStorage.getItem("universal-idle")))
 Tab(game.tab)
 
-const universeUpgradeCost = [null, new Decimal(2), new Decimal(5), new Decimal(25), new Decimal(100), new Decimal(400), new Decimal(1000), new Decimal(Infinity), new Decimal(Infinity), new Decimal(Infinity), new Decimal(Infinity)]
-const repeatableUniverseUpgradeCost = [null, new Decimal(10)]
-const repeatableUniverseUpgradeCostScaling = [null, new Decimal(10)]
-const challengeGoal = [null, new Decimal(Infinity)]
+const universeUpgradeCost = [null, new Decimal(2), new Decimal(5), new Decimal(25), new Decimal(100), new Decimal(400), new Decimal(1000), new Decimal(3000), new Decimal(9e6), new Decimal(Infinity), new Decimal(Infinity)]
+const repeatableUniverseUpgradeCost = [null, new Decimal(10), new Decimal(25000), new Decimal(Infinity), new Decimal(Infinity)]
+const repeatableUniverseUpgradeCostScaling = [null, new Decimal(10), new Decimal(100000), new Decimal(Infinity), new Decimal(Infinity)]
 
 let deltaTime;
 const calculate = window.setInterval(() => {
@@ -44,4 +16,6 @@ const calculate = window.setInterval(() => {
 
 function loop(ms){
   updateStuffs(ms)
+  if (game.autoGen) buyMaxAllGenerator()
+  if (game.autoGenBoost) buyGeneratorBoost()
 }

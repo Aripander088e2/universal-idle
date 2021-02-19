@@ -23,7 +23,7 @@ function loadGame(loadgame) {
   for (const i in loadgame) {
     game[i] = loadgame[i];
   }
-  game.tPlayedWTimeSpeed = new Decimal(game.tPlayedWTimeSpeed)
+  game.tPlayedWTimeSpeed = undefined
   game.atoms = new Decimal(game.atoms)
   game.size = new Decimal(game.size)
   game.time = new Decimal(game.time)
@@ -37,10 +37,19 @@ function loadGame(loadgame) {
     game.generator[i] = new Decimal(game.generator[i])
     game.generatorBought[i] = new Decimal(game.generatorBought[i])
   }
-  for (let i = 1; i < 1.5; i++) {
+  for (let i = 1; i < 10.5; i++) { // failsave
+    if (game.universeUpgrade[i] == undefined) game.universeUpgrade[i] = false
+  }
+  for (let i = 1; i < 4.5; i++) { // failsave
+    if (game.repeatableUniverseUpgrade[i] == undefined) game.repeatableUniverseUpgrade[i] = new Decimal(0)
+  }
+  for (let i = 1; i < 4.5; i++) {
     game.repeatableUniverseUpgrade[i] = new Decimal(game.repeatableUniverseUpgrade[i])
   }
-  game.version = 20210216
+  for (let i = 1; i < 10.5; i++) { // failsave
+    if (game.challengeCompletion[i] == undefined) game.challengeCompletion[i] = false
+  }
+  game.version = 20210219
 }
 
 function exporty() {
@@ -95,7 +104,7 @@ function importy() {
 function reset(){
 game = {
   tLast: Date.now(),
-  tPlayedWTimeSpeed: new Decimal(0),
+  tLastUniReset: Date.now(),
   tStart: Date.now(),
   atoms: new Decimal(10),
   size: new Decimal(1),
@@ -106,18 +115,20 @@ game = {
   universePoints: new Decimal(0),
   bestUniPtsInOneReset: new Decimal(0),
   universeUpgrade: [null, false, false, false, false, false, false, false, false, false, false],
-  repeatableUniverseUpgrade: [null, new Decimal(0)],
+  repeatableUniverseUpgrade: [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)],
   totalAtoms: new Decimal(0),
   bestSize: new Decimal(0),
   bestGenBoost: new Decimal(0),
   challenge: 0,
-  challengeCompletion: [null, false],
+  challengeCompletion: [null, false, false, false, false, false, false, false, false, false, false],
   tab: 1,
   notation: 0,
   timeDisplay: 0,
   productionDisplay: 0,
   version: 20210200,
   achievement: [],
+  autoGen: false,
+  autoGenBoost: false,
 }
   //save()
 }
