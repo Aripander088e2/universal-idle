@@ -94,7 +94,7 @@ function copyToClipboard(el) {
 
 function importy() {
   let loadgame = "";
-  loadgame = JSON.parse(atob(prompt("Paste in your save WARNING: WILL OVERWRITE YOUR CURRENT SAVE")));
+  loadgame = JSON.parse(atob(prompt("Paste in your save. WARNING: WILL OVERWRITE YOUR CURRENT SAVE")));
   if (loadgame !== "") {
     loadGame(loadgame);
     save()
@@ -135,11 +135,11 @@ game = {
 }
 
 function resetConf() {
-  if (!confirm("Are you sure you want to delete all of your progress? You can't undo this process! Remaining confirmation: 4")) return
-  if (!confirm("Are you sure you want to delete all of your progress? You can't undo this process! Remaining confirmation: 3")) return
-  if (!confirm("Are you sure you want to delete all of your progress? You can't undo this process! Remaining confirmation: 2")) return
-  if (!confirm("Are you sure you want to delete all of your progress? You can't undo this process! Remaining confirmation: 1")) return
-  if (!confirm("Are you sure you want to delete all of your progress? You can't undo this process! Remaining confirmation: 0")) return
+  if (!confirm("Are you sure you want to delete all of your progress? You can't undo this process! Remaining confirmations: 4")) return
+  if (!confirm("Are you sure you want to delete all of your progress? You can't undo this process! Remaining confirmations: 3")) return
+  if (!confirm("Are you sure you want to delete all of your progress? You can't undo this process! Remaining confirmations: 2")) return
+  if (!confirm("Are you sure you want to delete all of your progress? You can't undo this process! Remaining confirmations: 1")) return
+  if (!confirm("Are you sure you want to delete all of your progress? You can't undo this process! Remaining confirmations: 0")) return
   reset()
   save()
 }
