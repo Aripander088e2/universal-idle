@@ -181,22 +181,22 @@ function formateTime(ret, dp, dp2) {
       return formate(ret, dp, dp2) + " seconds"
     } else if (ret.lt(h)) {
       let modS = ret.sub(ret.div(m).floor().mul(m)) // seconds
-      return formate(ret.div(m).floor()) + " minutes, " + formate(modS, dp, dp2) + " seconds"
+      return formate(ret.div(m).floor()) + " minutes and " + formate(modS, dp, dp2) + " seconds"
     } else if (ret.lt(d)) {
       let modS = ret.sub(ret.div(m).floor().mul(m)) // seconds
       let modM = ret.sub(ret.div(h).floor().mul(h)) // minutes
-      return formate(ret.div(h).floor()) + " hours, " + formate(modM.div(m).floor()) + " minutes, " + formate(modS, dp, dp2) + " seconds"
+      return formate(ret.div(h).floor()) + " hours, " + formate(modM.div(m).floor()) + " minutes and " + formate(modS, dp, dp2) + " seconds"
     } else if (ret.lt(y)) {
       let modS = ret.sub(ret.div(m).floor().mul(m)) // seconds
       let modM = ret.sub(ret.div(h).floor().mul(h)) // minutes
       let modH = ret.sub(ret.div(d).floor().mul(d)) // hours
-      return formate(ret.div(d).floor()) + " days, " + formate(modH.div(h).floor()) + " hours, " + formate(modM.div(m).floor()) + " minutes, " + formate(modS, dp, dp2) + " seconds"
+      return formate(ret.div(d).floor()) + " days, " + formate(modH.div(h).floor()) + " hours, " + formate(modM.div(m).floor()) + " minutes and " + formate(modS, dp, dp2) + " seconds"
     } else if (ret.lt(y.mul(1e6))){
       let modS = ret.sub(ret.div(m).floor().mul(m)) // seconds
       let modM = ret.sub(ret.div(h).floor().mul(h)) // minutes
       let modH = ret.sub(ret.div(d).floor().mul(d)) // hours
       let modD = ret.sub(ret.div(y).floor().mul(y)) // days
-      return formate(ret.div(y).floor()) + " years, " + formate(modD.div(d).floor()) + " days, " + formate(modH.div(h).floor()) + " hours, " + formate(modM.div(m).floor()) + " minutes, " + formate(modS, dp, dp2) + " seconds"
+      return formate(ret.div(y).floor()) + " years, " + formate(modD.div(d).floor()) + " days, " + formate(modH.div(h).floor()) + " hours, " + formate(modM.div(m).floor()) + " minutes and " + formate(modS, dp, dp2) + " seconds"
     } else return formate(ret.div(y), dp, dp2) + " years"
   } else if (game.timeDisplay == 1){
     if (ret.lt(m)) {
@@ -249,7 +249,7 @@ function getProductionDisplay(){
     output = "Multiplication (Linear)"
     break;
   case 2:
-    output = "Multiplication (Logarithm)"
+    output = "Multiplication (Logarithmic)"
     break;
   default:
     output = ""
