@@ -250,9 +250,9 @@ news.news = [
   
   // Ordinal Markup Related
   () => (Math.random() < 0.25 ? "Enter" : "Exit") + " the " + Number(Math.floor(10 + Math.random() * 26)).toString(36).toLocaleUpperCase(), // 1% ticker possible if generate "Enter the E"
-  () => "Removed " + (Math.random() < 0.5 ? "Facebook " : "Messenger ") + (Math.random() < 0.01 ? "Cardinals" : "Ordinals") + " since it will be never exist in the game", // 1% ticker possible if generate "Facebook Cardinals" or "Messenger Cardinals"
+  () => "Removed " + (Math.random() < 0.5 ? "Facebook " : "Messenger ") + (Math.random() < 0.01 ? "Cardinals" : "Ordinals") + " since it will never exist in the game", // 1% ticker possible if generate "Facebook Cardinals" or "Messenger Cardinals"
   () => "When I can reach ε" + (Math.random() < 0.01 ? "ω" : Math.floor(1 / Math.random() - 1).toLocaleString()), // 1% ticker possible if generate Epsilon Omega
-  () => "Ordinal Markup will be released on skype in " + (Math.random() < 0.01 ? "Never" : randomTime(1e308)), // 1% ticker possible if generate "Never"
+  () => "Ordinal Markup will be released on Skype in " + (Math.random() < 0.01 ? "Never" : randomTime(1e308)), // 1% ticker possible if generate "Never"
   
   // Synergism Related
   () => "Shouldn't e" + formate(new Decimal(2).pow(20 + Math.floor(Math.random() * 100)).div(1.048576), 3, 3, 1, 1) + " is better than 1.00e" + formate(new Decimal(2).pow(20 + Math.floor(Math.random() * 100)).div(1.048576), 3, 3, 1, 1) + "?", // 1% ticker possible if both Number are same

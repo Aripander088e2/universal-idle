@@ -22,7 +22,7 @@ function renderVariable(ms){
 
 function renderMain(){
   // Atom
-  document.getElementById("atom").innerHTML = "You have " + formate(game.atoms, 2, 2) + " atoms on universe"
+  document.getElementById("atom").innerHTML = "You have " + formate(game.atoms, 2, 2) + " atoms in your universe"
   document.getElementById("atomSpeed").innerHTML = "You are getting " + formate(game.productionDisplay == 0 ? getGeneratorSpeed(1).mul(gameSpeed()) : productionRate(game.atoms, getGeneratorSpeed(1).mul(gameSpeed()), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "% of " : " OoM of ")) + " atoms per second"
   document.getElementById("atom").style.display = (!game.alternateMain ? "block" : "none")
   document.getElementById("atomSpeed").style.display = (!game.alternateMain ? "block" : "none")
@@ -31,19 +31,19 @@ function renderMain(){
   document.getElementById("atomAlternate").style.display = (game.alternateMain ? "block" : "none")
   // Size
   document.getElementById("size").innerHTML = "Your universe size is " + formate(game.size, 2, 2) + " meter"
-  document.getElementById("sizeSpeed").innerHTML = "They explaining universe size by " + formate(game.productionDisplay == 0 ? getSizeSpeed().mul(gameSpeed()) : productionRate(game.size, getSizeSpeed().mul(gameSpeed()), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "% of " : " OoM of ")) + " meter per second"
-  document.getElementById("sizeBoost").innerHTML = "They multiply all Generator multiplier by " + formate(getSizeBoost(), 3, 3)
+  document.getElementById("sizeSpeed").innerHTML = "They are explaining universe size by " + formate(game.productionDisplay == 0 ? getSizeSpeed().mul(gameSpeed()) : productionRate(game.size, getSizeSpeed().mul(gameSpeed()), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "% of " : " OoM of ")) + " meters per second"
+  document.getElementById("sizeBoost").innerHTML = "They multiply all Generator multipliers by " + formate(getSizeBoost(), 3, 3)
   document.getElementById("sizeSpeed").style.display = (isFullSetAchieved(1) && !game.alternateMain ? "block" : "none")
   document.getElementById("size").style.display = (isFullSetAchieved(1) && !game.alternateMain ? "block" : "none")
   document.getElementById("sizeBoost").style.display = (isFullSetAchieved(1) && !game.alternateMain ? "block" : "none")
   
-  document.getElementById("sizeAlternate").innerHTML = "Size: " + formate(game.size, 2, 2) + " meter (+" + formate(game.productionDisplay == 0 ? getSizeSpeed().mul(gameSpeed()) : productionRate(game.size, getSizeSpeed().mul(gameSpeed()), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "%" : " OoM")) + "/s, based on Atoms)"
-  document.getElementById("sizeAlternate2").innerHTML = "→ " + formate(getSizeBoost(), 3, 3) + "x all Generators multiplier"
+  document.getElementById("sizeAlternate").innerHTML = "Size: " + formate(game.size, 2, 2) + " meters (+" + formate(game.productionDisplay == 0 ? getSizeSpeed().mul(gameSpeed()) : productionRate(game.size, getSizeSpeed().mul(gameSpeed()), game.productionDisplay-1), (game.productionDisplay == 0 ? 2 : game.productionDisplay+1), 2) + (game.productionDisplay == 0 ? "" : (game.productionDisplay == 1 ? "%" : " OoM")) + "/s, based on Atoms)"
+  document.getElementById("sizeAlternate2").innerHTML = "→ " + formate(getSizeBoost(), 3, 3) + "x all Generator multipliers"
   document.getElementById("sizeAlternate").style.display = (isFullSetAchieved(1) && game.alternateMain ? "block" : "none")
   document.getElementById("sizeAlternate2").style.display = (isFullSetAchieved(1) && game.alternateMain ? "block" : "none")
   // Time
-  document.getElementById("time").innerHTML = "Your universe age is " + formateTime(game.time, 3, 3)
-  document.getElementById("timeBoost").innerHTML = "They raising all Generator multiplier to the power of " + formate(getTimeBoost(), 4, 4)
+  document.getElementById("time").innerHTML = "Your universe's age is " + formateTime(game.time, 3, 3)
+  document.getElementById("timeBoost").innerHTML = "They're raising all Generator multipliers to the power of " + formate(getTimeBoost(), 4, 4)
   document.getElementById("time").style.display = (game.universeUpgrade[2] && !game.alternateMain ? "block" : "none")
   document.getElementById("timeBoost").style.display = (game.universeUpgrade[2] && !game.alternateMain ? "block" : "none")
   
@@ -155,20 +155,20 @@ function renderTab101(){
 
 function renderTab102(){
   document.getElementById("statistic1").textContent = "You have played for " + formateTime((game.tLast - game.tStart)/1000, 3, 3)
-  document.getElementById("statistic2").textContent = "You have make a total of " + formate(game.totalAtoms, 2, 2) + " atoms"
+  document.getElementById("statistic2").textContent = "You have made a total of " + formate(game.totalAtoms, 2, 2) + " atoms"
   document.getElementById("statistic3").textContent = (isFullSetAchieved(1) ? "Your best Universe Size was " + formate(game.bestSize, 2, 2) + " meters" : "")
-  document.getElementById("statistic4").textContent = (game.achievement.includes(21) ? "You have spent " + formateTime((game.tLast - game.tLastUniReset)/1000, 3, 3) + " in this " + (game.challenge ? "Challenge" :"Universe Reset") : "")
+  document.getElementById("statistic4").textContent = (game.achievement.includes(21) ? "You have spent " + formateTime((game.tLast - game.tLastUniReset)/1000, 3, 3) + " in this " + (game.challenge ? "Challenge" : "Universe Reset") : "")
   document.getElementById("statistic5").textContent = (game.achievement.includes(21) ? "Your best Universe Points gained in one reset was " + formate(game.bestUniPtsInOneReset, 2, 2) : "")
   
   document.getElementById("resourcestat1").textContent = 
-    "Your atoms is enough to fill " + (game.atoms.gte(1e80) ? formate(game.atoms.log(1e80).floor(), 0, 2) + " Universes" + (game.atoms.lt("e8e7") ? " and " + formate(game.atoms.div(new Decimal(1e80).pow(game.atoms.max(1).log(1e80).floor())).log(1e80).mul(100), 3, 3) + "% of another" : "") :
-                                       formate(game.atoms.max(1).div(new Decimal(1e80).pow(game.atoms.max(1).log(1e80).floor())).log(1e80).mul(100), 3, 3) + "% of universe") + " (" + formate(game.atoms.max(1).log(1e80).ceil().max(1), 0, 2) + " Universe" + (game.atoms.gte(1e80) ? "s" : "") + " = " + formate(new Decimal(1e80).pow(game.atoms.max(1).log(1e80).ceil().max(1)), 2, 2) + " atoms)"
+    "Your atoms are enough to fill " + (game.atoms.gte(1e80) ? formate(game.atoms.log(1e80).floor(), 0, 2) + " Universes" + (game.atoms.lt("e8e7") ? " and " + formate(game.atoms.div(new Decimal(1e80).pow(game.atoms.max(1).log(1e80).floor())).log(1e80).mul(100), 3, 3) + "% of another" : "") :
+                                       formate(game.atoms.max(1).div(new Decimal(1e80).pow(game.atoms.max(1).log(1e80).floor())).log(1e80).mul(100), 3, 3) + "% of a universe") + " (" + formate(game.atoms.max(1).log(1e80).ceil().max(1), 0, 2) + " Universe" + (game.atoms.gte(1e80) ? "s" : "") + " = " + formate(new Decimal(1e80).pow(game.atoms.max(1).log(1e80).ceil().max(1)), 2, 2) + " atoms)"
   document.getElementById("resourcestat2").textContent = 
-    "Your size is enough to explain " + (game.size.gte(8.8e26) ? formate(game.size.log(8.8e26).floor(), 0, 2) + " Universes" + (game.size.lt(new Decimal(8.8e26).pow(1e6)) ? " and " + formate(game.size.div(new Decimal(8.8e26).pow(game.size.max(1).log(8.8e26).floor())).log(8.8e26).mul(100), 3, 3) + "% of another" : "") :
+    "Your universe size is enough to explain " + (game.size.gte(8.8e26) ? formate(game.size.log(8.8e26).floor(), 0, 2) + " Universes" + (game.size.lt(new Decimal(8.8e26).pow(1e6)) ? " and " + formate(game.size.div(new Decimal(8.8e26).pow(game.size.max(1).log(8.8e26).floor())).log(8.8e26).mul(100), 3, 3) + "% of another" : "") :
                                          formate(game.size.max(1).div(new Decimal(8.8e26).pow(game.size.max(1).log(8.8e26).floor())).log(8.8e26).mul(100), 3, 3) + "% of universe") + " (" + formate(game.size.max(1).log(8.8e26).ceil().max(1), 0, 2) + " Universe" + (game.size.gte(8.8e26) ? "s" : "") + " = " + formate(new Decimal(8.8e26).pow(game.size.max(1).log(8.8e26).ceil().max(1)), 2, 2) + " meters)"
   document.getElementById("resourcestat3").textContent = 
-    "Your age is enough to goes " + (game.time.gte(31.536e6*13.799e9) ? formate(game.time.log(31.536e6*13.799e9).floor(), 0, 2) + " Universes" + (game.time.lt(new Decimal(31.536e6*13.799e9).pow(1e6)) ? " and " + formate(game.time.max(1).div(new Decimal(31.536e6*13.799e9).pow(game.time.max(1).log(31.536e6*13.799e9).floor())).log(31.536e6*13.799e9).mul(100), 3, 3) + "% of another" : "") :
-                                     formate(game.time.max(1).div(new Decimal(31.536e6*13.799e9).pow(game.time.max(1).log(31.536e6*13.799e9).floor())).log(31.536e6*13.799e9).mul(100), 3, 3) + "% of universe") + " (" + formate(game.time.max(1).log(31.536e6*13.799e9).ceil().max(1), 0, 2) + " Universe" + (game.time.gte(31.536e6*13.799e9) ? "s" : "") + " = " + formate(new Decimal(31.536e6*13.799e9).pow(game.time.max(1).log(31.536e6*13.799e9).ceil().max(1)), 3, 3) + " seconds)"
+    "Your universe age is enough to last " + (game.time.gte(31.536e6*13.799e9) ? formate(game.time.log(31.536e6*13.799e9).floor(), 0, 2) + " Universes" + (game.time.lt(new Decimal(31.536e6*13.799e9).pow(1e6)) ? " and " + formate(game.time.max(1).div(new Decimal(31.536e6*13.799e9).pow(game.time.max(1).log(31.536e6*13.799e9).floor())).log(31.536e6*13.799e9).mul(100), 3, 3) + "% of another" : "") :
+                                     formate(game.time.max(1).div(new Decimal(31.536e6*13.799e9).pow(game.time.max(1).log(31.536e6*13.799e9).floor())).log(31.536e6*13.799e9).mul(100), 3, 3) + "% of a universe") + " (" + formate(game.time.max(1).log(31.536e6*13.799e9).ceil().max(1), 0, 2) + " Universe" + (game.time.gte(31.536e6*13.799e9) ? "s" : "") + " = " + formate(new Decimal(31.536e6*13.799e9).pow(game.time.max(1).log(31.536e6*13.799e9).ceil().max(1)), 3, 3) + " seconds)"
   // Mantissa Part is hidden after ^1 M because it no longer accelerate
   
   document.getElementById("resourcestat2").style.display = (isFullSetAchieved(1) ? "inline-block" : "none")

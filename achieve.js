@@ -1,7 +1,7 @@
 const achName = [null, 
-                 [null, "You gotta start somewhere", "1000 atoms is a lot", "Half life 3 CONFIRMED", "L4G: Left 4 Generators", "5 Generators Atom Punch", "We couldn't afford 9", "Not a luck related achievement", "90 degrees to infinity"], 
+                 [null, "You gotta start somewhere", "1000 atoms is a lot", "Half life 3 CONFIRMED", "L4G: Left 4 Generators", "5 Generator Atom Punch", "We couldn't afford 9", "Not a luck related achievement", "90 degrees to infinity"], 
                  [null, "Universal Collapser", "The Ninth Generator is a lie", "Equality", "Where is the Generator 8", "This is Hard", "Overpowered", "Squared Universe", "To Infinity"],
-                 [null, "Universal Challenger", "log(Infinity) Universes at once", "Two Generators", "How do you do this", "Universes of Theory", "Hyper Generator Boost", "This seem impossible", "Ultimate Universes"],
+                 [null, "Universal Challenger", "log(Infinity) Universes at once", "Two Generators", "How do you do this", "Universes of Theory", "Hyper Generator Boost", "This seems impossible", "Ultimate Universes"],
                 ]
 
 function updateAchievement(){
@@ -170,6 +170,6 @@ function checkAch33(){
 }
 
 function achNotify(r, c){
-  $.notify(achName[r][c] + " (" + getAchievementSetCompleted(r) + "/8 of set " + r + " achievements completed)","achieve")
-  if (isFullSetAchieved(r)) $.notify("Full Set " + r + " achievement completed!","achieve")
+  $.notify(achName[r][c] + " (" + getAchievementSetCompleted(r) + "/8 of set " + r + " Achievements completed)","achieve")
+  if (isFullSetAchieved(r)) $.notify("Full Set " + r + " of Achievements completed!","achieve")
 }
