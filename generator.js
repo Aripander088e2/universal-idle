@@ -1,18 +1,18 @@
 function updateGenerator(ms){
-  game.atoms = game.atoms.add(getGeneratorSpeed(1).mul(ms).div(1000))
-  game.totalAtoms = game.totalAtoms.add(getGeneratorSpeed(1).mul(ms).div(1000))
+  game.atoms = game.atoms.add(getGeneratorSpeed(1).mul(ms).div(10000))
+  game.totalAtoms = game.totalAtoms.add(getGeneratorSpeed(1).mul(ms).div(10000))
   for (let i=1; i<7.5; i++){
-    game.generator[i] = game.generator[i].add(getGeneratorSpeed(i+1).mul(ms).div(1000))
+    game.generator[i] = game.generator[i].add(getGeneratorSpeed(i+1).mul(ms).div(10000))
   }
 }
 
 function updateSize(ms){
-  game.size = game.size.add(getSizeSpeed().mul(ms).div(1000))
+  game.size = game.size.add(getSizeSpeed().mul(ms).div(10000))
   if (game.size.gte(game.bestSize)) game.bestSize = game.size
 }
 
 function updateTime(ms){
-  game.time = game.time.add(getTimeSpeed().mul(ms).div(1000))
+  game.time = game.time.add(getTimeSpeed().mul(ms).div(10000))
 }
 
 function getGeneratorMulti(gen){
@@ -72,7 +72,7 @@ function getSizeSpeed(){
 }
 
 function getSizeSpeedExp(){
-  let base = new Decimal(0.5)
+  let base = new Decimal(0.7)
   base = base.add(getTotalGenBoost(0).mul(getGeneratorBoostBaseEffect()[2]))
   return base
 }
@@ -85,13 +85,13 @@ function getSizeBoost(){
 
 function getTimeSpeed(){
   let base = game.universeUpgrade[2] ? game.universePoints.max(1).log(1000) : new Decimal(0)
-  base = base.mul(1 + getTotalChallengeCompletion(1) / 2)
+  base = base.mul(4 + getTotalChallengeCompletion(1) / 2)
   return base
 }
 
 function getTimeBoost(){
   if (game.challenge !== 0) return new Decimal(1)
-  let base = game.time.max(1).log(13.799e9*31.536e6).div(2).add(1)
+  let base = game.time.max(1).log(13.799e3*31.536e2).div(2).add(1)
   return base
 }
 
@@ -168,7 +168,7 @@ function buyGeneratorBoost(){
     game.atoms = atomsOnReset()
     game.generator = [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
     game.generatorBought =  [null, new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)]
-    game.generatorBoost = game.generatorBoost.add(1)
+    game.generatorBoost = game.generatorBoost.add(3)
   }
 }
 
